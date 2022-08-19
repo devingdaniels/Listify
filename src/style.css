@@ -1,0 +1,66 @@
+*{
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.main-grid-layout{
+    display: grid;  
+    grid-template-columns: repeat(5, 1fr);
+    grid-template-rows: repeat(5, max-content);
+
+}
+
+/* HEADER SECTION START */
+.header{
+    background-color: rgb(3, 70, 103);
+    grid-column: 1 / 6;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: white;
+    padding: 10px 40px 10px 40px;
+}
+
+.main-grid-layout .header > h1 {
+    font-size: 3.5rem;
+}
+
+.account-info-container{
+    text-align: center;
+    display: flex;
+    align-items: center;
+}
+
+.account-icon{
+    display: block;
+    height: 35px;
+    padding-right: 5px;
+    filter: invert(100%);
+}
+
+.header h4 {
+    white-space: nowrap;
+}
+/* HEADER SECTION END */
+
+/* TOOL SECTION START */
+.sidebar{
+    grid-row:  2 / 6;
+    color: black;
+    background-color: #2d9fd9;
+    padding: 20px;
+    height: 90vh;
+}
+.sidebar-item{
+    display: flex;
+    gap: 3%;
+    align-items: center;
+    cursor: pointer;
+    
+}
+.sidebar-icon{
+    display: block;
+    height: 25px;
+}
