@@ -50,15 +50,17 @@
     grid-row:  2 / 6;
     color: black;
     background-color: #2d9fd9;
-    padding: 20px;
+    padding: 20px 0 0 20px;
     height: 90vh;
+    width: 90%;
+    
 }
 .sidebar-item{
     display: flex;
     gap: 3%;
     align-items: center;
-    cursor: pointer;
-    
+    cursor: pointer; 
+    margin: 5px;  
 }
 .sidebar-icon{
     display: block;
