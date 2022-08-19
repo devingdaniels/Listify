@@ -1,13 +1,13 @@
 import './style.css'
 import { createSideBar } from './App/createSidePanel'
+import {createHeader} from './App/createHeaderSection'
 
 
 
-function renderWebsite(){
+document.getElementById('main-grid-layout').append(createHeader())
+document.getElementById('main').append(createSideBar())
 
-    document.querySelector('main').append(createSideBar())
-
-}
+    
 
 
-renderWebsite()
+

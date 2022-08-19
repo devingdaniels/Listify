@@ -5,10 +5,9 @@
     list-style: none;
 }
 
-.main-grid-layout{
+#main-grid-layout{
     display: grid;  
-    grid-template-columns: repeat(5, 1fr);
-    grid-template-rows: repeat(5, max-content);
+    grid-template-columns: repeat(2, 1fr);
 
 }
 
@@ -23,7 +22,7 @@
     padding: 10px 40px 10px 40px;
 }
 
-.main-grid-layout .header > h1 {
+.header-title{
     font-size: 3.5rem;
 }
 
@@ -47,22 +46,33 @@
 
 /* TOOL SECTION START */
 .sidebar{
-    grid-row:  2 / 6;
+    grid-row:  1 / 6;
     color: black;
     background-color: #2d9fd9;
-    padding: 20px 0 0 20px;
     height: 90vh;
-    width: 90%;
-    
+    width: 20%;    
+    padding: 20px;
 }
 .sidebar-item{
     display: flex;
-    gap: 3%;
     align-items: center;
     cursor: pointer; 
-    margin: 5px;  
+    width: max-content;
+    margin-bottom: 15px;
 }
 .sidebar-icon{
     display: block;
     height: 25px;
+    padding-right: 5px;
+}
+
+
+
+@media (max-width: 700px){
+    .sidebar{
+        padding-left: 0; 
+    }
+    .sidebar-item{
+        font-size: 14px;
+    }
 }
