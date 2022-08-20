@@ -5,20 +5,21 @@
     list-style: none;
 }
 
+
+
 #main-grid-layout{
     display: grid;  
     grid-template-columns: repeat(2, 1fr);
 
 }
-
 /* HEADER SECTION START */
 .header{
-    background-color: rgb(3, 70, 103);
+    background-color: rgb(129, 129, 129);
     grid-column: 1 / 6;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    color: white;
+    color: black;
     padding: 10px 40px 10px 40px;
 }
 
@@ -36,7 +37,6 @@
     display: block;
     height: 35px;
     padding-right: 5px;
-    filter: invert(100%);
 }
 
 .header h4 {
@@ -44,21 +44,25 @@
 }
 /* HEADER SECTION END */
 
-/* TOOL SECTION START */
+/* SIDEBAR SECTION START */
 .sidebar{
     grid-row:  1 / 6;
     color: black;
-    background-color: #2d9fd9;
-    height: 90vh;
+    background-color: #a7a7a7;
+    height: 80vh;
     width: 20%;    
     padding: 20px;
+}
+.sidebarHeading{
+    text-align: center;
+    margin-bottom: 20px;
 }
 .sidebar-item{
     display: flex;
     align-items: center;
     cursor: pointer; 
     width: max-content;
-    margin-bottom: 15px;
+    margin-bottom: 20px;
 }
 .sidebar-icon{
     display: block;
@@ -68,11 +72,71 @@
 
 
 
-@media (max-width: 700px){
-    .sidebar{
-        padding-left: 0; 
-    }
-    .sidebar-item{
-        font-size: 14px;
-    }
+
+.addTaskButton{
+    position: absolute;
+    right: 20px;
+    top: 75vh;
+    border: none;
+    background-color: transparent;
 }
+
+.addTaskImage{
+    position: absolute;
+    right: 0;
+    display:block;
+    height: 100px;
+    width: 100px;
+    border-radius: 50%;
+    border: .5px solid black;
+    cursor: pointer;
+    margin: auto;
+    margin-bottom: 25px;
+}
+
+/* CSS */
+.addTaskImage {
+  font-family: "Open Sans", sans-serif;
+  font-size: 16px;
+  letter-spacing: 2px;
+  text-decoration: none;
+  text-transform: uppercase;
+  color: #000;
+  cursor: pointer;
+  /* border: 3px solid; */
+  border: none;
+  padding: 0.25em 0.5em;
+  position: relative;
+  user-select: none;
+  touch-action: manipulation;
+}
+
+.addTaskImage:active {
+  top: 5px;
+  left: 5px;
+}
+
+
+
+
+
+/* FOOTER SECTION */
+.footer-container{
+    background-color: rgb(129, 129, 129);
+    padding: 10px 0px 5px 0px;
+    font-size: 20px;
+    text-align: center;
+    height: 84.5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1%;
+  }
+  .gitLink {
+    text-decoration: none;
+  }
+  
+  .gitLink:hover{
+    color: blue;
+  }
+  
