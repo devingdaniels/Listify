@@ -19,12 +19,13 @@ function createViewSection(){
     sideItemsArray.push(viewHeading)
     // View section inbox tab
     const inboxTab = createViewTabItem(TrayFullIcon, "Icon of a full inbox", "Inbox", "sidebar-tab-icon")
+    inboxTab.classList.add('active')
     sideItemsArray.push(inboxTab)
     // View section today tab
     const todayTab = createViewTabItem(TodayIcon,"Icon of a calendar today", "Today", "sidebar-tab-icon")
     sideItemsArray.push(todayTab)
     // View section month tab
-    const monthTab = createViewTabItem(MonthIcon,"Icon of a calendar month", "Month", "sidebar-tab-icon" )
+    const monthTab = createViewTabItem(MonthIcon,"Icon of a calendar month", "Month", "sidebar-tab-icon" )    
     sideItemsArray.push(monthTab)
     // Append all view components to container
     sideItemsArray.forEach(item =>{
@@ -45,9 +46,38 @@ function createViewTabItem(image, alt, label, styleClass){
     title.innerHTML = label
     tabItem.append(title)
     tabItem.addEventListener('click', ()=>{
-        alert(`${label} tab was pressed`)
+        // First check if new tab was clicked
+        if (tabItem.classList.contains('active')) return 
+        // Update the current active tab
+        const viewTabs = document.querySelectorAll('.sidebar-tab')
+        viewTabs.forEach(item =>{
+            if (item !== tabItem){
+                item.classList.remove('active')
+            }
+        })
+        tabItem.classList.add('active')
 
-        // NEED CODE HERE
+        // Display the correct view depending on the current tab
+        const main = document.getElementById('project-wrapper')
+        main.innerHTML = ""
+
+        if (label === "Inbox"){
+            //load all tasks 
+            alert('show inbox view')
+            
+        }
+        else if (label === "Today"){
+            // load all tasks due today
+            alert('show today view')
+            
+        }
+
+        else if (label === "Month"){
+            // load all tasks occuring in the next month
+            alert('show month view')
+            
+
+        }
     })
     return tabItem
 }

@@ -1,11 +1,6 @@
-class AppBrain{
-
-    taskDatabase = []
-    projectDatabase = []
+export class AppBrain{
 
 
-
-    
     
 
 }

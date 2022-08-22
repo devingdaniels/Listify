@@ -72,6 +72,7 @@
     display: block;
     height: 25px;
     padding-right: 5px;
+    cursor: pointer; 
 }
 
 /* SIDEBAR SECTION END */

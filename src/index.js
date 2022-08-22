@@ -1,19 +1,17 @@
 import './style.css'
-import { createSideBar } from './App/createSidePanel'
 import {createHeader} from './App/createHeaderSection'
-import {createAddTaskButton} from './App/createAddTaskButton'
+import { createSideBar } from './App/createSidePanel'
 import { createFooter } from './App/utils/createFooter'
-
+import {createAddTaskButton} from './App/createAddTaskButton'
 
 
 function renderWebsite(){
-
     createHeader()
     createSideBar()
     createFooter()
-    createAddTaskButton()
+    createAddTaskButton()   
 }
-    
+
 renderWebsite()
 
 
