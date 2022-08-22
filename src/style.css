@@ -65,7 +65,7 @@
     display: flex;
     align-items: center;
     cursor: pointer; 
-    width: max-content;
+    width: 50%;
     margin-bottom: 20px;
 }
 .sidebar-tab-icon, .newProjectIcon{
@@ -81,6 +81,7 @@
 /* MAIN PROJECT SECTION START */
 #project-wrapper{
     grid-column: 2/5;
+    padding: 20px;
 }
 
 
@@ -90,7 +91,7 @@
 /* SIDEBAR SECTION END */
 
 .addTaskButton{
-    position: absolute;
+    position: fixed;
     right: 20px;
     top: 75vh;
     border: none;
@@ -140,7 +141,7 @@
     padding: 10px 0px 5px 0px;
     font-size: 20px;
     text-align: center;
-    height: 84.5px;
+    height: 50px;
     display: flex;
     justify-content: center;
     align-items: center;

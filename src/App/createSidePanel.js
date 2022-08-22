@@ -4,8 +4,9 @@ import {createDomElement, renderIcon} from './utils/helperFunctions'
 import TrayFullIcon from './assets/tray-full-icon.svg'
 import TodayIcon from './assets/today-icon.svg'
 import MonthIcon from './assets/month-icon.svg'
-
 import PlusIcon from './assets/plus-icon.svg'
+import { taskAppBrain } from '../index.js'
+
 
 function createViewSection(){
     // Array for easier appending of all the items to the wrapper
@@ -45,41 +46,47 @@ function createViewTabItem(image, alt, label, styleClass){
     const title = document.createElement('h3')
     title.innerHTML = label
     tabItem.append(title)
-    tabItem.addEventListener('click', ()=>{
-        // First check if new tab was clicked
-        if (tabItem.classList.contains('active')) return 
-        // Update the current active tab
-        const viewTabs = document.querySelectorAll('.sidebar-tab')
-        viewTabs.forEach(item =>{
-            if (item !== tabItem){
-                item.classList.remove('active')
-            }
-        })
-        tabItem.classList.add('active')
-
-        // Display the correct view depending on the current tab
-        const main = document.getElementById('project-wrapper')
-        main.innerHTML = ""
-
-        if (label === "Inbox"){
-            //load all tasks 
-            alert('show inbox view')
-            
-        }
-        else if (label === "Today"){
-            // load all tasks due today
-            alert('show today view')
-            
-        }
-
-        else if (label === "Month"){
-            // load all tasks occuring in the next month
-            alert('show month view')
-            
-
-        }
-    })
+    tabItem.addEventListener('click', () =>{
+        handle(tabItem, label)
+    })       
     return tabItem
+}
+
+
+function handle(tabItem, label){
+ // First check if new tab was clicked
+ if (tabItem.classList.contains('active')) return 
+ // Update the current active tab
+ const viewTabs = document.querySelectorAll('.sidebar-tab')
+ viewTabs.forEach(item =>{
+     if (item !== tabItem){
+         item.classList.remove('active')
+     }
+ })
+ 
+ tabItem.classList.add('active')
+
+ // Display the correct view depending on the current tab
+ const projectSection = document.getElementById('project-wrapper')
+ // Reset the current project section
+ projectSection.innerHTML = ""
+
+ if (label === "Inbox"){
+     //load all tasks 
+     taskAppBrain().displayInbox()
+     
+ }
+ else if (label === "Today"){
+     // load all tasks due today
+     taskAppBrain().displayToday()
+
+ }
+
+ else if (label === "Month"){
+     // load all tasks occuring in the next month
+     taskAppBrain().displayMonth()
+     
+ }
 }
 
 
@@ -126,6 +133,10 @@ function createSideBar(){
     //Append new subsections 
     sideBar.append(createViewSection()) // this is the view section of the side panel
     sideBar.append(createProjectsSection()) // this is the projects section of the view panel
+
+    // Display the initial state
+    taskAppBrain().displayInbox()
+
 }
 
 export {createSideBar}

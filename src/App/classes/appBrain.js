@@ -1,17 +1,45 @@
 export class AppBrain{
-
-
     
+    constructor(){
+        this.listArray = []
+        this.container = this.projectAnchor()
+    }
 
+    displayInbox(){
+        this.container.append(this.createTabTitle("Inbox"))
+        
+        // method to display all tasks in the array 
+        
+    }
+
+    displayToday(){       
+        this.container.append(this.createTabTitle("Today"))
+
+        // method to display all tasks with a due date of current date
+
+
+    }
+    displayMonth(){
+        this.container.append(this.createTabTitle("Month"))
+
+
+        // method to display all tasks due in next 30 days
+
+    }
+
+    createTabTitle(tab){
+        const title = document.createElement('h1')
+        title.innerHTML = tab
+        title.style.fontSize = "40px"
+        title.style.textAlign = "center"        
+        return title
+    }
+    projectAnchor(){
+        return document.getElementById('project-wrapper')
+    }
 }
 
 
-
-
-
-// createNewTask(){
-//     // General task 
-// }
 
 // updateSideBarTitleSection(){
 //     const projectSection = document.getElementById('project-section')

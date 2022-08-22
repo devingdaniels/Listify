@@ -10,8 +10,11 @@ function createAddTaskButton(){
     button.append(img)
 
     button.addEventListener('click', ()=>{
-        alert('code and build add a task functionality')
-       
+        document.getElementById('footer-wrapper').scrollIntoView()
+        const test = document.getElementById('project-wrapper')
+        const test2 = document.createElement('h1')
+        test2.innerHTML = "test"
+        test.append(test2)       
     })
 
     document.body.append(button)
