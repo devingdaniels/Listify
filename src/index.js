@@ -8,14 +8,9 @@ import { createFooter } from './App/utils/createFooter'
 
 function renderWebsite(){
 
-    const headerWrapper = document.getElementById('header-wrapper')
-    const sidebarWrapper = document.getElementById('sidebar-wrapper')
-    const footerWrapper = document.getElementById('footer-wrapper')
-
-
-    headerWrapper.append(createHeader())
-    sidebarWrapper.append(createSideBar())
-    footerWrapper.append(createFooter())
+    createHeader()
+    createSideBar()
+    createFooter()
     createAddTaskButton()
 }
     

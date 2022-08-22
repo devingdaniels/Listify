@@ -51,49 +51,27 @@
 /* SIDEBAR SECTION START */
 #sidebar-wrapper{
     grid-column: 1/2;
-}
-.sidebar{
     background-color: #b6b5b5;
     color: black;     
     min-height: 80vh;
     padding: 20px;
 }
+
 .sidebarHeading{
     text-align: center;
     margin-bottom: 20px;
 }
-.sidebar-item{
+.sidebar-tab{
     display: flex;
     align-items: center;
     cursor: pointer; 
     width: max-content;
     margin-bottom: 20px;
 }
-.sidebar-icon{
+.sidebar-tab-icon, .newProjectIcon{
     display: block;
     height: 25px;
     padding-right: 5px;
-}
-
-.project-add-button{
-    margin: auto;
-}
-    
-
-.projectItemContainer{
-    width: 100px;
-    height: 10px;
-    background-color: red;
-}
-
-
-.add-project-input input{
-    display: block;
-    margin: auto;
-
-}
-.add-project-input{
-    text-align: center;
 }
 
 /* SIDEBAR SECTION END */
@@ -128,7 +106,6 @@
     border: .5px solid black;
     cursor: pointer;
     margin: auto;
-    margin-bottom: 25px;
 }
 
 /* CSS */
@@ -140,7 +117,6 @@
   text-transform: uppercase;
   color: #000;
   cursor: pointer;
-  /* border: 3px solid; */
   border: none;
   padding: 0.25em 0.5em;
   position: relative;

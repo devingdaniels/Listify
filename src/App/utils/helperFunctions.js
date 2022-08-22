@@ -14,4 +14,6 @@ function renderIcon(image, alt, styleClass){
     return img
 }
 
+
+
 export {createDomElement, renderIcon}

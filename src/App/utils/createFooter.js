@@ -1,5 +1,7 @@
-
 function createFooter(){
+    // Get and save the footer wrapper
+    const footerWrapper = document.getElementById('footer-wrapper')
+    // Create the footer content and add classes
     const footer = document.createElement('footer')
     const container = document.createElement('p')
     container.classList.add('footer-container') 
@@ -13,7 +15,8 @@ function createFooter(){
     link.innerHTML = "devingdaniels"
     container.append(link)
     footer.append(container)
-    return footer
+    // Append new content to the wrapper
+    footerWrapper.append(footer)
 }
 
 export {createFooter}

@@ -11,6 +11,7 @@ function createAddTaskButton(){
 
     button.addEventListener('click', ()=>{
         alert('code and build add a task functionality')
+       
     })
 
     document.body.append(button)
