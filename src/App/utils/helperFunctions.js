@@ -16,4 +16,21 @@ function renderIcon(image, alt, styleClass){
 
 
 
-export {createDomElement, renderIcon}
+function updateActive(tabItem){
+
+    if (tabItem.classList.contains('active')) return null
+    // Update the current active tab
+    const viewTabs = document.querySelectorAll('.sidebar-tab')
+    viewTabs.forEach(item =>{
+        if (item !== tabItem){
+            item.classList.remove('active')
+        }
+    })
+    
+    tabItem.classList.add('active')
+}
+
+
+export {createDomElement, renderIcon, updateActive}
+
+

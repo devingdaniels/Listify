@@ -1,7 +1,7 @@
 import './style.css'
 import {createHeader} from './App/createHeaderSection'
 import { createSideBar } from './App/createSidePanel'
-import { createFooter } from './App/utils/createFooter'
+import { createFooter } from './App/createFooter'
 import {createAddTaskButton} from './App/createAddTaskButton'
 
 
@@ -17,13 +17,11 @@ function renderWebsite(){
     taskAppBrain()
 }
 
-
+const appBrain = new AppBrain()
 function taskAppBrain(){
-    const appBrain = new AppBrain()
     return appBrain
 }
 
  renderWebsite()
-
 
 export {taskAppBrain}

@@ -84,6 +84,18 @@
     padding: 20px;
 }
 
+.task-container{
+    margin: auto;
+    width: 80%;
+    display: flex;
+    justify-content: space-between;
+}
+
+.trash-task-icon{
+    height: 25px;
+    padding-right: 5px;
+    cursor: pointer; 
+}
 
 
 /* MAIN PROJECT SECTION END */

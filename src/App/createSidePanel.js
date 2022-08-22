@@ -1,5 +1,5 @@
 // Methods
-import {createDomElement, renderIcon} from './utils/helperFunctions'
+import {createDomElement, renderIcon, updateActive} from './utils/helperFunctions'
 // Images
 import TrayFullIcon from './assets/tray-full-icon.svg'
 import TodayIcon from './assets/today-icon.svg'
@@ -47,45 +47,29 @@ function createViewTabItem(image, alt, label, styleClass){
     title.innerHTML = label
     tabItem.append(title)
     tabItem.addEventListener('click', () =>{
-        handle(tabItem, label)
+       if ( updateActive(tabItem) !== null){
+        handle(label)
+       }else {
+        alert('tab functino return null, nothing to handle')
+       }        
     })       
     return tabItem
 }
 
 
-function handle(tabItem, label){
- // First check if new tab was clicked
- if (tabItem.classList.contains('active')) return 
- // Update the current active tab
- const viewTabs = document.querySelectorAll('.sidebar-tab')
- viewTabs.forEach(item =>{
-     if (item !== tabItem){
-         item.classList.remove('active')
-     }
- })
- 
- tabItem.classList.add('active')
-
- // Display the correct view depending on the current tab
- const projectSection = document.getElementById('project-wrapper')
+function handle(label){
  // Reset the current project section
- projectSection.innerHTML = ""
+ taskAppBrain().resetProjectSection()
 
- if (label === "Inbox"){
-     //load all tasks 
-     taskAppBrain().displayInbox()
-     
+ if (label === "Inbox"){     
+     taskAppBrain().displayInbox()     
  }
- else if (label === "Today"){
-     // load all tasks due today
+ else if (label === "Today"){     
      taskAppBrain().displayToday()
-
  }
 
- else if (label === "Month"){
-     // load all tasks occuring in the next month
-     taskAppBrain().displayMonth()
-     
+ else if (label === "Month"){     
+     taskAppBrain().displayMonth()     
  }
 }
 
