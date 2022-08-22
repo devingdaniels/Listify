@@ -5,21 +5,25 @@
     list-style: none;
 }
 
-
+:root{
+    --headerAndFooter: rgb(27, 98, 204);
+}
 
 #main-grid-layout{
     display: grid;  
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(4, 1fr);
 
 }
 /* HEADER SECTION START */
+#header-wrapper{
+    grid-column: 1/5;
+}
 .header{
-    background-color: rgb(129, 129, 129);
-    grid-column: 1 / 6;
+    background-color: var(--headerAndFooter);
     display: flex;
     justify-content: space-between;
     align-items: center;
-    color: black;
+    color: rgb(255, 255, 255);
     padding: 10px 40px 10px 40px;
 }
 
@@ -45,12 +49,13 @@
 /* HEADER SECTION END */
 
 /* SIDEBAR SECTION START */
+#sidebar-wrapper{
+    grid-column: 1/2;
+}
 .sidebar{
-    grid-row:  1 / 6;
-    color: black;
-    background-color: #a7a7a7;
-    height: 80vh;
-    width: 20%;    
+    background-color: #b6b5b5;
+    color: black;     
+    min-height: 80vh;
     padding: 20px;
 }
 .sidebarHeading{
@@ -70,8 +75,40 @@
     padding-right: 5px;
 }
 
+.project-add-button{
+    margin: auto;
+}
+    
+
+.projectItemContainer{
+    width: 100px;
+    height: 10px;
+    background-color: red;
+}
 
 
+.add-project-input input{
+    display: block;
+    margin: auto;
+
+}
+.add-project-input{
+    text-align: center;
+}
+
+/* SIDEBAR SECTION END */
+
+
+/* MAIN PROJECT SECTION START */
+#project-wrapper{
+    grid-column: 2/5;
+}
+
+
+
+/* MAIN PROJECT SECTION END */
+
+/* SIDEBAR SECTION END */
 
 .addTaskButton{
     position: absolute;
@@ -117,12 +154,12 @@
 }
 
 
-
-
-
 /* FOOTER SECTION */
+#footer-wrapper{
+    grid-column: 1/5;
+}
 .footer-container{
-    background-color: rgb(129, 129, 129);
+    background-color: var(--headerAndFooter);
     padding: 10px 0px 5px 0px;
     font-size: 20px;
     text-align: center;

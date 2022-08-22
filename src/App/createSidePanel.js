@@ -4,7 +4,8 @@ import {renderIcon, createDomElement} from './utils/helperFunctions'
 import TrayFullIcon from './assets/tray-full-icon.svg'
 import TodayIcon from './assets/today-icon.svg'
 import MonthIcon from './assets/month-icon.svg'
-import NewProject from './assets/application-array-icon.svg'
+import PlusIcon from './assets/plus-icon.svg'
+import { createNewProject } from './classes/appBrain'
 
 
 function createSideBar(){
@@ -19,16 +20,48 @@ function createSideBar(){
 
 
 function createProjectsSection(){
+    let sideItemsArray = []
     // Add H1 to separate projects from top three views
-    const projects = createDomElement('h1','sidebarHeading')
-    projects.innerHTML = "Projects"
-    
-    
-    
+    const projectSection = document.createElement('div')
+    projectSection.id = ('project-section')
+    const projectHeading = createDomElement('h1','sidebarHeading')
 
-    return projects
+    projectHeading.innerHTML = "Projects"
+    sideItemsArray.push(projectHeading)
 
+    const addButton = createSidebarItem(PlusIcon, "Icon of new project", "Add", "sidebar-icon")
+    // custom styling on the item
+    addButton.id = "project-add-button"
+
+
+    addButton.addEventListener('click', ()=>{        
+        addNewProject()
+    })
+
+
+    sideItemsArray.push(addButton)
+
+    sideItemsArray.forEach(item =>{
+        projectSection.append(item)
+    })    
+    return projectSection
 }
+
+
+
+function addNewProject(){
+    // get the container to add the new project heading to
+    const projectContainer = document.getElementById('project-section')
+    // hide the add button
+    const addButton  = document.getElementById('project-add-button')
+    addButton.style.pointerEvents = "none"
+
+    const project = createNewProject()
+
+    
+    projectContainer.append(project)
+}
+
 
 
 function createViewSection(){
@@ -59,11 +92,15 @@ function createSidebarItem(image, alt, label, styleClass){
     // Append the image
     sidebarItem.append(renderIcon(image, alt, styleClass))
     // Append the label
-    const title = createDomElement('h3')
+    const title = document.createElement('h3')
     title.innerHTML = label
     sidebarItem.append(title)
     return sidebarItem
 }
+
+
+
+
 
 
 export {createSideBar}

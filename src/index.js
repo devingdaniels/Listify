@@ -6,20 +6,16 @@ import { createFooter } from './App/utils/createFooter'
 
 
 
-
-
-
-
-
-
-
 function renderWebsite(){
-    const main = document.getElementById('main')
-    const mainGridLayout = document.getElementById('main-grid-layout')
 
-    mainGridLayout.append(createHeader())
-    main.append(createSideBar())
-    main.append(createFooter())
+    const headerWrapper = document.getElementById('header-wrapper')
+    const sidebarWrapper = document.getElementById('sidebar-wrapper')
+    const footerWrapper = document.getElementById('footer-wrapper')
+
+
+    headerWrapper.append(createHeader())
+    sidebarWrapper.append(createSideBar())
+    footerWrapper.append(createFooter())
     createAddTaskButton()
 }
     
