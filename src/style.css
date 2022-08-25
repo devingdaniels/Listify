@@ -51,10 +51,11 @@
 /* SIDEBAR SECTION START */
 #sidebar-wrapper{
     grid-column: 1/2;
-    background-color: #b6b5b5;
+    background-color: #e3dfdf;
     color: black;     
     min-height: 80vh;
-    padding: 20px;
+    padding: 20px 5px 20px 20px;
+    width: 75%;
 }
 
 .sidebarHeading{
@@ -73,6 +74,28 @@
     height: 25px;
     padding-right: 5px;
     cursor: pointer; 
+}
+
+#userProjectSection{
+    overflow-y: auto;
+    
+    max-height: 200px;
+}
+
+#userProjectSection::-webkit-scrollbar {
+    width: 6px;
+    background-color: transparent;
+}
+
+.userProjectItem{   
+    margin: 10px 0 10px 0;
+    display: flex;
+    justify-content: space-between;
+}
+
+.projectFormContainer{
+    display: flex;
+    flex-direction: column;
 }
 
 /* SIDEBAR SECTION END */
@@ -97,52 +120,9 @@
     cursor: pointer; 
 }
 
-
 /* MAIN PROJECT SECTION END */
 
 /* SIDEBAR SECTION END */
-
-.addTaskButton{
-    position: fixed;
-    right: 20px;
-    top: 75vh;
-    border: none;
-    background-color: transparent;
-}
-
-.addTaskImage{
-    position: absolute;
-    right: 0;
-    display:block;
-    height: 100px;
-    width: 100px;
-    border-radius: 50%;
-    border: .5px solid black;
-    cursor: pointer;
-    margin: auto;
-}
-
-/* CSS */
-.addTaskImage {
-  font-family: "Open Sans", sans-serif;
-  font-size: 16px;
-  letter-spacing: 2px;
-  text-decoration: none;
-  text-transform: uppercase;
-  color: #000;
-  cursor: pointer;
-  border: none;
-  padding: 0.25em 0.5em;
-  position: relative;
-  user-select: none;
-  touch-action: manipulation;
-}
-
-.addTaskImage:active {
-  top: 5px;
-  left: 5px;
-}
-
 
 /* FOOTER SECTION */
 #footer-wrapper{

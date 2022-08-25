@@ -8,6 +8,7 @@ function createHeader(){
     const header = createDomElement("header", "header")
     const title = createDomElement('h1', 'header-title')
     title.textContent = "Listify"
+    
     header.append(title)
     const accountContainer = createDomElement('div','account-info-container')
     accountContainer.append(renderIcon(AccountIcon, "Icon of profile picture", "account-icon"))

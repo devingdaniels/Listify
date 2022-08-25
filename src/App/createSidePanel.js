@@ -1,11 +1,12 @@
 // Methods
-import {createDomElement, renderIcon, updateActive} from './utils/helperFunctions'
+import {createDomElement, renderIcon, updateActive, hideAddProjectButton, displayNewProjectForm, disableAddProjectButton} from './utils/helperFunctions'
 // Images
 import TrayFullIcon from './assets/tray-full-icon.svg'
 import TodayIcon from './assets/today-icon.svg'
 import MonthIcon from './assets/month-icon.svg'
 import PlusIcon from './assets/plus-icon.svg'
-import { taskAppBrain } from '../index.js'
+import { appBrain } from '../index.js'
+
 
 
 function createViewSection(){
@@ -50,7 +51,7 @@ function createViewTabItem(image, alt, label, styleClass){
        if ( updateActive(tabItem) !== null){
         handle(label)
        }else {
-        alert('tab functino return null, nothing to handle')
+        alert('tab function return null, nothing to handle')
        }        
     })       
     return tabItem
@@ -59,17 +60,17 @@ function createViewTabItem(image, alt, label, styleClass){
 
 function handle(label){
  // Reset the current project section
- taskAppBrain().resetProjectSection()
+ appBrain.resetProjectSection()
 
  if (label === "Inbox"){     
-     taskAppBrain().displayInbox()     
+    appBrain.displayInbox()     
  }
  else if (label === "Today"){     
-     taskAppBrain().displayToday()
+    appBrain.displayToday()
  }
 
  else if (label === "Month"){     
-     taskAppBrain().displayMonth()     
+    appBrain.displayMonth()     
  }
 }
 
@@ -83,26 +84,21 @@ function createProjectsSection(){
     projectHeading.innerHTML = "Projects"
     // Add project section 'add' project button
     const plusIcon = renderIcon(PlusIcon, "Icon plus sign", "newProjectIcon")
+    plusIcon.id = "addProjectIcon"
     plusIcon.addEventListener('click', ()=>{
-        alert('create a new project ')
-
-        // NEED CODE HERE
-        // Disable add button until save or cancel of new project
-        // Display the input element with buttons
-
-
-        // Create a new project 
-        // Get a title for the project
-        // On 'save', append the title of the project to the newProjectsContainer, make the title a tab so it is tied to the project and the tasks are displayed in the project-wrapper section 
-        // On cancel, hide the input and buttons
+        // Hide add icon so user can only add one project at a time
+        disableAddProjectButton()
+        // show add new project input 
+        appBrain.displayNewProjectForm()
 
 
-    
+
+
 
     })
     // Add anchor for adding new projects
     const newProjectsContainer = document.createElement('div')
-    newProjectsContainer.id = "newProjectsContainer"
+    newProjectsContainer.id = "userProjectSection"
 
     // Append all the components 
     projectSection.append(projectHeading)
@@ -119,8 +115,10 @@ function createSideBar(){
     sideBar.append(createProjectsSection()) // this is the projects section of the view panel
 
     // Display the initial state
-    taskAppBrain().displayInbox()
+    appBrain.displayInbox()
 
 }
+
+
 
 export {createSideBar}

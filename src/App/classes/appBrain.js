@@ -1,62 +1,34 @@
 import TrashCanIcon from '../assets/Trashcan-icon.svg'
-import { renderIcon } from '../utils/helperFunctions'
+import { renderIcon, enableAddProjectButton } from '../utils/helperFunctions'
+import { Project } from './project'
+import DotOptions from '../assets/dots-vertical-icon.svg'
 
 export class AppBrain{
-    
+
     constructor(){
-        this.listArray = []
+        this.projectArray = []
         this.container = this.projectAnchor()
     }
 
 
-    createTask(){
 
-
-        const task = document.createElement('div')
-        task.classList.add('task-container')
-    
-
-        const inputSaveWrapper = document.createElement('div')
-        const input = document.createElement('input')
-        const saveButton = document.createElement('button')
-        
-
-        saveButton.innerHTML = this.listArray.length
-
-        inputSaveWrapper.append(input)
-        inputSaveWrapper.append(saveButton)
-
-
-
-
-        const trashCanIcon = renderIcon(TrashCanIcon, "Picture of trashcan icon", 'trash-task-icon')
-        trashCanIcon.id = this.listArray.length
-        trashCanIcon.addEventListener('click', ()=>{
-
-            alert('code remove a task functionality')
-
-            // const index = Number(trashCanIcon.id)
-            // console.log(index)
-            // this.listArray.splice(index, 1)
-            // console.log(this.listArray)
-
+    displayProjects(){
+        const anchor = document.getElementById('userProjectSection')
+        anchor.innerHTML = ""
+        this.projectArray.forEach(item => {
+            const container = document.createElement('div')
+            container.classList.add('userProjectItem')
+            const options = renderIcon(DotOptions, "Icon of dots option svg", 'sidebar-tab-icon')
+            const h3 = document.createElement('h3')
+            h3.innerHTML = item.title
+           container.append(h3)
+           container.append(options)
+           anchor.append(container)
         })
-
-        
-        task.append(inputSaveWrapper)
-        task.append(trashCanIcon)
-
-        this.listArray.push(task)
-
-
     }
 
     displayInbox(){
-        this.resetProjectSection()
-        this.container.append(this.createTabTitle("Inbox"))        
-        this.listArray.forEach(item => {
-            this.projectAnchor().append(item)
-        })        
+            
     }
 
     displayToday(){       
@@ -87,4 +59,64 @@ export class AppBrain{
     resetProjectSection(){
         document.getElementById('project-wrapper').innerHTML = ""
     }
+
+    displayNewProjectForm(){
+
+        const anchor = document.getElementById('project-section')
+
+        const container = document.createElement('div')
+        container.classList.add('projectFormContainer')
+    
+        const input = document.createElement('input')
+        input.id = "projectTitleData"
+        input.style.display = "block"
+        input.placeholder = "Project title"
+        // Add code to prevent user from submitting with enter
+
+        const save = document.createElement('button')
+        save.textContent = "Save"
+        save.type = "button"
+        const cancel = document.createElement('button')
+        cancel.textContent = "Cancel"
+        cancel.type = "button"
+    
+        save.addEventListener('click', () =>{  
+            const projectTitle = document.getElementById('projectTitleData')  
+            if (projectTitle.value !== ""){
+                // Create a new project object
+                const project = new Project()
+                // Save the title
+                project.title = projectTitle.value
+                // Push the object onto the appBrain array
+                this.projectArray.push(project)                                
+                // Enable the add project button
+                enableAddProjectButton()
+                const userProjectSection = document.getElementById('userProjectSection')
+                userProjectSection.innerHTML = ""
+                container.remove()
+                this.displayProjects()  
+                // clear section data before updating                
+                console.log(this.projectArray)      
+            }
+            else if(projectTitle.value === ""){
+                alert('need valid title')
+            }        
+        })
+    
+        cancel.addEventListener('click', ()=>{
+            // Remove the input form 
+            container.remove()
+            // Reshow the add project button
+            enableAddProjectButton()
+            
+        })
+    
+    
+        container.append(input)
+        container.append(save)
+        container.append(cancel)
+        anchor.append(container)    
+    }
 }
+
+

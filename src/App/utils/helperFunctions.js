@@ -15,9 +15,7 @@ function renderIcon(image, alt, styleClass){
 }
 
 
-
 function updateActive(tabItem){
-
     if (tabItem.classList.contains('active')) return null
     // Update the current active tab
     const viewTabs = document.querySelectorAll('.sidebar-tab')
@@ -25,12 +23,19 @@ function updateActive(tabItem){
         if (item !== tabItem){
             item.classList.remove('active')
         }
-    })
-    
+    })    
     tabItem.classList.add('active')
 }
 
+function enableAddProjectButton(){
+    const projectButton = document.getElementById('addProjectIcon')
+    projectButton.style.pointerEvents = "auto"
+}
+function disableAddProjectButton(){
+    const projectButton = document.getElementById('addProjectIcon')
+    projectButton.style.pointerEvents = "none"
+}
 
-export {createDomElement, renderIcon, updateActive}
+export {createDomElement, renderIcon, updateActive, enableAddProjectButton, disableAddProjectButton}
 
 
