@@ -1,10 +1,10 @@
 // Methods
-import {createDomElement, renderIcon, updateActive, hideAddProjectButton, displayNewProjectForm, disableAddProjectButton} from './utils/helperFunctions'
+import {createDomElement, renderIcon, updateActive, disableAddProjectButton, addProjectOrTaskButton} from './utils/helperFunctions'
 // Images
 import TrayFullIcon from './assets/tray-full-icon.svg'
 import TodayIcon from './assets/today-icon.svg'
 import MonthIcon from './assets/month-icon.svg'
-import PlusIcon from './assets/plus-icon.svg'
+
 import { appBrain } from '../index.js'
 
 
@@ -48,11 +48,9 @@ function createViewTabItem(image, alt, label, styleClass){
     title.innerHTML = label
     tabItem.append(title)
     tabItem.addEventListener('click', () =>{
-       if ( updateActive(tabItem) !== null){
+       updateActive(tabItem, 'sidebar-tab')
         handle(label)
-       }else {
-        alert('tab function return null, nothing to handle')
-       }        
+         
     })       
     return tabItem
 }
@@ -82,43 +80,43 @@ function createProjectsSection(){
     // Add projects section title
     const projectHeading = createDomElement('h1','sidebarHeading')
     projectHeading.innerHTML = "Projects"
+
+
+
+    
+
     // Add project section 'add' project button
-    const plusIcon = renderIcon(PlusIcon, "Icon plus sign", "newProjectIcon")
-    plusIcon.id = "addProjectIcon"
-    plusIcon.addEventListener('click', ()=>{
+    const iconSpanContainer = addProjectOrTaskButton("Add Project")
+
+    iconSpanContainer.addEventListener('click', ()=>{
         // Hide add icon so user can only add one project at a time
         disableAddProjectButton()
         // show add new project input 
         appBrain.displayNewProjectForm()
-
-
-
-
-
+        
     })
+
     // Add anchor for adding new projects
     const newProjectsContainer = document.createElement('div')
     newProjectsContainer.id = "userProjectSection"
 
     // Append all the components 
     projectSection.append(projectHeading)
-    projectSection.append(plusIcon)
+    projectSection.append(iconSpanContainer)
     projectSection.append(newProjectsContainer)
     return projectSection
 }
 
 
-function createSideBar(){
+function createSidePanel(){
     const sideBar = document.getElementById('sidebar-wrapper')
     //Append new subsections 
     sideBar.append(createViewSection()) // this is the view section of the side panel
     sideBar.append(createProjectsSection()) // this is the projects section of the view panel
 
-    // Display the initial state
+    // 
     appBrain.displayInbox()
-
 }
 
 
-
-export {createSideBar}
+export {createSidePanel}

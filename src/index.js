@@ -1,6 +1,6 @@
 import './style.css'
 import {createHeader} from './App/createHeaderSection'
-import { createSideBar } from './App/createSidePanel'
+import { createSidePanel } from './App/createSidePanel'
 import { createFooter } from './App/createFooter'
 import { AppBrain } from './App/classes/appBrain'
 
@@ -11,12 +11,9 @@ renderWebsite()
 
 function renderWebsite(){
     createHeader()
-    createSideBar()
+    createSidePanel()
     createFooter()  
    
 }
-
-
-
  
 export {appBrain}

@@ -5,6 +5,8 @@
     list-style: none;
 }
 
+
+
 :root{
     --headerAndFooter: rgb(27, 98, 204);
 }
@@ -98,6 +100,10 @@
     flex-direction: column;
 }
 
+.iconSpanContainer{
+    display: flex;
+    align-items: center;
+}
 /* SIDEBAR SECTION END */
 
 
@@ -118,6 +124,14 @@
     height: 25px;
     padding-right: 5px;
     cursor: pointer; 
+}
+
+.new-task-template{
+    width: 50%;
+    margin: auto;
+} 
+.new-task-template input{
+    display: block;
 }
 
 /* MAIN PROJECT SECTION END */

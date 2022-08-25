@@ -1,3 +1,5 @@
+import PlusIcon from '../assets/plus-icon.svg'
+
 function createDomElement(type, classList){
     const el = document.createElement(type)
     if (classList !== ""){
@@ -15,10 +17,10 @@ function renderIcon(image, alt, styleClass){
 }
 
 
-function updateActive(tabItem){
+function updateActive(tabItem, className){
     if (tabItem.classList.contains('active')) return null
     // Update the current active tab
-    const viewTabs = document.querySelectorAll('.sidebar-tab')
+    const viewTabs = document.querySelectorAll('.' + className)
     viewTabs.forEach(item =>{
         if (item !== tabItem){
             item.classList.remove('active')
@@ -36,6 +38,20 @@ function disableAddProjectButton(){
     projectButton.style.pointerEvents = "none"
 }
 
-export {createDomElement, renderIcon, updateActive, enableAddProjectButton, disableAddProjectButton}
+function addProjectOrTaskButton(label){
+    
+    const iconSpanContainer = document.createElement('div')
+    iconSpanContainer.classList.add('iconSpanContainer')
+    const plusIcon = renderIcon(PlusIcon, "Icon plus sign", "newProjectIcon")
+    plusIcon.id = "addProjectIcon"
+    const span = document.createElement('span')
+    span.textContent = label
+    span.style.cursor = 'pointer'
+    iconSpanContainer.append(plusIcon)
+    iconSpanContainer.append(span)
+    return iconSpanContainer
+}
+
+export {createDomElement, renderIcon, updateActive, enableAddProjectButton, disableAddProjectButton, addProjectOrTaskButton}
 
 

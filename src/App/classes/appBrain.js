@@ -1,7 +1,7 @@
-import TrashCanIcon from '../assets/Trashcan-icon.svg'
-import { renderIcon, enableAddProjectButton } from '../utils/helperFunctions'
+import { renderIcon, enableAddProjectButton, addProjectOrTaskButton } from '../utils/helperFunctions'
 import { Project } from './project'
-import DotOptions from '../assets/dots-vertical-icon.svg'
+import DotOptionsIcon from '../assets/dots-vertical-icon.svg'
+import { updateActive } from '../utils/helperFunctions'
 
 export class AppBrain{
 
@@ -9,61 +9,52 @@ export class AppBrain{
         this.projectArray = []
         this.container = this.projectAnchor()
     }
-
-
-
-    displayProjects(){
+    displayProjects(project){
         const anchor = document.getElementById('userProjectSection')
         anchor.innerHTML = ""
+
         this.projectArray.forEach(item => {
+            
+
             const container = document.createElement('div')
+
             container.classList.add('userProjectItem')
-            const options = renderIcon(DotOptions, "Icon of dots option svg", 'sidebar-tab-icon')
+            if (project === item) {
+                container.classList.add('active')
+            }
+            
+            const options = renderIcon(DotOptionsIcon, "Icon of dots option svg", 'sidebar-tab-icon')
+            options.addEventListener('click', ()=>{
+                showProjectOptionPanel()
+            })
+
             const h3 = document.createElement('h3')
             h3.innerHTML = item.title
+            h3.style.cursor = "pointer"
+            h3.addEventListener('click', ()=>{                   
+                updateActive(h3.parentElement, 'userProjectItem' )
+                const array = this.projectArray.filter(item => {
+                    if (item.title == h3.innerHTML){
+                        return item
+                    }
+                })
+                const item = array[0]
+                displayActiveProject(item)
+            })
+
+
            container.append(h3)
            container.append(options)
            anchor.append(container)
         })
     }
 
-    displayInbox(){
-            
-    }
-
-    displayToday(){       
-        this.container.append(this.createTabTitle("Today"))
-
-        // method to display all tasks with a due date of current date
-
-
-    }
-    displayMonth(){
-        this.container.append(this.createTabTitle("Month"))
-
-
-        // method to display all tasks due in next 30 days
-
-    }
-
-    createTabTitle(tab){
-        const title = document.createElement('h1')
-        title.innerHTML = tab
-        title.style.fontSize = "40px"
-        title.style.textAlign = "center"        
-        return title
-    }
-    projectAnchor(){
-        return document.getElementById('project-wrapper')
-    }
     resetProjectSection(){
         document.getElementById('project-wrapper').innerHTML = ""
     }
 
     displayNewProjectForm(){
-
         const anchor = document.getElementById('project-section')
-
         const container = document.createElement('div')
         container.classList.add('projectFormContainer')
     
@@ -93,10 +84,12 @@ export class AppBrain{
                 enableAddProjectButton()
                 const userProjectSection = document.getElementById('userProjectSection')
                 userProjectSection.innerHTML = ""
+
                 container.remove()
-                this.displayProjects()  
+
+                this.displayProjects(project)  
                 // clear section data before updating                
-                console.log(this.projectArray)      
+                      
             }
             else if(projectTitle.value === ""){
                 alert('need valid title')
@@ -111,12 +104,126 @@ export class AppBrain{
             
         })
     
-    
         container.append(input)
         container.append(save)
         container.append(cancel)
         anchor.append(container)    
     }
+
+
+
+    displayToday(){       
+        this.container.append(createTabTitle("Today"))
+
+        // method to display all tasks with a due date of current date
+    }
+
+    displayInbox(){       
+        this.container.append(createTabTitle("Inbox"))
+
+        // method to display all tasks with a due date of current date
+    }
+    
+    displayMonth(){
+        this.container.append(createTabTitle("Month"))
+
+
+        // method to display all tasks due in next 30 days
+
+    }
+    projectAnchor(){
+        return document.getElementById('project-wrapper')
+    }
 }
 
 
+
+function displayCurrentProjectFile(project){
+   
+
+
+}
+
+
+function showProjectOptionPanel(){
+    alert('Show options for edit name or delete')
+}
+
+
+
+function createTabTitle(tab){
+    const title = document.createElement('h1')
+    title.innerHTML = tab
+    title.style.fontSize = "40px"
+    title.style.textAlign = "center"        
+    return title
+}
+
+function displayActiveProject(project){
+    const anchor = document.getElementById('project-wrapper')
+           
+    anchor.innerHTML = ""
+    anchor.append(createTabTitle(project.title))
+        
+
+    // Append div for adding new task
+    const addTaskButton = addProjectOrTaskButton("Add Task")
+    addTaskButton.addEventListener('click', ()=>{
+        createNewUserTask(project)
+    })
+
+    anchor.append(addTaskButton)
+
+
+    // Display all current tasks listed under this project
+    project.taskArray.forEach(task => {
+        anchor.append(displayProjectTasks(task))
+    })
+}
+
+function createNewUserTask(project){
+    TEST()
+}
+
+
+function displayProjectTasks(task){
+    const container = document.createElement('h1')
+    container.innerHTML = task
+    return container
+}
+
+
+function TEST(){
+
+    const el = document.createElement('div')
+    el.style.border = "1px solid red"
+    el.classList.add('new-task-template')
+    
+    
+    const testAppend = document.getElementById('project-wrapper')
+    testAppend.append(el)
+    }
+    
+    
+
+
+
+    // const nameLabel = document.createElement('label')
+    // nameLabel.textContent = "Task Name"
+    // const taskName = document.createElement('input')
+    // taskName.placeholder = "Task name"
+    
+    // const taskInfo = document.createElement('input')
+    // taskInfo.placeholder = "Task description"
+
+
+
+    // const saveButton = document.createElement('button')
+    // saveButton.innerHTML = "Save"
+    
+    // el.append(nameLabel)
+    // el.append(taskName)
+    // el.append(taskInfo)
+    // el.append(saveButton)
+    
+    
