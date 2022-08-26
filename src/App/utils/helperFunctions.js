@@ -30,16 +30,15 @@ function updateActive(tabItem, className){
 }
 
 function enableAddProjectButton(){
-    const projectButton = document.getElementById('addProjectIcon')
-    projectButton.style.pointerEvents = "auto"
+    const projectButton = document.getElementById('iconSpanContainer')
+    projectButton.style.display = "flex"
 }
 function disableAddProjectButton(){
-    const projectButton = document.getElementById('addProjectIcon')
-    projectButton.style.pointerEvents = "none"
+    const projectButton = document.getElementById('iconSpanContainer')
+    projectButton.style.display = "none"
 }
 
-function addProjectOrTaskButton(label){
-    
+function addProjectOrTaskButton(label){    
     const iconSpanContainer = document.createElement('div')
     iconSpanContainer.classList.add('iconSpanContainer')
     const plusIcon = renderIcon(PlusIcon, "Icon plus sign", "newProjectIcon")

@@ -53,8 +53,11 @@ export class AppBrain{
         document.getElementById('project-wrapper').innerHTML = ""
     }
 
+
+    
     displayNewProjectForm(){
-        const anchor = document.getElementById('project-section')
+        let temp = document.getElementById('project-section')
+        const anchor = temp.firstChild
         const container = document.createElement('div')
         container.classList.add('projectFormContainer')
     
@@ -64,16 +67,36 @@ export class AppBrain{
         input.placeholder = "Project title"
         // Add code to prevent user from submitting with enter
 
+        const buttonWrapper = document.createElement('div')
         const save = document.createElement('button')
         save.textContent = "Save"
         save.type = "button"
         const cancel = document.createElement('button')
         cancel.textContent = "Cancel"
         cancel.type = "button"
+
+        save.id = ('saveNewProject')
+        cancel.id = ('cancelNewProject')
+
+        buttonWrapper.append(save)
+        buttonWrapper.append(cancel)
+
+
     
         save.addEventListener('click', () =>{  
-            const projectTitle = document.getElementById('projectTitleData')  
-            if (projectTitle.value !== ""){
+            const projectTitle = document.getElementById('projectTitleData') 
+
+            const isFound = this.projectArray.some(item =>{
+                if (item.title === projectTitle.value){                    
+                    return true
+                }
+                return false
+            })
+            if (isFound){
+                alert('Project title already exists. Please edit.')
+            }
+
+           else  if (projectTitle.value !== ""){
                 // Create a new project object
                 const project = new Project()
                 // Save the title
@@ -92,7 +115,7 @@ export class AppBrain{
                       
             }
             else if(projectTitle.value === ""){
-                alert('need valid title')
+                alert('Enter a valid project title')
             }        
         })
     
@@ -104,9 +127,8 @@ export class AppBrain{
             
         })
     
-        container.append(input)
-        container.append(save)
-        container.append(cancel)
+        container.append(input)        
+        container.append(buttonWrapper)
         anchor.append(container)    
     }
 
@@ -195,19 +217,8 @@ function displayProjectTasks(task){
 
 function TEST(){
 
-    const el = document.createElement('div')
-    el.style.border = "1px solid red"
-    el.classList.add('new-task-template')
-    
-    
-    const testAppend = document.getElementById('project-wrapper')
-    testAppend.append(el)
-    }
-    
-    
 
-
-
+    alert('Display a new task form')
     // const nameLabel = document.createElement('label')
     // nameLabel.textContent = "Task Name"
     // const taskName = document.createElement('input')
@@ -226,4 +237,4 @@ function TEST(){
     // el.append(taskInfo)
     // el.append(saveButton)
     
-    
+}

@@ -81,12 +81,11 @@ function createProjectsSection(){
     const projectHeading = createDomElement('h1','sidebarHeading')
     projectHeading.innerHTML = "Projects"
 
-
-
     
 
     // Add project section 'add' project button
     const iconSpanContainer = addProjectOrTaskButton("Add Project")
+    iconSpanContainer.id = ('iconSpanContainer')
 
     iconSpanContainer.addEventListener('click', ()=>{
         // Hide add icon so user can only add one project at a time
