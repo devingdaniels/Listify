@@ -5,6 +5,9 @@
     list-style: none;
 }
 
+label{
+    font-size: 25px;
+}
 
 
 :root{
@@ -86,7 +89,7 @@
     width: 50%;
     margin-bottom: 20px;
 }
-.sidebar-tab-icon, .newProjectIcon{
+.sidebar-tab-icon, .addNewItemIcon{
     display: block;
     height: 25px;
     padding-right: 5px;
@@ -139,14 +142,19 @@
 }
 
 .projectFormContainer input{
-    -webkit-border-radius: 20px;
+    /* -webkit-border-radius: 20px;
     -moz-border-radius: 20px;
-     border-radius: 20px;
+     border-radius: 20px; */
      border: 1px solid #2d9fd9;
      color: black;
      width: 250px;
      height: 40px;
      padding-left: 10px;
+}
+
+.add-project-button-wrapper{
+    display: flex;
+    gap: 10%;
 }
 /* SIDEBAR SECTION END */
 
@@ -157,26 +165,10 @@
     padding: 20px;
 }
 
-.task-container{
-    margin: auto;
-    width: 80%;
-    display: flex;
-    justify-content: space-between;
+.displayedTask{
+    border: 1px solid black;
 }
 
-.trash-task-icon{
-    height: 25px;
-    padding-right: 5px;
-    cursor: pointer; 
-}
-
-.new-task-template{
-    width: 50%;
-    margin: auto;
-} 
-.new-task-template input{
-    display: block;
-}
 
 /* MAIN PROJECT SECTION END */
 
@@ -205,4 +197,42 @@
     color: blue;
   }
   
+  #taskFormWrapper{
+    display: block;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    height: 300px;
+    width: 500px;
+    border: 1px solid;
+    box-shadow: 2px 5px 12px rgb(80, 105, 228);
+    background-color: aliceblue;
+  }
+  
+  #new-task-form{
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+  }
 
+  
+  .titleWrapper input{
+    border: 1px solid #2d9fd9;
+     color: black;     
+     height: 40px;
+     padding-left: 10px;  
+  }
+
+  #descriptionWrapper textarea{
+    border: 1px solid #2d9fd9;
+     color: black;     
+     height: 80px;
+     padding-left: 10px;  
+  }
+
+  
+  .titleWrapper, #descriptionWrapper, #dueDateWrapper{
+    display: flex;
+    flex-direction: column;
+  }

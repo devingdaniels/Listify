@@ -1,4 +1,4 @@
-import { renderIcon, enableAddProjectButton, addProjectOrTaskButton } from '../utils/helperFunctions'
+import { renderIcon, enableAddProjectButton, addProjectOrTaskButton, newTaskTemplateForm, disableAddProjectButton } from '../utils/helperFunctions'
 import { Project } from './project'
 import DotOptionsIcon from '../assets/dots-vertical-icon.svg'
 import { updateActive } from '../utils/helperFunctions'
@@ -54,7 +54,6 @@ export class AppBrain{
     }
 
 
-    
     displayNewProjectForm(){
         let temp = document.getElementById('project-section')
         const anchor = temp.firstChild
@@ -68,6 +67,7 @@ export class AppBrain{
         // Add code to prevent user from submitting with enter
 
         const buttonWrapper = document.createElement('div')
+        buttonWrapper.classList.add('add-project-button-wrapper')
         const save = document.createElement('button')
         save.textContent = "Save"
         save.type = "button"
@@ -160,13 +160,6 @@ export class AppBrain{
 
 
 
-function displayCurrentProjectFile(project){
-   
-
-
-}
-
-
 function showProjectOptionPanel(){
     alert('Show options for edit name or delete')
 }
@@ -196,7 +189,6 @@ function displayActiveProject(project){
 
     anchor.append(addTaskButton)
 
-
     // Display all current tasks listed under this project
     project.taskArray.forEach(task => {
         anchor.append(displayProjectTasks(task))
@@ -204,37 +196,43 @@ function displayActiveProject(project){
 }
 
 function createNewUserTask(project){
-    TEST()
+    const anchor = document.getElementById('project-wrapper')
+    const taskForm = newTaskTemplateForm()
+
+
+    disableAddProjectButton()
+
+    anchor.append(taskForm)
+
+    // Display a form with info about the task
+    // On template save, save info to task object
+    // Save object to project task array 
+    // Display all tasks 
 }
 
 
 function displayProjectTasks(task){
-    const container = document.createElement('h1')
-    container.innerHTML = task
+    const container = document.createElement('div')
+    container.classList.add('displayedTask')
+
+
+    const titleWrapper = document.createElement('div')
+
+    
+    const titleLabel = document.createElement('label')
+    titleLabel.innerHTML = 'Title:'
+    const titleBody = document.createElement('p')
+    titleBody.innerHTML = task.title
+
+    titleWrapper.append(titleLabel)
+    titleWrapper.append(titleBody)
+
+
+    container.append(titleWrapper)
+
     return container
 }
 
 
-function TEST(){
 
-
-    alert('Display a new task form')
-    // const nameLabel = document.createElement('label')
-    // nameLabel.textContent = "Task Name"
-    // const taskName = document.createElement('input')
-    // taskName.placeholder = "Task name"
-    
-    // const taskInfo = document.createElement('input')
-    // taskInfo.placeholder = "Task description"
-
-
-
-    // const saveButton = document.createElement('button')
-    // saveButton.innerHTML = "Save"
-    
-    // el.append(nameLabel)
-    // el.append(taskName)
-    // el.append(taskInfo)
-    // el.append(saveButton)
-    
-}
+export {displayActiveProject}
