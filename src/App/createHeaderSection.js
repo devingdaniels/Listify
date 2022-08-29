@@ -3,32 +3,32 @@ import AccountIcon from './assets/account-icon.svg'
 import CheckBoxIcon from './assets/checkbox-icon.svg'
 
 function createHeader(){
-    // Get and save the header wrapper
-    const headerWrapper = document.getElementById('header-wrapper')
-    //Create header content
-    const header = createDomElement("header", "header")
+    // Containers 
+    const anchor = document.getElementById('header-wrapper')    
+    const headerContainer = createDomElement("header", "headerContainer")
+    const titleContainer = createDomElement('div','titleContainer')
+    const accountContainer = createDomElement('div','accountInfoContainer')
 
-    const titleContainer = createDomElement('div','title-container')
 
-    const pageIcon = renderIcon(CheckBoxIcon, "Image of checkbox icon", "main-webpage-icon")
-    const title = createDomElement('h1', 'header-title')
+    // Main title and main webpage image
+    const listifyIcon = renderIcon(CheckBoxIcon, "Image of checkbox icon", "listifyIcon")
+    const title = createDomElement('h1', 'listifyTitle')
     title.textContent = "Listify"
-
-    titleContainer.append(pageIcon)
+    titleContainer.append(listifyIcon)
     titleContainer.append(title)
 
 
-    const accountContainer = createDomElement('div','account-info-container')
-    accountContainer.append(renderIcon(AccountIcon, "Icon of profile picture", "account-icon"))
+    // Account info, ie account icon and user name
+    accountContainer.append(renderIcon(AccountIcon, "Icon of profile picture", "profileIcon"))
     const userName = document.createElement('h4')
     userName.innerHTML = "User Name"
     accountContainer.append(userName)
 
-
-    header.append(titleContainer)
-    header.append(accountContainer)
-    // Append new content to the wrapper
-    headerWrapper.append(header)
+    // Append two sub sections to header container
+    headerContainer.append(titleContainer)
+    headerContainer.append(accountContainer)
+    // Append the header container to the header anchor 
+    anchor.append(headerContainer)
 }
 
 export {createHeader}

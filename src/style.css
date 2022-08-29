@@ -23,44 +23,36 @@ label{
 #header-wrapper{
     grid-column: 1/5;
 }
-.header{
+.headerContainer{
     background-color: var(--headerAndFooter);
     display: flex;
     justify-content: space-between;
-    align-items: center;
     color: rgb(255, 255, 255);
     padding: 10px 40px 10px 40px;
 }
 
-.header-title{
-    font-size: 3.5rem;
-}
-
-.account-info-container{
-    text-align: center;
+.accountInfoContainer,.titleContainer {
     display: flex;
     align-items: center;
 }
 
-.account-icon{
+.listifyTitle{
+    font-size: 3.5rem;
+}
+
+.listifyIcon{
+    height: 50px;
+    margin-right: 15px;    
+}
+
+.profileIcon{
     display: block;
     height: 35px;
     padding-right: 5px;
 }
 
-.header h4 {
+.headerContainer h4 {
     white-space: nowrap;
-}
-
-.title-container{
-    display: flex;
-    align-items: center;
-}
-
-.main-webpage-icon{
-    height: 50px;
-    margin-right: 15px;
-    
 }
 /* HEADER SECTION END */
 
@@ -194,7 +186,7 @@ label{
 #footer-wrapper{
     grid-column: 1/5;
 }
-.footer-container{
+.footerContainer{
     background-color: var(--headerAndFooter);
     padding: 10px 0px 5px 0px;
     font-size: 20px;
@@ -212,6 +204,13 @@ label{
   .gitLink:hover{
     color: blue;
   }
+  
+
+
+
+
+
+
   
   #taskFormWrapper{
     display: block;

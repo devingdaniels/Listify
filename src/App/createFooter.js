@@ -4,7 +4,7 @@ function createFooter(){
     // Create the footer content and add classes
     const footer = document.createElement('footer')
     const container = document.createElement('p')
-    container.classList.add('footer-container') 
+    container.classList.add('footerContainer') 
     container.innerHTML = " Copyright ©"
     var date = new Date().getFullYear()
     container.innerHTML += " " + date + " "
