@@ -7,7 +7,6 @@ import { updateActive } from '../utils/helperFunctions'
 import { add    } from 'date-fns'
 
 
-
 export class AppBrain{
 
     constructor(){
@@ -17,6 +16,27 @@ export class AppBrain{
     projectAnchor(){
         return document.getElementById('project-wrapper')
     }
+
+    resetProjectSection(){
+        document.getElementById('project-wrapper').innerHTML = ""
+    }
+
+    displayActiveView(currentView){
+    // Reset the current project section
+    this.resetProjectSection()
+   
+    if (currentView === "Inbox"){     
+       this.displayInbox()     
+    }
+    else if (currentView === "Today"){     
+       this.displayToday()
+    }
+   
+    else if (currentView === "Month"){     
+       this.displayMonth()     
+    }
+   }
+   
 
     displayInbox(){       
         const anchor = document.getElementById('project-wrapper')
@@ -81,7 +101,7 @@ export class AppBrain{
                 container.classList.add('active')
             }
             
-            const options = renderIcon(DotOptionsIcon, "Icon of dots option svg", 'sidebar-tab-icon')
+            const options = renderIcon(DotOptionsIcon, "Icon of dots option svg", 'sidebarTabIcon')
             options.addEventListener('click', ()=>{
                 showProjectOptionPanel()
             })
@@ -106,91 +126,8 @@ export class AppBrain{
            anchor.append(container)
         })
     }
-
-    resetProjectSection(){
-        document.getElementById('project-wrapper').innerHTML = ""
-    }
-
-
-    displayNewProjectForm(){
-        let temp = document.getElementById('project-section')
-        const anchor = temp.firstChild
-        const container = document.createElement('div')
-        container.classList.add('projectFormContainer')
-    
-        const input = document.createElement('input')
-        input.id = "projectTitleData"
-        input.style.display = "block"
-        input.placeholder = "Project title"
-        // Add code to prevent user from submitting with enter
-
-        const buttonWrapper = document.createElement('div')
-        buttonWrapper.classList.add('add-project-button-wrapper')
-        const save = document.createElement('button')
-        save.textContent = "Save"
-        save.type = "button"
-        const cancel = document.createElement('button')
-        cancel.textContent = "Cancel"
-        cancel.type = "button"
-
-        save.id = ('saveNewProject')
-        cancel.id = ('cancelNewProject')
-
-        buttonWrapper.append(save)
-        buttonWrapper.append(cancel)
-
-
-    
-        save.addEventListener('click', () =>{  
-            const projectTitle = document.getElementById('projectTitleData') 
-
-            const isFound = this.projectArray.some(item =>{
-                if (item.title === projectTitle.value){                    
-                    return true
-                }
-                return false
-            })
-            if (isFound){
-                alert('Project title already exists. Please edit.')
-            }
-
-           else  if (projectTitle.value !== ""){
-                // Create a new project object
-                const project = new Project()
-                // Save the title
-                project.title = projectTitle.value
-                // Push the object onto the appBrain array
-                this.projectArray.push(project)                                
-                // Enable the add project button
-                enableAddProjectButton()
-                const userProjectSection = document.getElementById('userProjectSection')
-                userProjectSection.innerHTML = ""
-
-                container.remove()
-
-                this.displayProjects(project)  
-                // clear section data before updating                
-                      
-            }
-            else if(projectTitle.value === ""){
-                alert('Enter a valid project title')
-            }        
-        })
-    
-        cancel.addEventListener('click', ()=>{
-            // Remove the input form 
-            container.remove()
-            // Reshow the add project button
-            enableAddProjectButton()
-            
-        })
-    
-        container.append(input)        
-        container.append(buttonWrapper)
-        anchor.append(container)    
-    }
-
 }
+
 
 
 

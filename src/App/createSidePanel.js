@@ -1,12 +1,11 @@
 // Methods
-import {createDomElement, renderIcon, updateActive, disableAddProjectButton, addProjectOrTaskButton} from './utils/helperFunctions'
+import {createDomElement, renderIcon, updateActive, disableAddProjectButton, addProjectOrTaskButton, displayNewProjectForm} from './utils/helperFunctions'
 // Images
 import TrayFullIcon from './assets/tray-full-icon.svg'
 import TodayIcon from './assets/today-icon.svg'
 import MonthIcon from './assets/month-icon.svg'
 
 import { appBrain } from '../index.js'
-
 
 
 function createViewSection(){
@@ -18,16 +17,17 @@ function createViewSection(){
     // View section title
     const viewHeading = createDomElement('h1','sidebarHeading')
     viewHeading.innerHTML = "Views"
+    viewHeading.style.borderBottom = "1px solid black"
     sideItemsArray.push(viewHeading)
     // View section inbox tab
-    const inboxTab = createViewTabItem(TrayFullIcon, "Icon of a full inbox", "Inbox", "sidebar-tab-icon")
+    const inboxTab = createViewTabItem(TrayFullIcon, "Icon of a full inbox", "Inbox", "sidebarTabIcon")
     inboxTab.classList.add('active')
     sideItemsArray.push(inboxTab)
     // View section today tab
-    const todayTab = createViewTabItem(TodayIcon,"Icon of a calendar today", "Today", "sidebar-tab-icon")
+    const todayTab = createViewTabItem(TodayIcon,"Icon of a calendar today", "Today", "sidebarTabIcon")
     sideItemsArray.push(todayTab)
     // View section month tab
-    const monthTab = createViewTabItem(MonthIcon,"Icon of a calendar month", "Month", "sidebar-tab-icon" )    
+    const monthTab = createViewTabItem(MonthIcon,"Icon of a calendar month", "Month", "sidebarTabIcon" )    
     sideItemsArray.push(monthTab)
     // Append all view components to container
     sideItemsArray.forEach(item =>{
@@ -36,51 +36,32 @@ function createViewSection(){
     return viewSection
 }
 
-
-function createViewTabItem(image, alt, label, styleClass){
+function createViewTabItem(image, alt, tabName, styleClass){
     // Create the sidebarItem wrapper
     const tabItem = document.createElement('div')
-    tabItem.classList.add('sidebar-tab')
+    tabItem.classList.add('sidebarTabLabel')
     // Append the image
     tabItem.append(renderIcon(image, alt, styleClass))
-    // Append the label
+    // Append the tabName
     const title = document.createElement('h3')
-    title.innerHTML = label
+    title.innerHTML = tabName
     tabItem.append(title)
     tabItem.addEventListener('click', () =>{
-       updateActive(tabItem, 'sidebar-tab')
-        handle(label)
-         
+        updateActive(tabItem, 'sidebarTabLabel')
+        appBrain.displayActiveView(tabName)         
     })       
     return tabItem
 }
 
-function handle(label){
- // Reset the current project section
- appBrain.resetProjectSection()
-
- if (label === "Inbox"){     
-    appBrain.displayInbox()     
- }
- else if (label === "Today"){     
-    appBrain.displayToday()
- }
-
- else if (label === "Month"){     
-    appBrain.displayMonth()     
- }
-}
-
-
 function createProjectsSection(){
     // Create the projects section container
-     const projectSection = document.createElement('div')
+    const projectSection = document.createElement('div')
     projectSection.id = ('project-section')
     // Add projects section title
     const projectHeading = createDomElement('h1','sidebarHeading')
     projectHeading.innerHTML = "Projects"
+    projectHeading.style.borderBottom = "1px solid black"
 
-    
 
     // Add project section 'add' project button
     const iconSpanContainer = addProjectOrTaskButton("Add Project")
@@ -90,9 +71,15 @@ function createProjectsSection(){
         // Hide add icon so user can only add one project at a time
         disableAddProjectButton()
         // show add new project input 
-        appBrain.displayNewProjectForm()
+        displayNewProjectForm()
         
     })
+
+
+
+    // Add anchor for adding new projects
+    const newProjectTitleAnchor = document.createElement('div')
+    newProjectTitleAnchor.id = "newProjectTitleAnchor"
 
     // Add anchor for adding new projects
     const newProjectsContainer = document.createElement('div')
@@ -101,6 +88,7 @@ function createProjectsSection(){
     // Append all the components 
     projectSection.append(projectHeading)
     projectSection.append(iconSpanContainer)
+    projectSection.append(newProjectTitleAnchor)
     projectSection.append(newProjectsContainer)
     return projectSection
 }

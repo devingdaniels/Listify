@@ -12,7 +12,8 @@ renderWebsite()
 function renderWebsite(){
     createHeader()
     createSidePanel()
-    createFooter()     
+    createFooter()    
+    appBrain.displayInbox() 
 }
 
  

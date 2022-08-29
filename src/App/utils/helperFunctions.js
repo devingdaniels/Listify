@@ -2,7 +2,7 @@ import PlusIcon from '../assets/plus-icon.svg'
 import { Task } from '../classes/task'
 import { appBrain } from '../../index.js'
 import { displayActiveProject } from '../classes/appBrain'
-
+import { Project } from '../classes/project'
 
 
 function getCurrentDate(){
@@ -72,7 +72,7 @@ function addProjectOrTaskButton(label){
 
 function newTaskTemplateForm(){
     const formWrapper = document.createElement('div')
-    formWrapper.id = ('taskFormWrapper')
+    formWrapper.id = ('task-form-wrapper')
     const form = document.createElement('form')
     form.id = "new-task-form"
     form.action = "#"
@@ -164,9 +164,11 @@ function createNewTaskFromForm(){
 
     const task = new Task(title, description, dueDate)
 
+    // Get the name of the project
     const projectName = document.getElementById('project-wrapper').firstChild.innerHTML
     
-    let project = appBrain.projectArray.find(item =>{
+    // Find the project object in the app brain and return
+    const project = appBrain.projectArray.find(item =>{
             if (item.title === projectName){
                 return item
             }
@@ -174,7 +176,7 @@ function createNewTaskFromForm(){
     
     project.taskArray.push(task)
 
-    document.getElementById('taskFormWrapper').remove()
+    document.getElementById('task-form-wrapper').remove()
 
     enableAddProjectButton()
 
@@ -183,8 +185,88 @@ function createNewTaskFromForm(){
 }
 
 
+function displayNewProjectForm(){
+    const anchor = document.getElementById('newProjectTitleAnchor')
+    
+    const container = document.createElement('div')
+    container.classList.add('projectFormContainer')
+
+    const input = document.createElement('input')
+    input.id = "projectTitleData"
+    input.style.display = "block"
+    input.placeholder = "Project title"
+    // Add code to prevent user from submitting with enter
+
+    const buttonWrapper = document.createElement('div')
+    buttonWrapper.classList.add('add-project-button-wrapper')
+    const save = document.createElement('button')
+    save.textContent = "Save"
+    save.type = "button"
+    const cancel = document.createElement('button')
+    cancel.textContent = "Cancel"
+    cancel.type = "button"
+
+    save.id = ('saveNewProject')
+    cancel.id = ('cancelNewProject')
+
+    buttonWrapper.append(save)
+    buttonWrapper.append(cancel)
 
 
-export {createDomElement, renderIcon, updateActive, enableAddProjectButton, disableAddProjectButton, addProjectOrTaskButton, newTaskTemplateForm, getCurrentDate}
+
+    save.addEventListener('click', () =>{  
+        const projectTitle = document.getElementById('projectTitleData') 
+
+        const isFound = appBrain.projectArray.some(item =>{
+            if (item.title === projectTitle.value){                    
+                return true
+            }
+            return false
+        })
+
+        if (isFound){
+            alert('Project title already exists. Please edit.')
+        }
+
+       else  if (projectTitle.value !== ""){
+            // Create a new project object
+            const project = new Project()
+            // Save the title
+            project.title = projectTitle.value
+            // Push the object onto the appBrain array
+            appBrain.projectArray.push(project)                                
+            // Enable the add project button
+            enableAddProjectButton()
+            const userProjectSection = document.getElementById('userProjectSection')
+            userProjectSection.innerHTML = ""
+
+            container.remove()
+
+            appBrain.displayProjects(project)  
+            // clear section data before updating                
+                  
+        }
+        else if(projectTitle.value === ""){
+            alert('Enter a valid project title')
+        }        
+    })
+
+    cancel.addEventListener('click', ()=>{
+        // Remove the input form 
+        container.remove()
+        // Reshow the add project button
+        enableAddProjectButton()
+        
+    })
+
+    container.append(input)        
+    container.append(buttonWrapper)
+    anchor.appendChild(container)
+}
+
+
+
+
+export {createDomElement, renderIcon, updateActive, enableAddProjectButton, disableAddProjectButton, addProjectOrTaskButton, newTaskTemplateForm, getCurrentDate, displayNewProjectForm}
 
 

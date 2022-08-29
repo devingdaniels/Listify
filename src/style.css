@@ -75,14 +75,14 @@ label{
     text-align: center;
     margin-bottom: 20px;
 }
-.sidebar-tab{
+.sidebarTabLabel{
     display: flex;
     align-items: center;
     cursor: pointer; 
     width: 50%;
     margin-bottom: 20px;
 }
-.sidebar-tab-icon, .addNewItemIcon{
+.sidebarTabIcon, .addNewItemIcon{
     display: block;
     height: 25px;
     padding-right: 5px;
@@ -211,8 +211,8 @@ label{
 
 
 
-  
-  #taskFormWrapper{
+
+  #task-form-wrapper{
     display: block;
     position: fixed;
     top: 50%;
