@@ -1,4 +1,3 @@
-
 class Project{
 constructor(){
     this.title = ""

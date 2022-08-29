@@ -17,7 +17,7 @@ label{
 #main-grid-layout{
     display: grid;  
     grid-template-columns: repeat(4, 1fr);
-
+    
 }
 /* HEADER SECTION START */
 #header-wrapper{
@@ -72,6 +72,7 @@ label{
     height: 80vh;
     padding: 20px 5px 20px 20px;
     overflow-y: scroll;
+    height: 525px;
 }
 #sidebar-wrapper::-webkit-scrollbar {
     width: 6px;
@@ -123,7 +124,7 @@ label{
     align-items: center;
 }
 
-#cancelNewProject, #saveNewProject     
+#cancelNewProject, #saveNewProject, #new-task-save-button    
 {
    background-image: linear-gradient(144deg,#AF40FF, #5B42F3 50%,#00DDEB);
    border: 0;
@@ -155,6 +156,7 @@ label{
 .add-project-button-wrapper{
     display: flex;
     gap: 10%;
+    margin-bottom: 10px;
 }
 /* SIDEBAR SECTION END */
 
@@ -163,16 +165,30 @@ label{
 #project-wrapper{
     grid-column: 2/5;
     padding: 20px;
+    overflow-y: scroll;
+    height: 525px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.project-section-heading{
+    margin-bottom: 20px;
+    border-bottom: 3px solid var(--headerAndFooter) ;
+    width: 200px;
+}
+#add-new-task-button{
+    margin-bottom: 20px;
 }
 
 .displayedTask{
-    border: 1px solid black;
-}
-
+    background-color: rgb(193, 188, 188);
+    padding: 10px;
+    margin: 10px;
+    width: 50%;
+}  
 
 /* MAIN PROJECT SECTION END */
-
-/* SIDEBAR SECTION END */
 
 /* FOOTER SECTION */
 #footer-wrapper{
@@ -183,7 +199,7 @@ label{
     padding: 10px 0px 5px 0px;
     font-size: 20px;
     text-align: center;
-    height: 50px;
+    height: 54px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -201,9 +217,9 @@ label{
     display: block;
     position: fixed;
     top: 50%;
-    left: 50%;
+    left: 62%;
     transform: translate(-50%, -50%);
-    height: 300px;
+    height: 320px;
     width: 500px;
     border: 1px solid;
     box-shadow: 2px 5px 12px rgb(80, 105, 228);
@@ -217,7 +233,7 @@ label{
   }
 
   
-  .titleWrapper input{
+  .titleWrapper input,#dueDate{
     border: 1px solid #2d9fd9;
      color: black;     
      height: 40px;

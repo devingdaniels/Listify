@@ -4,9 +4,9 @@ class Task{
         this.description = description
         this.dueDate = dueDate
         // this.favorite = favorite
+        
     }
 }
-
 
 export {Task}
 

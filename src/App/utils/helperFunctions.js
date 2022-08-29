@@ -3,9 +3,21 @@ import { Task } from '../classes/task'
 import { appBrain } from '../../index.js'
 import { displayActiveProject } from '../classes/appBrain'
 
+
+
+function getCurrentDate(){
+    let today = new Date();
+    let dd = String(today.getDate()).padStart(2, '0');
+    let mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+    let yyyy = today.getFullYear();
+    today = yyyy + '-' + mm + '-' + dd;
+    return today
+    
+}
+
 function createDomElement(type, classList){
     const el = document.createElement(type)
-    if (classList !== ""){
+    if (classList !== "" && classList !== null){
         el.classList.add(classList)
     }    
     return el
@@ -67,7 +79,6 @@ function newTaskTemplateForm(){
     form.method = "post"
     
 
-
     const titleWrapper = document.createElement('div')
     titleWrapper.classList.add('titleWrapper')
 
@@ -125,19 +136,16 @@ function newTaskTemplateForm(){
     buttonWrapper.id = "newTaskButtonWrapper"
 
     const saveButton = document.createElement('button')
+    saveButton.id = 'new-task-save-button'
     saveButton.type = 'submit'
     saveButton.innerHTML = "Save"
     saveButton.addEventListener('click', e=>{
         e.preventDefault() 
-        handleFormData()        
+        createNewTaskFromForm()        
     })
 
 
-
-    buttonWrapper.append(saveButton)
-
-
-    
+    buttonWrapper.append(saveButton)    
     form.append(titleWrapper)
     form.append(descriptionWrapper)
     form.append(dueDateWrapper)
@@ -149,8 +157,7 @@ function newTaskTemplateForm(){
 }
 
 
-
-function handleFormData(){
+function createNewTaskFromForm(){
     const title = document.getElementById('title').value   
     const description = document.getElementById('description').value
     const dueDate = document.getElementById('dueDate').value
@@ -172,10 +179,12 @@ function handleFormData(){
     enableAddProjectButton()
 
     displayActiveProject(project)
+    
 }
 
 
 
-export {createDomElement, renderIcon, updateActive, enableAddProjectButton, disableAddProjectButton, addProjectOrTaskButton, newTaskTemplateForm}
+
+export {createDomElement, renderIcon, updateActive, enableAddProjectButton, disableAddProjectButton, addProjectOrTaskButton, newTaskTemplateForm, getCurrentDate}
 
 

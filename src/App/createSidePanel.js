@@ -55,7 +55,6 @@ function createViewTabItem(image, alt, label, styleClass){
     return tabItem
 }
 
-
 function handle(label){
  // Reset the current project section
  appBrain.resetProjectSection()
@@ -111,10 +110,7 @@ function createSidePanel(){
     const sideBar = document.getElementById('sidebar-wrapper')
     //Append new subsections 
     sideBar.append(createViewSection()) // this is the view section of the side panel
-    sideBar.append(createProjectsSection()) // this is the projects section of the view panel
-
-    // 
-    appBrain.displayInbox()
+    sideBar.append(createProjectsSection()) // this is the projects section of the view panel    
 }
 
 
