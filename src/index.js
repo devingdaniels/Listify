@@ -1,20 +1,8 @@
 import './style.css'
-import {createHeader} from './App/createHeaderSection'
-import { createSidePanel } from './App/createSidePanel'
-import { createFooter } from './App/createFooter'
-import { AppBrain } from './App/classes/appBrain'
+import { createHeader, createSidePanel, createFooter } from "./App/UI";
 
 
 
-const appBrain = new AppBrain()
-renderWebsite()
-
-function renderWebsite(){
-    createHeader()
-    createSidePanel()
-    createFooter()    
-    appBrain.displayInbox() 
-}
-
- 
-export {appBrain}
+document.getElementById('header-wrapper').append(createHeader())
+document.getElementById('sidebar-wrapper').append(createSidePanel())
+document.getElementById('footer-wrapper').append(createFooter())

@@ -1,247 +1,84 @@
 *{
     box-sizing: border-box;
-    margin: 0;
     padding: 0;
-    list-style: none;
+    margin: 0;
 }
 
-label{
-    font-size: 25px;
-}
-
-
-:root{
-    --headerAndFooter: rgb(27, 98, 204);
-}
 
 #main-grid-layout{
     display: grid;  
     grid-template-columns: repeat(4, 1fr);
     
 }
+
+
 /* HEADER SECTION START */
 #header-wrapper{
     grid-column: 1/5;
 }
 .headerContainer{
-    background-color: var(--headerAndFooter);
     display: flex;
     justify-content: space-between;
-    color: rgb(255, 255, 255);
-    padding: 10px 40px 10px 40px;
+    align-items: center;
+    padding: 0 10% 0 10%;
 }
-
-.accountInfoContainer,.titleContainer {
+.leftSubSection, .rightSubSection{
     display: flex;
     align-items: center;
+    justify-content: center;
+    font-size: 1.75rem;
 }
-
-.listifyTitle{
-    font-size: 3.5rem;
-}
-
-.listifyIcon{
-    height: 50px;
-    margin-right: 15px;    
-}
-
-.profileIcon{
+.listifyIcon, .userProfileIcon{
     display: block;
-    height: 35px;
-    padding-right: 5px;
+    height: 40px;
+    margin-right: 10px;
+
+}
+.darkModeToggle{
+    display: absolute;
+    left: 100px;
 }
 
-.headerContainer h4 {
-    white-space: nowrap;
-}
 /* HEADER SECTION END */
+
 
 /* SIDEBAR SECTION START */
 #sidebar-wrapper{
     grid-column: 1/2;
-    background-color: #e3dfdf;
-    color: black;     
-    height: 80vh;
-    padding: 20px 5px 20px 20px;
-    overflow-y: scroll;
-    height: 525px;
+    background-color: antiquewhite;
+    padding: 10px;
+    height: 87vh;
 }
-#sidebar-wrapper::-webkit-scrollbar {
-    width: 6px;
-    background-color: transparent;
-}
-
-.sidebarHeading{
-    text-align: center;
-    margin-bottom: 20px;
-}
-.sidebarTabLabel{
+.tabItemContainer{
     display: flex;
-    align-items: center;
-    cursor: pointer; 
-    width: 50%;
-    margin-bottom: 20px;
+    cursor: pointer;
+    padding: 10px 0 10px 15px;
 }
-.sidebarTabIcon, .addNewItemIcon{
+.sidebarTabViewIcon{
     display: block;
-    height: 25px;
-    padding-right: 5px;
-    cursor: pointer; 
+    height: 20px;
+    margin-right: 10px;
 }
 
-#userProjectSection{
-    overflow-y: auto;    
-    max-height: 200px;
-}
-
-#userProjectSection::-webkit-scrollbar {
-    width: 6px;
-    background-color: transparent;
-}
-
-.userProjectItem{   
-    margin: 10px 0 10px 0;
-    display: flex;
-    justify-content: space-between;
-}
-
-.projectFormContainer{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-
-.iconSpanContainer{
-    display: flex;
-    align-items: center;
-}
-
-#cancelNewProject, #saveNewProject, #new-task-save-button    
-{
-   background-image: linear-gradient(144deg,#AF40FF, #5B42F3 50%,#00DDEB);
-   border: 0;
-   border-radius: 8px;
-   box-shadow: rgba(151, 65, 252, 0.2) 0 15px 30px -5px;
-   color: white;
-   font-family: Phantomsans, sans-serif;
-   font-size: 20px;
-   line-height: 1em;
-   text-decoration: none;
-   white-space: nowrap;
-   cursor: pointer;
-   margin: 5px 0 5px 0;
-   padding: 10px;
-
-}
-
-.projectFormContainer input{
-    /* -webkit-border-radius: 20px;
-    -moz-border-radius: 20px;
-     border-radius: 20px; */
-     border: 1px solid #2d9fd9;
-     color: black;
-     width: 250px;
-     height: 40px;
-     padding-left: 10px;
-}
-
-.add-project-button-wrapper{
-    display: flex;
-    gap: 10%;
-    margin-bottom: 10px;
-}
 /* SIDEBAR SECTION END */
 
 
-/* MAIN PROJECT SECTION START */
-#project-wrapper{
+
+
+/* CENTRAL VIEW SECTION START */
+#current-view-wrapper{
     grid-column: 2/5;
-    padding: 20px;
-    overflow-y: scroll;
-    height: 525px;
-    text-align: center;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-.projectSectionHeading{
-    margin-bottom: 20px;
-    border-bottom: 1px solid black ;
-    width: 200px;
-}
-#add-new-task-button{
-    margin-bottom: 20px;
+    background-color: bisque;
+   
 }
 
-.displayedTask{
-    width: 60%;
-    border: 1px solid;
-    box-shadow: 2px 5px 12px rgb(80, 105, 228);
-    background-color: aliceblue;
-    margin-bottom: 20px;
-}  
-.currentTaskItemWrapper{
-    
-}
+/* CENTRAL VIEW SECTION END */
 
-/* MAIN PROJECT SECTION END */
 
-/* FOOTER SECTION */
+
+/* FOOTER SECTION START*/
 #footer-wrapper{
     grid-column: 1/5;
-}
-.footerContainer{
-    background-color: var(--headerAndFooter);
-    padding: 10px 0px 5px 0px;
-    font-size: 20px;
     text-align: center;
-    height: 54px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 1%;
-  }
-  .gitLink {
-    text-decoration: none;
-  }
-  
-  .gitLink:hover{
-    color: blue;
-  }
-  
-
-
-/* NEW TASK POP-UP FORM */
-  #task-form-container{
-    display: block;
-    position: fixed;
-    top: 50%;
-    left: 62%;
-    transform: translate(-50%, -50%);
-    height: 320px;
-    width: 500px;
-    border: 1px solid;
-    box-shadow: 2px 5px 12px rgb(80, 105, 228);
-    background-color: aliceblue;
-    padding: 20px;
-  }
-    
-  .newTaskFormWrapper input, #dueDate{
-    border: 1px solid #2d9fd9;
-    color: black;     
-    height: 40px;
-    padding-left: 10px;  
-  }
-
-  .newTaskFormWrapper textarea{
-    border: 1px solid #2d9fd9;
-     color: black;     
-     height: 80px;
-     padding-left: 10px;  
-  }
-
-  
-  .newTaskFormWrapper{
-    display: flex;
-    flex-direction: column;
-  }
+}
+/* FOOTER SECTION END*/
