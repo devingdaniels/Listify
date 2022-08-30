@@ -164,9 +164,9 @@ label{
     flex-direction: column;
     align-items: center;
 }
-.project-section-heading{
+.projectSectionHeading{
     margin-bottom: 20px;
-    border-bottom: 3px solid var(--headerAndFooter) ;
+    border-bottom: 1px solid black ;
     width: 200px;
 }
 #add-new-task-button{
@@ -174,11 +174,15 @@ label{
 }
 
 .displayedTask{
-    background-color: rgb(193, 188, 188);
-    padding: 10px;
-    margin: 10px;
-    width: 50%;
+    width: 60%;
+    border: 1px solid;
+    box-shadow: 2px 5px 12px rgb(80, 105, 228);
+    background-color: aliceblue;
+    margin-bottom: 20px;
 }  
+.currentTaskItemWrapper{
+    
+}
 
 /* MAIN PROJECT SECTION END */
 
@@ -207,12 +211,8 @@ label{
   
 
 
-
-
-
-
-
-  #task-form-wrapper{
+/* NEW TASK POP-UP FORM */
+  #task-form-container{
     display: block;
     position: fixed;
     top: 50%;
@@ -223,23 +223,17 @@ label{
     border: 1px solid;
     box-shadow: 2px 5px 12px rgb(80, 105, 228);
     background-color: aliceblue;
-  }
-  
-  #new-task-form{
-    display: flex;
-    flex-direction: column;
     padding: 20px;
   }
-
-  
-  .titleWrapper input,#dueDate{
+    
+  .newTaskFormWrapper input, #dueDate{
     border: 1px solid #2d9fd9;
-     color: black;     
-     height: 40px;
-     padding-left: 10px;  
+    color: black;     
+    height: 40px;
+    padding-left: 10px;  
   }
 
-  #descriptionWrapper textarea{
+  .newTaskFormWrapper textarea{
     border: 1px solid #2d9fd9;
      color: black;     
      height: 80px;
@@ -247,7 +241,7 @@ label{
   }
 
   
-  .titleWrapper, #descriptionWrapper, #dueDateWrapper{
+  .newTaskFormWrapper{
     display: flex;
     flex-direction: column;
   }

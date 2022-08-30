@@ -1,10 +1,9 @@
-import { renderIcon, enableAddProjectButton, addProjectOrTaskButton, newTaskTemplateForm, disableAddProjectButton, getCurrentDate } from '../utils/helperFunctions'
-import { Project } from './project'
+import { renderIcon, addProjectOrTaskButton, newTaskTemplateForm, disableAddProjectButton, getCurrentDate } from '../utils/helperFunctions'
 import DotOptionsIcon from '../assets/dots-vertical-icon.svg'
 import { updateActive } from '../utils/helperFunctions'
 
 
-import { add    } from 'date-fns'
+import { add } from 'date-fns'
 
 
 export class AppBrain{
@@ -138,7 +137,7 @@ function showProjectOptionPanel(){
 
 function createTabTitle(tab){
     const title = document.createElement('h1')
-    title.classList.add('project-section-heading')
+    title.classList.add('projectSectionHeading')
     title.innerHTML = tab
     title.style.fontSize = "40px"
     title.style.textAlign = "center"        
@@ -167,24 +166,12 @@ function displayActiveProject(project){
     })
 }
 
-function createNewUserTask(project){
-    const anchor = document.getElementById('project-wrapper')
-    const taskForm = newTaskTemplateForm()
-
-
-    disableAddProjectButton()
-
-    anchor.append(taskForm)
-
-}
-
-
 function displayProjectTasks(task){
     const container = document.createElement('div')
     container.classList.add('displayedTask')
 
     const titleWrapper = document.createElement('div')
-    titleWrapper.id = 'project-task-title-wrapper'
+    titleWrapper.classList.add('currentTaskItemWrapper')
     const titleLabel = document.createElement('label')
     titleLabel.innerHTML = 'Title:'
     const titleBody = document.createElement('p')
@@ -192,8 +179,10 @@ function displayProjectTasks(task){
     titleWrapper.append(titleLabel)
     titleWrapper.append(titleBody)
 
+
+
     const descriptionWrapper = document.createElement('div')
-    descriptionWrapper.id = 'project-task-description-wrapper'
+    descriptionWrapper.classList.add('currentTaskItemWrapper')
     const descriptionLabel = document.createElement('label')
     descriptionLabel.innerHTML = "Description:"
     const descriptionBody = document.createElement('p')
@@ -203,7 +192,7 @@ function displayProjectTasks(task){
 
 
     const dueDateWrapper = document.createElement('div')
-    dueDateWrapper.id = 'project-task-dueDate-wrapper'
+    dueDateWrapper.classList.add('currentTaskItemWrapper')
     const dueDateLabel = document.createElement('label')
     dueDateLabel.innerHTML = "Due:"
     const dueDateBody = document.createElement('p')
@@ -220,6 +209,18 @@ function displayProjectTasks(task){
     return container
 }
 
+
+
+function createNewUserTask(project){
+    const anchor = document.getElementById('project-wrapper')
+    const taskForm = newTaskTemplateForm()
+
+
+    disableAddProjectButton()
+
+    anchor.append(taskForm)
+
+}
 function formatJSDate(date){
     const string = String(date)
     date = ''        

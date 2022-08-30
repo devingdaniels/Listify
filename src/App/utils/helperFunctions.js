@@ -72,22 +72,21 @@ function addProjectOrTaskButton(label){
 
 function newTaskTemplateForm(){
     const formWrapper = document.createElement('div')
-    formWrapper.id = ('task-form-wrapper')
+    formWrapper.id = ('task-form-container')
     const form = document.createElement('form')
-    form.id = "new-task-form"
     form.action = "#"
     form.method = "post"
     
 
     const titleWrapper = document.createElement('div')
-    titleWrapper.classList.add('titleWrapper')
+    titleWrapper.classList.add('newTaskFormWrapper')
 
     const titleLabel = document.createElement('label')
     titleLabel.for = "title"
     titleLabel.innerHTML = "Title:"
     const titleInput = document.createElement('input')
     titleInput.type = "text"
-    titleInput.id = "title"
+    titleInput.id = "newTaskTitle"
     titleInput.placeholder = "What is this task?"
     titleInput.minLength = 1
     titleInput.maxLength = 50
@@ -98,14 +97,14 @@ function newTaskTemplateForm(){
 
 
     const descriptionWrapper = document.createElement('div')
-    descriptionWrapper.id = 'descriptionWrapper'
+    descriptionWrapper.classList.add('newTaskFormWrapper')
 
     const descriptionLabel = document.createElement('label')
     descriptionLabel.for = "description"
     descriptionLabel.innerHTML = "Description:"
 
     const descriptionInput = document.createElement('textarea')
-    descriptionInput.id = "description"
+    descriptionInput.id = "newTaskDescription"
     descriptionInput.placeholder = "ie, some info about your task"
     descriptionInput.name = 'descriptionInfo'
     descriptionInput.style.resize = "none"
@@ -117,7 +116,7 @@ function newTaskTemplateForm(){
 
     
     const dueDateWrapper = document.createElement('div')
-    dueDateWrapper.id = "dueDateWrapper"
+    dueDateWrapper.classList.add('newTaskFormWrapper')
 
     const dueDateLabel = document.createElement('label')
     dueDateLabel.for = 'dueDate'
@@ -125,7 +124,7 @@ function newTaskTemplateForm(){
 
     const dueDateInput = document.createElement('input')
     dueDateInput.type = 'date'
-    dueDateInput.id = 'dueDate'
+    dueDateInput.id = 'newTaskDueDate'
 
     dueDateWrapper.append(dueDateLabel)
     dueDateWrapper.append(dueDateInput)
@@ -133,7 +132,7 @@ function newTaskTemplateForm(){
 
 
     const buttonWrapper = document.createElement('div')
-    buttonWrapper.id = "newTaskButtonWrapper"
+    buttonWrapper.classList.add("newTaskButtonWrapper")
 
     const saveButton = document.createElement('button')
     saveButton.id = 'new-task-save-button'
@@ -158,9 +157,9 @@ function newTaskTemplateForm(){
 
 
 function createNewTaskFromForm(){
-    const title = document.getElementById('title').value   
-    const description = document.getElementById('description').value
-    const dueDate = document.getElementById('dueDate').value
+    const title = document.getElementById('newTaskTitle').value   
+    const description = document.getElementById('newTaskDescription').value
+    const dueDate = document.getElementById('newTaskDueDate').value
 
     const task = new Task(title, description, dueDate)
 
@@ -176,7 +175,7 @@ function createNewTaskFromForm(){
     
     project.taskArray.push(task)
 
-    document.getElementById('task-form-wrapper').remove()
+    document.getElementById('task-form-container').remove()
 
     enableAddProjectButton()
 
