@@ -131,24 +131,32 @@ function newTaskTemplateForm(){
 
 
 
-    const buttonWrapper = document.createElement('div')
-    buttonWrapper.classList.add("newTaskButtonWrapper")
+    const saveButtonWrapper = document.createElement('div')
+    saveButtonWrapper.classList.add("newTaskButtonWrapper")
 
     const saveButton = document.createElement('button')
     saveButton.id = 'new-task-save-button'
-    saveButton.type = 'submit'
+    saveButton.type = 'button'
     saveButton.innerHTML = "Save"
-    saveButton.addEventListener('click', e=>{
-        e.preventDefault() 
-        createNewTaskFromForm()        
+    
+    saveButton.addEventListener('click', function(){
+        const title = document.getElementById('newTaskTitle')
+        const description = document.getElementById('newTaskDescription')
+        const dueDate =  document.getElementById('newTaskDueDate')
+        if (title.value === '' || dueDate.value === "" || description.value === ""){
+            alert('Empty field, add data')
+        }
+        else {
+            createNewTaskFromForm()
+        }        
     })
 
 
-    buttonWrapper.append(saveButton)    
+    saveButtonWrapper.append(saveButton)    
     form.append(titleWrapper)
     form.append(descriptionWrapper)
     form.append(dueDateWrapper)
-    form.append(buttonWrapper)
+    form.append(saveButtonWrapper)
     // form.append(descriptionInput)    
     // form.append(dueDate)
     formWrapper.append(form)

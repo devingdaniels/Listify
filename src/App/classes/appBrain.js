@@ -64,27 +64,6 @@ export class AppBrain{
     
     displayMonth(){
         
-        const anchor = document.getElementById('project-wrapper')
-        anchor.innerHTML = ''
-        this.container.append(createTabTitle("Month"))
-        this.projectArray.forEach(project =>{
-            project.taskArray.forEach(task =>{    
-                
-                const dateObject = getParsedDate(task.dueDate)
-
-                const result = add(new Date(dateObject.yyyy, dateObject.mm, dateObject.dd),    
-                 {                   
-                    days: 30              
-                })
-                console.log(dateObject)
-                console.log(task.dueDate)
-                console.log(result)
-
-                if (task.dueDate < result){
-                    anchor.append(displayProjectTasks(task))
-                }                                
-            })
-        })
     }
    
 
@@ -108,7 +87,8 @@ export class AppBrain{
             const h3 = document.createElement('h3')
             h3.innerHTML = item.title
             h3.style.cursor = "pointer"
-            h3.addEventListener('click', ()=>{                   
+            h3.addEventListener('click', ()=>{  
+
                 updateActive(h3.parentElement, 'userProjectItem' )
                 const array = this.projectArray.filter(item => {
                     if (item.title == h3.innerHTML){
@@ -173,7 +153,7 @@ function displayProjectTasks(task){
     const titleWrapper = document.createElement('div')
     titleWrapper.classList.add('currentTaskItemWrapper')
     const titleLabel = document.createElement('label')
-    titleLabel.innerHTML = 'Title:'
+    titleLabel.innerHTML = 'Title'
     const titleBody = document.createElement('p')
     titleBody.innerHTML = task.title
     titleWrapper.append(titleLabel)
@@ -184,7 +164,7 @@ function displayProjectTasks(task){
     const descriptionWrapper = document.createElement('div')
     descriptionWrapper.classList.add('currentTaskItemWrapper')
     const descriptionLabel = document.createElement('label')
-    descriptionLabel.innerHTML = "Description:"
+    descriptionLabel.innerHTML = "Description"
     const descriptionBody = document.createElement('p')
     descriptionBody.innerHTML = task.description
     descriptionWrapper.append(descriptionLabel)
@@ -194,7 +174,7 @@ function displayProjectTasks(task){
     const dueDateWrapper = document.createElement('div')
     dueDateWrapper.classList.add('currentTaskItemWrapper')
     const dueDateLabel = document.createElement('label')
-    dueDateLabel.innerHTML = "Due:"
+    dueDateLabel.innerHTML = "Due"
     const dueDateBody = document.createElement('p')
 
     dueDateBody.innerHTML = formatJSDate(task.dueDate)
