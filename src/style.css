@@ -48,8 +48,29 @@
     background-color: antiquewhite;
     padding: 10px;
     height: 87vh;
+    overflow-y: auto;
 }
-.tabItemContainer{
+/* width */
+#sidebar-wrapper::-webkit-scrollbar {
+    width: 10px;
+  }
+  /* Track */
+#sidebar-wrapper::-webkit-scrollbar-track {
+    box-shadow: inset 0 0 5px grey; 
+    border-radius: 10px;
+}
+   
+  /* Handle */
+#sidebar-wrapper ::-webkit-scrollbar-thumb {
+    background: red; 
+    border-radius: 10px;
+}
+  /* Handle on hover */
+#sidebar-wrapper::-webkit-scrollbar-thumb:hover {
+    background: #b30000; 
+}
+
+.tabItemContainer, .newProjectButton{
     display: flex;
     cursor: pointer;
     padding: 10px 0 10px 15px;
@@ -58,6 +79,47 @@
     display: block;
     height: 20px;
     margin-right: 10px;
+}
+
+.projectFormContainer{
+    display: flex;
+    flex-direction: column;
+    width: 60%;
+    margin: auto;
+}
+.projectFormButtonContainer{
+    margin: 3px auto 0 auto;
+    display: flex;
+    justify-content: space-around;
+    width: 100%;
+
+}
+.newProjectSaveButton, .newProjectCancelButton{
+    border: none;
+}
+.newProjectSaveButton{
+    background-color: rgb(8, 244, 8);
+}
+.newProjectCancelButton{
+    background-color: red;
+}
+.newProjectOptionsButton{
+    height: 20px;
+    padding-right: 30px;
+    cursor: pointer;
+}
+.duplicateProjectTitleError::placeholder{
+    color: red;
+}
+
+/* This is for each new project tab that is created by the user */
+.projectSidebarItemWrapper{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+#new-project-container-anchor{
+    
 }
 
 /* SIDEBAR SECTION END */
@@ -80,5 +142,6 @@
 #footer-wrapper{
     grid-column: 1/5;
     text-align: center;
+    background-color: aqua;
 }
 /* FOOTER SECTION END*/

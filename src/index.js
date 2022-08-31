@@ -1,8 +1,7 @@
-import './style.css'
-import { createHeader, createSidePanel, createFooter } from "./App/UI";
-
-
-
-document.getElementById('header-wrapper').append(createHeader())
-document.getElementById('sidebar-wrapper').append(createSidePanel())
-document.getElementById('footer-wrapper').append(createFooter())
+import {Listify} from './App/classes/Listify'
+import {createListifyUI} from './App/UI'
+// Create the website UI
+createListifyUI()
+//Create instance of listify, which holds all project and task data
+const listify = new Listify()
+export {listify}

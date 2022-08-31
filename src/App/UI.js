@@ -1,3 +1,4 @@
+import '../style.css'
 // Images
 import ListifyBrandIcon from './assets/checkbox-icon.svg'
 import CustomerIcon from './assets/customer-icon.svg'
@@ -5,11 +6,8 @@ import TrayFullIcon from './assets/tray-full-icon.svg'
 import TodayIcon from './assets/today-icon.svg'
 import MonthIcon from './assets/month-icon.svg'
 import StarIcon from './assets/star-icon.svg'
-import PlusIcon from './assets/plus-icon.svg'
 // Methods 
-import { renderIcon, toggleDarkMode } from './utils/helperFunctions'
-// Event listen functions
-import { updateViewTab, createNewProject } from './eventListeners'
+import { renderIcon, toggleDarkMode, createSidebarViewTab, createNewProjectButton } from './utils/helperFunctions'
 
 
 function createHeader(){
@@ -47,7 +45,6 @@ function createHeader(){
     return headerContainer
 }
 
-
 function createSidePanel(){
     // Array for easier appending of all the items to the wrapper
     let sideItemsArray = []
@@ -76,11 +73,14 @@ function createSidePanel(){
     projectHeading.innerHTML = "Projects"
     projectHeading.style.borderBottom = "1px solid black"
     sideItemsArray.push(projectHeading)
-    // Project section new project button
-    const newProjectButton = createSidebarViewTab(PlusIcon,"Icon of a plus icon", "New Project", "sidebarTabViewIcon" )
-    newProjectButton.id = 'new-project-button' 
-    newProjectButton.addEventListener('click', createNewProject)  
-    sideItemsArray.push(newProjectButton)
+    // Project section new project anchor
+    const projectButtonAnchor = document.createElement('div')
+    projectButtonAnchor.id = 'project-button-anchor'
+    sideItemsArray.push(projectButtonAnchor)
+     // Create an anchor for appending new project forms
+     const projectFormAnchor = document.createElement('div')
+     projectFormAnchor.id = 'project-form-container-anchor'
+     sideItemsArray.push(projectFormAnchor)
     // Create an anchor for appending future user projects tabs
     const projectAnchor = document.createElement('div')
     projectAnchor.id = 'new-project-container-anchor'
@@ -90,22 +90,6 @@ function createSidePanel(){
         sidebarContainer.append(item)
     })    
     return sidebarContainer
-}
-
-function createSidebarViewTab(image, alt, tabName, styleClass){
-    // Create the sidebarItem wrapper
-    const tabItemContainer = document.createElement('div')
-    tabItemContainer.classList.add('tabItemContainer')
-    // Append the image
-    tabItemContainer.append(renderIcon(image, alt, styleClass))
-    // Append the tabName
-    const title = document.createElement('h4')
-    title.innerHTML = tabName
-    tabItemContainer.append(title)
-    if (tabName !== 'New Project'){
-        tabItemContainer.addEventListener('click', updateViewTab)
-    }
-    return tabItemContainer
 }
 
 function createFooter(){
@@ -123,4 +107,11 @@ function createFooter(){
     return footer
 }
 
-export {createHeader, createSidePanel, createFooter}
+function createListifyUI(){
+    document.getElementById('header-wrapper').append(createHeader())
+    document.getElementById('sidebar-wrapper').append(createSidePanel())
+    document.getElementById('footer-wrapper').append(createFooter())
+    createNewProjectButton()    
+}
+
+export {createHeader, createSidePanel, createFooter, createListifyUI}
