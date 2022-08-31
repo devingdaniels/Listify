@@ -26,17 +26,13 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 1.75rem;
+    font-size: 2.7rem;
 }
 .listifyIcon, .userProfileIcon{
     display: block;
     height: 40px;
     margin-right: 10px;
 
-}
-.darkModeToggle{
-    display: absolute;
-    left: 100px;
 }
 
 /* HEADER SECTION END */
@@ -45,10 +41,10 @@
 /* SIDEBAR SECTION START */
 #sidebar-wrapper{
     grid-column: 1/2;
-    background-color: antiquewhite;
     padding: 10px;
     height: 87vh;
     overflow-y: auto;
+    border: 1px solid gray;
 }
 /* width */
 #sidebar-wrapper::-webkit-scrollbar {
@@ -112,14 +108,11 @@
     color: red;
 }
 
-/* This is for each new project tab that is created by the user */
 .projectSidebarItemWrapper{
+    /* This is for each new project tab that is created by the user */
     display: flex;
     align-items: center;
     justify-content: space-between;
-}
-#new-project-container-anchor{
-    
 }
 
 /* SIDEBAR SECTION END */
@@ -130,8 +123,21 @@
 /* CENTRAL VIEW SECTION START */
 #current-view-wrapper{
     grid-column: 2/5;
-    background-color: bisque;
+    border: 1px solid gray;
+    padding: 20px;
    
+}
+
+.currentViewHeadingWrapper{
+    font-size: 50px;
+    border-bottom: 1px solid black;
+    width: max-content;
+    margin: auto;
+}
+.newTaskButton{
+    display: flex;
+    width: max-content;
+    cursor: pointer;
 }
 
 /* CENTRAL VIEW SECTION END */
@@ -142,6 +148,10 @@
 #footer-wrapper{
     grid-column: 1/5;
     text-align: center;
-    background-color: aqua;
+    border: 1px solid gray;
 }
 /* FOOTER SECTION END*/
+
+
+
+/* DARK MODE CSS */

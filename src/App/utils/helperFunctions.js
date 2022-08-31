@@ -1,8 +1,12 @@
 import PlusIcon from '../assets/plus-icon.svg'
-import { displayNewProjectForm, updateViewTab } from '../eventListeners'
+import { displayNewProjectForm,displayNewTaskForm, updateViewTab } from '../eventListeners'
+
+
 
 function toggleDarkMode(){
-    alert('code dark mode theme')
+    
+alert('code darkmode')
+    
 }
 
 function renderIcon(image, alt, styleClass){
@@ -22,6 +26,14 @@ function createNewProjectButton(){
     button.id = 'new-project-button'
     button.classList.add('newProjectButton')
     button.addEventListener('click', displayNewProjectForm)
+    anchor.append(button)
+}
+function createNewTaskButton(){
+    const anchor = document.getElementById('current-view-wrapper')
+    const button = createSidebarViewTab(PlusIcon,"Icon of a plus icon", "Add Task", "sidebarTabViewIcon" )
+    button.id = 'new-task-button'
+    button.classList.add('newTaskButton')
+    button.addEventListener('click', displayNewTaskForm)
     anchor.append(button)
 }
 
@@ -61,4 +73,4 @@ function createSidebarViewTab(image, alt, tabName, styleClass){
     return tabItemContainer
 }
 
-export {renderIcon, toggleDarkMode, createNewProjectButton, createSidebarViewTab, disableNewProjectButton, enableNewProjectButton, removeProjectForm}
+export {renderIcon, toggleDarkMode, createNewProjectButton, createSidebarViewTab, disableNewProjectButton, enableNewProjectButton, removeProjectForm, createNewTaskButton}

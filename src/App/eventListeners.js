@@ -20,10 +20,25 @@ function updateViewTab(currentTab){
 
     // Get the name of the current tab
     const tabName = currentTab.lastChild.innerHTML
-
-    alert(`${tabName} is called`)
-
+    switch(tabName) {
+        case 'All Tasks':
+          listify.displayAllTasks()
+          break;
+        case 'Today':
+            listify.displayToday()
+          break;
+        case 'Next 7 Days':
+            listify.displayNextSevenDays()
+          break;
+        case 'Favorites':
+            listify.displayFavorites()
+          break;
+        default:
+          listify.displayCurrentProject(tabName)
+      }
 }
+
+
 
 // This gets called when user clicks on 'add new project' button in the side panel
 function displayNewProjectForm(){
@@ -99,8 +114,16 @@ function createNewProjectObject(title){
 
 
 
+function displayNewTaskForm(){
+    
+}
+
+
+
+
 function displayProjectOptionPanel(){
     alert('display project options panel')
 }
 
-export {updateViewTab, displayNewProjectForm, createNewProjectObject, displayProjectOptionPanel}
+
+export {updateViewTab, displayNewProjectForm, createNewProjectObject, displayProjectOptionPanel, displayNewTaskForm}

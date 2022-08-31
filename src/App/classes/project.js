@@ -7,9 +7,6 @@ export class Project{
     displayTasks(){
         alert('display all tasks for the current project')
     }
-
-
-    
-
 }
+
 

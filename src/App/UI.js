@@ -27,18 +27,27 @@ function createHeader(){
     const rightSubSection = document.createElement('div')
     rightSubSection.classList.add('rightSubSection')
     const profileIcon = renderIcon(CustomerIcon, 'Image of a user profile icon', 'userProfileIcon')
-    const currentUserName = document.createElement('h4')
+    const currentUserName = document.createElement('h6')
     currentUserName.id = 'current-user-name' //Target later for displaying current user
     currentUserName.innerHTML = "John Doe"
     rightSubSection.append(profileIcon)
     rightSubSection.append(currentUserName)
+
+
+
     // Dark Mode Button
-    const darkMode = document.createElement('button')
-    darkMode.innerHTML = "Theme"
-    darkMode.addEventListener('click', toggleDarkMode)
-    darkMode.classList.add('darkModeToggle')
+    const darkModeWrapper = document.createElement('div')
+    const darkModeInput = document.createElement('input')
+    darkModeInput.type = 'checkbox'
+    darkModeInput.id = 'darkmode-toggle'
+    darkModeInput.addEventListener('click', toggleDarkMode)
+    const darkModeLabel = document.createElement('label')
+    darkModeLabel.for = 'darkmode-toggle'
+    darkModeWrapper.append(darkModeInput)
+    darkModeWrapper.append(darkModeLabel)
+
     // Appends
-    headerContainer.append(darkMode)
+    headerContainer.append(darkModeWrapper)
     headerContainer.append(leftSubSection)
     headerContainer.append(rightSubSection)
     // Return header container
