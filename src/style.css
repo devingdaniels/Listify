@@ -144,7 +144,7 @@
     border: 1px solid blue;
     padding: 20px;
     width: 70%; 
-    margin-top: 10px;
+    margin: 10px auto 0px auto;
 }
 #new-task-form label{
     font-size: 2rem;
@@ -163,6 +163,26 @@
     display: flex;
     justify-content: center;
     gap: 10%;
+}
+.prettyTaskContainer{
+    display: flex;
+    align-items: center;
+    width: 70%;
+    margin: auto;
+    justify-content: center;
+}
+#task-checkbox-complete{
+    border-radius: 100%;
+}
+.taskInfoWrapper{
+    width: 50%;
+}
+.taskDueDateWrapper{
+    display: flex;
+    align-items: center;
+    border-radius: 40%;
+    padding: 3px;
+    border: 1px solid black;
 }
 
 /* CENTRAL VIEW SECTION END */

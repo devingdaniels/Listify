@@ -231,4 +231,16 @@ function displayProjectOptionPanel(){
 }
 
 
-export {updateViewTab, displayNewProjectForm, createNewProjectObject, displayProjectOptionPanel, displayNewTaskForm}
+function toggleTaskFavoriteStatus(){
+    alert('toggleTaskFavoriteStatus')
+}
+
+function showEditTaskPanel(){
+    alert('showEditTaskPanel')
+}
+
+function toggleTaskIsComplete(){
+    alert('toggleTaskIsComplete')
+}
+
+export {updateViewTab, displayNewProjectForm, createNewProjectObject, displayProjectOptionPanel, displayNewTaskForm, toggleTaskFavoriteStatus,toggleTaskIsComplete,  showEditTaskPanel}

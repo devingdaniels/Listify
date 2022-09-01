@@ -97,7 +97,7 @@ export class Listify{
             const description = task.taskDescription
             const dueDate = task.dueDate
             // Use data to create task display container within the current project
-            const taskContainer  = task.createTaskContainer(title, description, dueDate)
+            const taskContainer  = task.displayPrettyTask(title, description, dueDate)
             // Append the task container to the dom in the project section
             getCurrentViewWrapper().append(taskContainer)
         })
