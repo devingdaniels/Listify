@@ -88,4 +88,23 @@ function showErrorMessage(targetElement, message){
     errorMessage.placeholder = message
 }
 
-export {renderIcon, toggleDarkMode, createNewProjectButton, createSidebarViewTab, disableNewProjectButton, enableNewProjectButton, removeProjectForm, createNewTaskButton, showErrorMessage, enableNewTaskButton, disableNewTaskButton}
+function formatJSDate(date){
+    if (date === '' || date === null){
+        return
+    } 
+
+    const string = String(date)
+    date = ''        
+
+    for (let i = 5; i < 10; i++){
+        date += string[i]
+    }
+    date += '-'
+    for(let i = 0; i < 4; i++){
+        date += string[i]
+    }
+    return date    
+}
+
+
+export {renderIcon, toggleDarkMode, createNewProjectButton, createSidebarViewTab, disableNewProjectButton, enableNewProjectButton, removeProjectForm, createNewTaskButton, showErrorMessage, enableNewTaskButton, disableNewTaskButton,formatJSDate}

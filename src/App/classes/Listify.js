@@ -73,10 +73,19 @@ export class Listify{
     }
 
     isDuplicateTitle(title){
-        console.log(title)
        return this.projectArray.some(project => project.projectTitle === title )
        }
-    
+
+    getCurrentProject(){
+        // Get the title of the current project in the view 
+        const projectTitle = document.getElementById('current-view-wrapper').firstChild.innerHTML
+        // Traverse and find the object with matching title
+        for(let i = 0; i < this.projectArray.length; i++){
+            if (this.projectArray[i].projectTitle === projectTitle ){
+                return this.projectArray[i]
+            }
+        }
+    }
 }
 
 

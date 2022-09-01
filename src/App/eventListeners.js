@@ -1,5 +1,5 @@
 // Helper methods
-import {removeProjectForm, disableNewProjectButton, enableNewProjectButton, showErrorMessage, disableNewTaskButton, enableNewTaskButton } from "./utils/helperFunctions"
+import {removeProjectForm, disableNewProjectButton, enableNewProjectButton, showErrorMessage, disableNewTaskButton, enableNewTaskButton, formatJSDate , getCurrentProject} from "./utils/helperFunctions"
 // Classes 
 import { Project } from "./classes/project"
 import { Task } from "./classes/task"
@@ -163,6 +163,7 @@ function displayNewTaskForm(){
     const dueDateInput = document.createElement('input')
     dueDateInput.type = 'date'
     dueDateInput.id = 'task-dueDate'
+    dueDateInput.min = new Date().toLocaleDateString('en-ca')
     
     dueDateWrapper.append(dueDateLabel)
     dueDateWrapper.append(dueDateInput)
@@ -210,13 +211,15 @@ function parseTaskForm(){
     // Get the data from the form
     const title = document.getElementById('task-title').value
     const description = document.getElementById('task-description').value
-    const dueDate = document.getElementById('task-dueDate').value
+    const tempDate = document.getElementById('task-dueDate').value
+    const formattedDate = formatJSDate(tempDate)
     // Remove the form from the dom
     removeTaskFormFromDom()
     // Create new task object
-    const task = new Task(title,description,dueDate)
-    console.log(task)
+    const task = new Task(title,description,formattedDate)
     // Add the task object to the current projectArray
+    const project = listify.getCurrentProject()
+    console.log(project)    
     // Use data form task to create task dom element
     // Display all tasks for current project
 }
