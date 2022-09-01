@@ -104,7 +104,7 @@
     padding-right: 30px;
     cursor: pointer;
 }
-.duplicateProjectTitleError::placeholder{
+.errorMessage::placeholder{
     color: red;
 }
 
@@ -138,6 +138,31 @@
     display: flex;
     width: max-content;
     cursor: pointer;
+}
+
+#new-task-form{
+    border: 1px solid blue;
+    padding: 20px;
+    width: 70%; 
+    margin-top: 10px;
+}
+#new-task-form label{
+    font-size: 2rem;
+}
+.formSubSection{
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 10px;
+}
+.formSubSection input, textarea{
+    border: 1px solid blue;
+    border-radius: 50px;
+    padding: 5px;
+}
+.newTaskButtonWrapper{
+    display: flex;
+    justify-content: center;
+    gap: 10%;
 }
 
 /* CENTRAL VIEW SECTION END */

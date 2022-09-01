@@ -41,17 +41,25 @@ function disableNewProjectButton(){
     const button = document.getElementById('new-project-button')
     button.style.pointerEvents = 'none'
 }
+function enableNewProjectButton(){
+    const button = document.getElementById('new-project-button')
+    button.style.pointerEvents = 'auto'
+}
+
+function disableNewTaskButton(){
+    const button = document.getElementById('new-task-button')
+    button.style.pointerEvents = 'none'
+}
+function enableNewTaskButton(){
+    const button = document.getElementById('new-task-button')
+    button.style.pointerEvents = 'auto'
+}
 
 function removeProjectForm(){
     const clearForm = document.getElementById('project-form-container-anchor')
     clearForm.innerHTML = ""
 }
 
-
-function enableNewProjectButton(){
-    const button = document.getElementById('new-project-button')
-    button.style.pointerEvents = 'auto'
-}
 
 function createSidebarViewTab(image, alt, tabName, styleClass){
     // Create the sidebarItem wrapper
@@ -73,4 +81,11 @@ function createSidebarViewTab(image, alt, tabName, styleClass){
     return tabItemContainer
 }
 
-export {renderIcon, toggleDarkMode, createNewProjectButton, createSidebarViewTab, disableNewProjectButton, enableNewProjectButton, removeProjectForm, createNewTaskButton}
+function showErrorMessage(targetElement, message){
+    const errorMessage = document.getElementById(targetElement)
+    errorMessage.classList.add('errorMessage')
+    errorMessage.value = ""
+    errorMessage.placeholder = message
+}
+
+export {renderIcon, toggleDarkMode, createNewProjectButton, createSidebarViewTab, disableNewProjectButton, enableNewProjectButton, removeProjectForm, createNewTaskButton, showErrorMessage, enableNewTaskButton, disableNewTaskButton}

@@ -1,13 +1,15 @@
 export class Task{
-    constructor(taskTitle = '', taskDescription = '', isFavorite= '', dueDate =''){
+    constructor(taskTitle = '', taskDescription = '', dueDate ='' ){
         this.taskTitle = taskTitle
         this.taskDescription = taskDescription
-        this.isFavorite = isFavorite
         this.dueDate = dueDate
+        this.isFavorite = false
+
+       
     }
 }
 
 
-Task.prototype.createTaskForm = function (){
+Task.prototype.createTaskContainer = function (){
     alert('Returns a task form')
 }

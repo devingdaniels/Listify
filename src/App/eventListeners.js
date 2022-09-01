@@ -1,7 +1,8 @@
 // Helper methods
-import {removeProjectForm, disableNewProjectButton, enableNewProjectButton } from "./utils/helperFunctions"
+import {removeProjectForm, disableNewProjectButton, enableNewProjectButton, showErrorMessage, disableNewTaskButton, enableNewTaskButton } from "./utils/helperFunctions"
 // Classes 
 import { Project } from "./classes/project"
+import { Task } from "./classes/task"
 import {listify } from '../index.js'
 
 // Images
@@ -73,10 +74,7 @@ function newProjectForm(){
          if(!listify.isDuplicateTitle(projectTitle)){
             createNewProjectObject(projectTitle)  
          }else{
-            const errorMessage = document.getElementById('new-project-title')
-            errorMessage.classList.add('duplicateProjectTitleError')
-            errorMessage.value = ""
-            errorMessage.placeholder = "Project already exists..."
+           showErrorMessage('new-project-title', 'Project name taken')
          }
     })
     // Button if user wants to cancel creating a new project
@@ -115,10 +113,128 @@ function createNewProjectObject(title){
 
 
 function displayNewTaskForm(){
+    // Disable the new task button until current task is created or cancelled 
+    disableNewTaskButton()
+    // Get the anchor for appending this new task form
+    const anchor = document.getElementById('current-view-wrapper')
+
+
+    const form = document.createElement('form')
+    form.id = 'new-task-form'
+
+
+    const titleWrapper = document.createElement('div')
+    titleWrapper.classList.add('formSubSection')
+    const taskNameLabel = document.createElement('label')
+    taskNameLabel.innerHTML = 'Title'
+    taskNameLabel.for = 'task-title'
+    const taskNameInput = document.createElement('input')
+    taskNameInput.id = 'task-title'
+    taskNameInput.type = 'text'
+    taskNameInput.placeholder = 'My awesome new task'
+    taskNameInput.required = 'true'
     
+    titleWrapper.append(taskNameLabel)
+    titleWrapper.append(taskNameInput)
+    
+
+
+    const descriptionWrapper = document.createElement('div')
+    descriptionWrapper.classList.add('formSubSection')
+    const descriptionLabel = document.createElement('label')
+    descriptionLabel.innerHTML = 'Description'
+    descriptionLabel.for = 'task-description'
+    const descriptionInput = document.createElement('textarea')
+    descriptionInput.id = 'task-description'
+    descriptionInput.style.resize = 'none'
+    descriptionInput.placeholder = 'i.e, the procrastination monkey is on my back'
+    descriptionInput.required = 'true'
+    
+    descriptionWrapper.append(descriptionLabel)
+    descriptionWrapper.append(descriptionInput)
+
+
+
+    const dueDateWrapper = document.createElement('div')
+    dueDateWrapper.classList.add('formSubSection')
+    const dueDateLabel = document.createElement('label')
+    dueDateLabel.innerHTML = 'Due Date'
+    dueDateLabel.for = 'task-dueDate'
+    const dueDateInput = document.createElement('input')
+    dueDateInput.type = 'date'
+    dueDateInput.id = 'task-dueDate'
+    
+    dueDateWrapper.append(dueDateLabel)
+    dueDateWrapper.append(dueDateInput)
+
+
+
+
+    const buttonWrapper = document.createElement('div')
+    buttonWrapper.classList.add('newTaskButtonWrapper')
+
+    const saveButton = document.createElement('input')
+    saveButton.type = 'button'
+    saveButton.value = 'Create'
+    saveButton.addEventListener('click', ()=>{
+        if (doesTaskFormHaveName()){
+            enableNewTaskButton()
+            parseTaskForm()
+        }
+        else { 
+            showErrorMessage('task-title', 'Add task title')
+        }        
+    })
+
+    const cancelButton = document.createElement('input')
+    cancelButton.type = 'button'
+    cancelButton.value = 'Cancel'
+    cancelButton.addEventListener('click', removeTaskFormFromDom)
+
+
+    buttonWrapper.append(saveButton)
+    buttonWrapper.append(cancelButton)
+
+
+    form.append(titleWrapper)
+    form.append(descriptionWrapper)
+    form.append(dueDateWrapper)
+    form.append(buttonWrapper)
+
+    anchor.append(form)
 }
 
 
+
+function parseTaskForm(){
+    // Get the data from the form
+    const title = document.getElementById('task-title').value
+    const description = document.getElementById('task-description').value
+    const dueDate = document.getElementById('task-dueDate').value
+    // Remove the form from the dom
+    removeTaskFormFromDom()
+    // Create new task object
+    const task = new Task(title,description,dueDate)
+    console.log(task)
+    // Add the task object to the current projectArray
+    // Use data form task to create task dom element
+    // Display all tasks for current project
+}
+
+
+function removeTaskFormFromDom(){
+    enableNewTaskButton()
+    document.getElementById('new-task-form').remove()
+}
+
+
+function doesTaskFormHaveName(){
+    const title = document.getElementById('task-title').value
+    if (title !== ''){
+        return true
+    }
+    return false
+}
 
 
 function displayProjectOptionPanel(){
