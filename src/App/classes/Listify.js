@@ -59,7 +59,8 @@ export class Listify{
         getCurrentViewWrapper().append(createCurrentViewHeading(projectTitle))
         // Create and append a 'add new task' button under the heading
         createNewTaskButton()
-        // Upon save of a new task, append a nice task template under button
+        // Display the current project tasks under the 'add task' button
+        this.displayCurrentProjectTasks(this.getCurrentProject())
     }
 
     displayAllCurrentProjectsSidebar(){
@@ -85,6 +86,21 @@ export class Listify{
                 return this.projectArray[i]
             }
         }
+    }
+    displayCurrentProjectTasks(project){
+        // For each task
+        // Get task info, append to task display container
+        // Append each container to the project section 
+        project.taskArray.forEach(task =>{
+            // Get the data from each task
+            const title = task.taskTitle
+            const description = task.taskDescription
+            const dueDate = task.dueDate
+            // Use data to create task display container within the current project
+            const taskContainer  = task.createTaskContainer(title, description, dueDate)
+            // Append the task container to the dom in the project section
+            getCurrentViewWrapper().append(taskContainer)
+        })
     }
 }
 

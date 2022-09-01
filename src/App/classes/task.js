@@ -10,6 +10,7 @@ export class Task{
 }
 
 
-Task.prototype.createTaskContainer = function (){
-    alert('Returns a task form')
+Task.prototype.createTaskContainer = function (title, description, dueDate){
+   return title + description + dueDate
+
 }

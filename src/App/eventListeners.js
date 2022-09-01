@@ -117,12 +117,10 @@ function displayNewTaskForm(){
     disableNewTaskButton()
     // Get the anchor for appending this new task form
     const anchor = document.getElementById('current-view-wrapper')
-
-
+    // Form 
     const form = document.createElement('form')
     form.id = 'new-task-form'
-
-
+    // Title section with label and input
     const titleWrapper = document.createElement('div')
     titleWrapper.classList.add('formSubSection')
     const taskNameLabel = document.createElement('label')
@@ -133,12 +131,9 @@ function displayNewTaskForm(){
     taskNameInput.type = 'text'
     taskNameInput.placeholder = 'My awesome new task'
     taskNameInput.required = 'true'
-    
     titleWrapper.append(taskNameLabel)
     titleWrapper.append(taskNameInput)
-    
-
-
+    // Description section of form with label and input 
     const descriptionWrapper = document.createElement('div')
     descriptionWrapper.classList.add('formSubSection')
     const descriptionLabel = document.createElement('label')
@@ -148,13 +143,10 @@ function displayNewTaskForm(){
     descriptionInput.id = 'task-description'
     descriptionInput.style.resize = 'none'
     descriptionInput.placeholder = 'i.e, the procrastination monkey is on my back'
-    descriptionInput.required = 'true'
-    
+    descriptionInput.required = 'true'    
     descriptionWrapper.append(descriptionLabel)
     descriptionWrapper.append(descriptionInput)
-
-
-
+    // Due date section of form with label and input 
     const dueDateWrapper = document.createElement('div')
     dueDateWrapper.classList.add('formSubSection')
     const dueDateLabel = document.createElement('label')
@@ -163,45 +155,38 @@ function displayNewTaskForm(){
     const dueDateInput = document.createElement('input')
     dueDateInput.type = 'date'
     dueDateInput.id = 'task-dueDate'
-    dueDateInput.min = new Date().toLocaleDateString('en-ca')
-    
+    dueDateInput.min = new Date().toLocaleDateString('en-ca')    
     dueDateWrapper.append(dueDateLabel)
     dueDateWrapper.append(dueDateInput)
-
-
-
-
+    // Button section of the form with 'create' and 'cancel' options
     const buttonWrapper = document.createElement('div')
     buttonWrapper.classList.add('newTaskButtonWrapper')
-
-    const saveButton = document.createElement('input')
-    saveButton.type = 'button'
-    saveButton.value = 'Create'
-    saveButton.addEventListener('click', ()=>{
+    const createTaskButton = document.createElement('input')
+    createTaskButton.type = 'button'
+    createTaskButton.value = 'Create'
+    createTaskButton.addEventListener('click', ()=>{
         if (doesTaskFormHaveName()){
             enableNewTaskButton()
             parseTaskForm()
         }
         else { 
+            // Triggered if user does not enter a task title
             showErrorMessage('task-title', 'Add task title')
         }        
     })
-
+    // Cancel the creation of a new task button
     const cancelButton = document.createElement('input')
     cancelButton.type = 'button'
     cancelButton.value = 'Cancel'
     cancelButton.addEventListener('click', removeTaskFormFromDom)
-
-
-    buttonWrapper.append(saveButton)
+    buttonWrapper.append(createTaskButton)
     buttonWrapper.append(cancelButton)
-
-
+    // Form appends
     form.append(titleWrapper)
     form.append(descriptionWrapper)
     form.append(dueDateWrapper)
     form.append(buttonWrapper)
-
+    // Append form to 'current-view-wrapper' anchor of the dom
     anchor.append(form)
 }
 
@@ -217,11 +202,12 @@ function parseTaskForm(){
     removeTaskFormFromDom()
     // Create new task object
     const task = new Task(title,description,formattedDate)
+    // Get the current open project
+    const project = listify.getCurrentProject()  
     // Add the task object to the current projectArray
-    const project = listify.getCurrentProject()
-    console.log(project)    
-    // Use data form task to create task dom element
-    // Display all tasks for current project
+    project.taskArray.push(task)
+    // Update the project view to show all tasks
+    listify.displayCurrentProject(project.projectTitle)
 }
 
 
