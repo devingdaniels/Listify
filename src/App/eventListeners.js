@@ -1,5 +1,5 @@
 // Helper methods
-import {removeProjectForm, disableNewProjectButton, enableNewProjectButton, showErrorMessage, disableNewTaskButton, enableNewTaskButton, formatJSDate, getCurrentActiveViewTab} from "./utils/helperFunctions"
+import {removeProjectForm, disableNewProjectButton, enableNewProjectButton, showErrorMessage, disableNewTaskButton, enableNewTaskButton, formatJSDate, getCurrentActiveViewTab, getCurrentStar} from "./utils/helperFunctions"
 // Classes 
 import { Project } from "./classes/project"
 import { Task } from "./classes/task"
@@ -249,16 +249,22 @@ function displayProjectOptionPanel(){
 }
 
 
-function toggleTaskFavoriteStatus(taskTitle, projectTitle){
+function toggleTaskFavoriteStatus(taskTitle, projectTitle, star){
     const project = listify.getCurrentProject(projectTitle)
     
     const task = project.taskArray.find(task => task.taskTitle === taskTitle)
 
+
     if (task.isFavorite === true){
         task.isFavorite = false
+        star.classList.add("fa-regular")
+        star.classList.remove("fa-solid")
     }else {
         task.isFavorite = true
+        star.classList.add("fa-solid")
+        star.classList.remove("fa-regular")
     }
+
     updateViewTab(getCurrentActiveViewTab())
 }
 

@@ -48,17 +48,20 @@ Task.prototype.displayPrettyTask = function (taskTitle, description, dueDate, pr
    }
    
 
+
+
    // Favorite option
    const starDotsWrapper = document.createElement('div')
    starDotsWrapper.classList.add('starDotsWrapper')
-   const star = renderIcon(StarOutlineIcon, 'Image of a star icon', 'sidebarTabViewIcon')
-   star.addEventListener('click', ()=>{
-
+   const star = document.createElement('i')
+   star.classList.add("fa-star")
+   star.classList.add("fa-regular")
+   
+   star.onclick = e => testyFunction(e)
+   
+//    star.addEventListener('click', e =>{
         
-
-
-        toggleTaskFavoriteStatus(taskTitle, projectTitle)
-   })
+//    })
    // Edit task vertical dots option
    const optionIcon = renderIcon(OptionDots, 'Image of a three vertical dots', 'sidebarTabViewIcon')
    optionIcon.addEventListener('click', showEditTaskPanel)
@@ -75,4 +78,11 @@ Task.prototype.displayPrettyTask = function (taskTitle, description, dueDate, pr
 
     return taskContainer
 
+}
+
+function testyFunction(e){
+    console.log(e.target)
+    e.target.classList.add('testClass')
+    console.log(e.target)
+    //toggleTaskFavoriteStatus(taskTitle, projectTitle, e.target)
 }

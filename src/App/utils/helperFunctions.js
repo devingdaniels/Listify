@@ -119,4 +119,10 @@ function getCurrentActiveViewTab(){
     return result
 }
 
-export {renderIcon, toggleDarkMode, createNewProjectButton, createSidebarViewTab, disableNewProjectButton, enableNewProjectButton, removeProjectForm, createNewTaskButton, showErrorMessage, enableNewTaskButton, disableNewTaskButton,formatJSDate, getCurrentActiveViewTab}
+function getCurrentStar(){
+    const allStars = Array.from(document.querySelectorAll('fa-star'))
+
+    
+}
+
+export {renderIcon, toggleDarkMode, createNewProjectButton, createSidebarViewTab, disableNewProjectButton, enableNewProjectButton, removeProjectForm, createNewTaskButton, showErrorMessage, enableNewTaskButton, disableNewTaskButton,formatJSDate, getCurrentActiveViewTab, getCurrentStar}
