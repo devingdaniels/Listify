@@ -235,7 +235,6 @@ function toggleTaskFavoriteStatus(taskTitle, projectTitle, star){
     
     const task = project.taskArray.find(task => task.taskTitle === taskTitle)
 
-    console.log(star)
     if (task.isFavorite === true){
         task.isFavorite = false
         star.classList.add("fa-regular")
@@ -248,6 +247,25 @@ function toggleTaskFavoriteStatus(taskTitle, projectTitle, star){
 
     updateViewTab(getCurrentActiveViewTab())
 }
+
+function toggleTaskIsComplete(taskTitle, projectTitle, markComplete){
+    const project = listify.getCurrentProject(projectTitle)    
+    const task = project.taskArray.find(task => task.taskTitle === taskTitle)
+
+    
+    if (task.isComplete === true){
+        task.isComplete = false
+        markComplete.classList.add('fa-regular','fa-circle') // empty circle 
+        markComplete.classList.remove('fa-solid','fa-circle-check')
+    }else {
+        task.isComplete = true
+        markComplete.classList.add('fa-solid','fa-circle-check')
+        markComplete.classList.remove('fa-regular','fa-circle')
+    }
+
+    updateViewTab(getCurrentActiveViewTab())
+}
+
 
 
 function isDuplicateTask(){
@@ -272,8 +290,5 @@ function showEditTaskPanel(){
     alert('showEditTaskPanel')
 }
 
-function toggleTaskIsComplete(){
-    alert('toggleTaskIsComplete')
-}
 
 export {updateViewTab, displayNewProjectForm, createNewProjectObject, displayProjectOptionPanel, displayNewTaskForm, toggleTaskFavoriteStatus,toggleTaskIsComplete,  showEditTaskPanel}

@@ -15,7 +15,7 @@ export class Listify{
 
         this.projectArray.forEach(project =>{
             project.taskArray.forEach(task=>{                
-                const el = task.displayPrettyTask(task.taskTitle, task.taskDescription, task.dueDate, project.projectTitle)
+                const el = task.displayPrettyTask(task.taskTitle, task.taskDescription, task.dueDate, project.projectTitle, task.isFavorite, task.isComplete)
                 getCurrentViewWrapper().append(el)                
             })
         })        
@@ -53,7 +53,7 @@ export class Listify{
         this.projectArray.forEach(project =>{
             project.taskArray.forEach(task=>{
                 if (task.isFavorite === true){
-                    const el = task.displayPrettyTask(task.taskTitle, task.taskDescription, task.dueDate, project.projectTitle, task.isFavorite)
+                    const el = task.displayPrettyTask(task.taskTitle, task.taskDescription, task.dueDate, project.projectTitle, task.isFavorite, task.isComplete)
                     getCurrentViewWrapper().append(el)
                 }
             })
@@ -99,7 +99,7 @@ export class Listify{
             const description = task.taskDescription
             const dueDate = task.dueDate
             // Use data to create task display container within the current project
-            const taskContainer  = task.displayPrettyTask(title, description, dueDate, project.projectTitle, task.isFavorite)
+            const taskContainer  = task.displayPrettyTask(title, description, dueDate, project.projectTitle, task.isFavorite, task.isComplete)
             // Append the task container to the dom in the project section
             getCurrentViewWrapper().append(taskContainer)
         })

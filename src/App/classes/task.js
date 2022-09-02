@@ -13,19 +13,28 @@ export class Task{
         this.dueDate = dueDate
         this.projectTitle = projectTitle
         this.isFavorite = false
+        this.isComplete = false
     }
 }
 
 
-Task.prototype.displayPrettyTask = function (taskTitle, description, dueDate, projectTitle, favStatus){
+Task.prototype.displayPrettyTask = function (taskTitle, description, dueDate, projectTitle, isFavorite, isComplete){
    const taskContainer = document.createElement('div')
    taskContainer.classList.add('prettyTaskContainer')
    taskContainer.id = projectTitle
    // Check box for marking task complete
-   const markComplete = document.createElement('input')
-   markComplete.type = 'checkbox'
-   markComplete.classList.add('task-checkbox-complete')
-   markComplete.addEventListener('click', toggleTaskIsComplete)
+   const markComplete = document.createElement('i')
+   if (isComplete === true){
+    markComplete.classList.add('fa-solid','fa-circle-check')
+    markComplete.classList.remove('fa-regular','fa-circle')
+   }else if (isComplete === false){
+    markComplete.classList.add('fa-regular','fa-circle') // empty circle 
+    markComplete.classList.remove('fa-solid','fa-circle-check')
+   }
+   markComplete.addEventListener('click', e =>{
+    console.log(e.target)
+    toggleTaskIsComplete(taskTitle, projectTitle, e.target)
+   })
    // Title
    // description 
    const taskInfoWrapper = document.createElement('div')
@@ -44,22 +53,18 @@ Task.prototype.displayPrettyTask = function (taskTitle, description, dueDate, pr
    }else{
     dueDateWrapper.innerHTML = "No Date"
    }
-   
-
    // Favorite option
    const starDotsWrapper = document.createElement('div')
    starDotsWrapper.classList.add('starDotsWrapper')
    const star = document.createElement('i')
    star.classList.add('fa-star')
-   if (favStatus === true){
+   if (isFavorite === true){
     star.classList.remove("fa-regular")
     star.classList.add("fa-solid")
-}else if (favStatus === false){
+}else if (isFavorite === false){
     star.classList.remove("fa-solid")
     star.classList.add("fa-regular")
 }
-  
-      
    star.addEventListener('click', e =>{
         toggleTaskFavoriteStatus(taskTitle, projectTitle, e.target)
    })
