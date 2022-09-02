@@ -166,8 +166,7 @@ function displayNewTaskForm(){
     createTaskButton.value = 'Create'
     createTaskButton.addEventListener('click', ()=>{
         if (doesTaskFormHaveName()){
-            if (isDuplicateTask()){ // CODE THIS, returns false for now
-                
+            if (isDuplicateTask()){ 
                 showErrorMessage('task-title', 'Task already exists')
             }else{
                 enableNewTaskButton()
@@ -194,8 +193,10 @@ function displayNewTaskForm(){
     // Append form to 'current-view-wrapper' anchor of the dom
     anchor.append(form)
 }
-
-
+function removeTaskFormFromDom(){
+    enableNewTaskButton()
+    document.getElementById('new-task-form').remove()
+}
 
 function parseTaskForm(){
     // Get the data from the form
@@ -215,10 +216,7 @@ function parseTaskForm(){
     listify.displayCurrentProject(project.projectTitle)
 }
 
-function removeTaskFormFromDom(){
-    enableNewTaskButton()
-    document.getElementById('new-task-form').remove()
-}
+
 
 
 function doesTaskFormHaveName(){
@@ -229,6 +227,18 @@ function doesTaskFormHaveName(){
     return false
 }
 
+
+
+
+function isDuplicateTask(){
+
+    // Get the current project
+    // This is safish because user can only add task while in current project
+    const project = listify.getCurrentProject(document.getElementById('current-view-wrapper').firstChild.innerHTML)
+    const title = document.getElementById('task-title').value
+   
+   return project.taskArray.some(task => task.taskTitle === title)
+}
 
 function toggleTaskFavoriteStatus(taskTitle, projectTitle, star){
     const project = listify.getCurrentProject(projectTitle)
@@ -264,22 +274,6 @@ function toggleTaskIsComplete(taskTitle, projectTitle, markComplete){
     }
 
     updateViewTab(getCurrentActiveViewTab())
-}
-
-
-
-function isDuplicateTask(){
-
-    alert('isDuplicateTask')
-    return false
-    // const title = document.getElementById('task-title').value
-
-    // const currentProject = listify.getCurrentProject(title)
-    // return currentProject.taskArray.some(task =>{
-    //     if (task.taskTitle === title){
-    //         return true
-    //     }
-    // })
 }
 
 
