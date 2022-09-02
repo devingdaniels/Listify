@@ -141,8 +141,8 @@
 }
 
 #new-task-form{
-    border: 1px solid blue;
-    padding: 20px;
+    border: 2px solid blue;
+    padding: 5px;
     width: 70%; 
     margin: 10px auto 0px auto;
 }
@@ -167,9 +167,10 @@
 .prettyTaskContainer{
     display: flex;
     align-items: center;
-    width: 70%;
+    width: 60%;
     margin: auto;
-    justify-content: center;
+    justify-content: space-around;
+    margin-top: 15px;
 }
 #task-checkbox-complete{
     border-radius: 100%;
@@ -180,9 +181,13 @@
 .taskDueDateWrapper{
     display: flex;
     align-items: center;
-    border-radius: 40%;
     padding: 3px;
-    border: 1px solid black;
+    border: .3px solid black;
+    width: 100px;
+    justify-content: center;
+}
+.starDotsWrapper{
+    display: flex;
 }
 
 /* CENTRAL VIEW SECTION END */

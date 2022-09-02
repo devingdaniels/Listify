@@ -1,5 +1,5 @@
 // Helper methods
-import {removeProjectForm, disableNewProjectButton, enableNewProjectButton, showErrorMessage, disableNewTaskButton, enableNewTaskButton, formatJSDate , getCurrentProject} from "./utils/helperFunctions"
+import {removeProjectForm, disableNewProjectButton, enableNewProjectButton, showErrorMessage, disableNewTaskButton, enableNewTaskButton, formatJSDate, getCurrentActiveViewTab} from "./utils/helperFunctions"
 // Classes 
 import { Project } from "./classes/project"
 import { Task } from "./classes/task"
@@ -166,8 +166,13 @@ function displayNewTaskForm(){
     createTaskButton.value = 'Create'
     createTaskButton.addEventListener('click', ()=>{
         if (doesTaskFormHaveName()){
-            enableNewTaskButton()
-            parseTaskForm()
+            if (isDuplicateTask()){ // CODE THIS, returns false for now
+                
+                showErrorMessage('task-title', 'Task already exists')
+            }else{
+                enableNewTaskButton()
+                parseTaskForm()
+            }           
         }
         else { 
             // Triggered if user does not enter a task title
@@ -200,16 +205,15 @@ function parseTaskForm(){
     const formattedDate = formatJSDate(tempDate)
     // Remove the form from the dom
     removeTaskFormFromDom()
+     // Get the current open project
+     const project = listify.getCurrentProject(document.getElementById('current-view-wrapper').firstChild.innerHTML)
     // Create new task object
-    const task = new Task(title,description,formattedDate)
-    // Get the current open project
-    const project = listify.getCurrentProject()  
+    const task = new Task(title,description,formattedDate, project.projectTitle) 
     // Add the task object to the current projectArray
     project.taskArray.push(task)
     // Update the project view to show all tasks
     listify.displayCurrentProject(project.projectTitle)
 }
-
 
 function removeTaskFormFromDom(){
     enableNewTaskButton()
@@ -225,15 +229,39 @@ function doesTaskFormHaveName(){
     return false
 }
 
+function isDuplicateTask(){
+
+    alert('isDuplicateTask')
+    return false
+    // const title = document.getElementById('task-title').value
+
+    // const currentProject = listify.getCurrentProject(title)
+    // return currentProject.taskArray.some(task =>{
+    //     if (task.taskTitle === title){
+    //         return true
+    //     }
+    // })
+}
+
 
 function displayProjectOptionPanel(){
     alert('display project options panel')
 }
 
 
-function toggleTaskFavoriteStatus(){
-    alert('toggleTaskFavoriteStatus')
+function toggleTaskFavoriteStatus(taskTitle, projectTitle){
+    const project = listify.getCurrentProject(projectTitle)
+    
+    const task = project.taskArray.find(task => task.taskTitle === taskTitle)
+
+    if (task.isFavorite === true){
+        task.isFavorite = false
+    }else {
+        task.isFavorite = true
+    }
+    updateViewTab(getCurrentActiveViewTab())
 }
+
 
 function showEditTaskPanel(){
     alert('showEditTaskPanel')

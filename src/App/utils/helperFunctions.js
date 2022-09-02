@@ -106,5 +106,17 @@ function formatJSDate(date){
     return date    
 }
 
+function getCurrentActiveViewTab(){
+    // Get all the current tabs on the sidebar
+    const allTabItems = document.querySelectorAll('.tabItemContainer')
+    // Make all tabs except current tab inactive
+    const array = Array.from(allTabItems)
+    const result = array.find(el =>{
+        if (el.classList.contains('active')){
+            return el
+        }
+    })
+    return result
+}
 
-export {renderIcon, toggleDarkMode, createNewProjectButton, createSidebarViewTab, disableNewProjectButton, enableNewProjectButton, removeProjectForm, createNewTaskButton, showErrorMessage, enableNewTaskButton, disableNewTaskButton,formatJSDate}
+export {renderIcon, toggleDarkMode, createNewProjectButton, createSidebarViewTab, disableNewProjectButton, enableNewProjectButton, removeProjectForm, createNewTaskButton, showErrorMessage, enableNewTaskButton, disableNewTaskButton,formatJSDate, getCurrentActiveViewTab}

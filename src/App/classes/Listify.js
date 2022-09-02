@@ -46,10 +46,15 @@ export class Listify{
          clearCurrentViewWrapper()
         // Display name of current view
         getCurrentViewWrapper().append(createCurrentViewHeading('Favorites'))
-        // Display the name of the tab at the top of the page 
-        // Iterate over each project
-        // On each project, iterate over each task - display if task has favorites TRUE
-        // Append each task with the template task UI to the displayFavorites tab view
+        
+        this.projectArray.forEach(project =>{
+            project.taskArray.forEach(task=>{
+                if (task.isFavorite === true){
+                    const el = task.displayPrettyTask(task.taskTitle, task.taskDescription, task.dueDate, project.projectTitle)
+                    getCurrentViewWrapper().append(el)
+                }
+            })
+        })
     }
 
     displayCurrentProject(projectTitle){
@@ -60,7 +65,7 @@ export class Listify{
         // Create and append a 'add new task' button under the heading
         createNewTaskButton()
         // Display the current project tasks under the 'add task' button
-        this.displayCurrentProjectTasks(this.getCurrentProject())
+        this.displayCurrentProjectTasks(this.getCurrentProject(projectTitle))
     }
 
     displayAllCurrentProjectsSidebar(){
@@ -77,15 +82,9 @@ export class Listify{
        return this.projectArray.some(project => project.projectTitle === title )
        }
 
-    getCurrentProject(){
+    getCurrentProject(projectTitle){
         // Get the title of the current project in the view 
-        const projectTitle = document.getElementById('current-view-wrapper').firstChild.innerHTML
-        // Traverse and find the object with matching title
-        for(let i = 0; i < this.projectArray.length; i++){
-            if (this.projectArray[i].projectTitle === projectTitle ){
-                return this.projectArray[i]
-            }
-        }
+       return  this.projectArray.find(project => project.projectTitle === projectTitle)
     }
     displayCurrentProjectTasks(project){
         // For each task
@@ -97,7 +96,7 @@ export class Listify{
             const description = task.taskDescription
             const dueDate = task.dueDate
             // Use data to create task display container within the current project
-            const taskContainer  = task.displayPrettyTask(title, description, dueDate)
+            const taskContainer  = task.displayPrettyTask(title, description, dueDate, project.projectTitle)
             // Append the task container to the dom in the project section
             getCurrentViewWrapper().append(taskContainer)
         })
@@ -112,6 +111,7 @@ function clearCurrentViewWrapper(){
 function getCurrentViewWrapper(){
     return document.getElementById('current-view-wrapper')
 }
+
 function createCurrentViewHeading(title){
     const heading = document.createElement('h1')
     heading.innerHTML = title
