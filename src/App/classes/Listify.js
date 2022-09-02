@@ -1,5 +1,5 @@
 import {createNewProjectTabSection} from '../utils/createProjectTab'
-import { createNewTaskButton } from '../utils/helperFunctions'
+import { createNewTaskButton, getCurrentDate, addSevenDays } from '../utils/helperFunctions'
 
 export class Listify{
 
@@ -26,10 +26,15 @@ export class Listify{
         // Clear the previous content in the display section
         clearCurrentViewWrapper()
         getCurrentViewWrapper().append(createCurrentViewHeading('Today'))
-        // Display the name of the tab at the top of the page 
-        // Iterate over each project
-        // On each project, iterate over each task - display if task has dueDate of today
-        // Append each task with the template task UI to the displayToday tab view
+       
+        this.projectArray.forEach(project =>{
+            project.taskArray.forEach(task =>{
+                    if (task.dueDate === getCurrentDate()){
+                        const el = task.displayPrettyTask(task.taskTitle, task.taskDescription, task.dueDate, project.projectTitle, task.isFavorite, task.isComplete)
+                    getCurrentViewWrapper().append(el)
+                    }
+            })
+        })
     }
 
 
@@ -38,10 +43,16 @@ export class Listify{
         clearCurrentViewWrapper()
         // Display name of current view
         getCurrentViewWrapper().append(createCurrentViewHeading('Next 7 Days'))
-        // Display the name of the tab at the top of the page 
-        // Iterate over each project
-        // On each project, iterate over each task - display if task has dueDate of today or falls within the next 7 days
-        // Append each task with the template task UI to the displayNextSevenDays tab view
+        this.projectArray.forEach(project =>{
+            project.taskArray.forEach(task=>{
+                console.log(task.dueDate + " " + addSevenDays(getCurrentDate()))
+                if (task.dueDate < addSevenDays(getCurrentDate())){
+                    const el = task.displayPrettyTask(task.taskTitle, task.taskDescription, task.dueDate, project.projectTitle, task.isFavorite, task.isComplete)
+                    getCurrentViewWrapper().append(el)
+                }
+            })
+        })
+
     }
 
     displayFavorites(){

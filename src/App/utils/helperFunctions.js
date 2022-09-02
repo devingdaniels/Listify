@@ -1,7 +1,27 @@
 import PlusIcon from '../assets/plus-icon.svg'
 import { displayNewProjectForm,displayNewTaskForm, updateViewTab } from '../eventListeners'
+// Date methods
+import add from 'date-fns/add'
+import format from 'date-fns/format'
+function getCurrentDate(){
+    let today = new Date();
+    let dd = String(today.getDate()).padStart(2, '0');
+    let mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+    let yyyy = today.getFullYear();
+    today = mm + '-' + dd + '-' + yyyy;
+    return today
 
+}
 
+function addSevenDays(unParsedDate){
+
+    const plusSeven = add(new Date(unParsedDate), {
+        weeks: 1
+      })
+    const result = format(new Date(plusSeven), 'MM-dd-yyyy')
+    
+    return result
+}
 
 function toggleDarkMode(){
     
@@ -119,10 +139,5 @@ function getCurrentActiveViewTab(){
     return result
 }
 
-function getCurrentStar(){
-    const allStars = Array.from(document.querySelectorAll('fa-star'))
 
-    
-}
-
-export {renderIcon, toggleDarkMode, createNewProjectButton, createSidebarViewTab, disableNewProjectButton, enableNewProjectButton, removeProjectForm, createNewTaskButton, showErrorMessage, enableNewTaskButton, disableNewTaskButton,formatJSDate, getCurrentActiveViewTab, getCurrentStar}
+export {renderIcon, toggleDarkMode, createNewProjectButton, createSidebarViewTab, disableNewProjectButton, enableNewProjectButton, removeProjectForm, createNewTaskButton, showErrorMessage, enableNewTaskButton, disableNewTaskButton,formatJSDate, getCurrentActiveViewTab, getCurrentDate, addSevenDays}

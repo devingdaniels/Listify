@@ -5,8 +5,6 @@ import { Project } from "./classes/project"
 import { Task } from "./classes/task"
 import {listify } from '../index.js'
 
-// Images
-
 function updateViewTab(currentTab){
     // Get all the current tabs on the sidebar
     const allTabItems = document.querySelectorAll('.tabItemContainer')
@@ -38,9 +36,6 @@ function updateViewTab(currentTab){
           listify.displayCurrentProject(tabName)
       }
 }
-
-
-
 // This gets called when user clicks on 'add new project' button in the side panel
 function displayNewProjectForm(){
     // Hide the new project button temporally 
@@ -109,8 +104,6 @@ function createNewProjectObject(title){
     // Display each project on the side panel 
     listify.displayAllCurrentProjectsSidebar()
 }
-
-
 
 function displayNewTaskForm(){
     // Disable the new task button until current task is created or cancelled 
@@ -202,8 +195,8 @@ function parseTaskForm(){
     // Get the data from the form
     const title = document.getElementById('task-title').value
     const description = document.getElementById('task-description').value
-    const tempDate = document.getElementById('task-dueDate').value
-    const formattedDate = formatJSDate(tempDate)
+    const unParsedDate = document.getElementById('task-dueDate').value
+    const formattedDate = formatJSDate(unParsedDate)
     // Remove the form from the dom
     removeTaskFormFromDom()
      // Get the current open project
@@ -216,9 +209,6 @@ function parseTaskForm(){
     listify.displayCurrentProject(project.projectTitle)
 }
 
-
-
-
 function doesTaskFormHaveName(){
     const title = document.getElementById('task-title').value
     if (title !== ''){
@@ -227,24 +217,19 @@ function doesTaskFormHaveName(){
     return false
 }
 
-
-
-
 function isDuplicateTask(){
-
     // Get the current project
-    // This is safish because user can only add task while in current project
+    // This is safe-ish because user can only add task while in current project
     const project = listify.getCurrentProject(document.getElementById('current-view-wrapper').firstChild.innerHTML)
+    // Get string of input user is trying to use
     const title = document.getElementById('task-title').value
-   
-   return project.taskArray.some(task => task.taskTitle === title)
+   // return true or false
+    return project.taskArray.some(task => task.taskTitle === title)
 }
 
 function toggleTaskFavoriteStatus(taskTitle, projectTitle, star){
-    const project = listify.getCurrentProject(projectTitle)
-    
+    const project = listify.getCurrentProject(projectTitle)    
     const task = project.taskArray.find(task => task.taskTitle === taskTitle)
-
     if (task.isFavorite === true){
         task.isFavorite = false
         star.classList.add("fa-regular")
@@ -254,15 +239,12 @@ function toggleTaskFavoriteStatus(taskTitle, projectTitle, star){
         star.classList.add("fa-solid")
         star.classList.remove("fa-regular")
     }
-
     updateViewTab(getCurrentActiveViewTab())
 }
 
 function toggleTaskIsComplete(taskTitle, projectTitle, markComplete){
     const project = listify.getCurrentProject(projectTitle)    
     const task = project.taskArray.find(task => task.taskTitle === taskTitle)
-
-    
     if (task.isComplete === true){
         task.isComplete = false
         markComplete.classList.add('fa-regular','fa-circle') // empty circle 
@@ -272,7 +254,6 @@ function toggleTaskIsComplete(taskTitle, projectTitle, markComplete){
         markComplete.classList.add('fa-solid','fa-circle-check')
         markComplete.classList.remove('fa-regular','fa-circle')
     }
-
     updateViewTab(getCurrentActiveViewTab())
 }
 

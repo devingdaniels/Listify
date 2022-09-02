@@ -3,10 +3,6 @@ export class Project{
         this.projectTitle = title
         this.taskArray = []
     }
-
-    displayTasks(){
-        alert('display all tasks for the current project')
-    }
 }
 
 

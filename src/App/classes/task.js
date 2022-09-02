@@ -2,12 +2,11 @@
 import { renderIcon } from '../utils/helperFunctions'
 import {toggleTaskFavoriteStatus, showEditTaskPanel, toggleTaskIsComplete} from '../eventListeners'
 // Images
-import StarOutlineIcon from '../assets/star-outline-icon.svg'
 import OptionDots from '../assets/dots-vertical-icon.svg'
 
 
 export class Task{
-    constructor(taskTitle = '', taskDescription = '', dueDate ='', projectTitle= '' ){
+    constructor(taskTitle = '', taskDescription = '', dueDate ='', projectTitle= ''){
         this.taskTitle = taskTitle
         this.taskDescription = taskDescription
         this.dueDate = dueDate
