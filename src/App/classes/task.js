@@ -11,15 +11,13 @@ export class Task{
         this.taskTitle = taskTitle
         this.taskDescription = taskDescription
         this.dueDate = dueDate
-        this.isFavorite = false
         this.projectTitle = projectTitle
-
-       
+        this.isFavorite = false
     }
 }
 
 
-Task.prototype.displayPrettyTask = function (taskTitle, description, dueDate, projectTitle){
+Task.prototype.displayPrettyTask = function (taskTitle, description, dueDate, projectTitle, favStatus){
    const taskContainer = document.createElement('div')
    taskContainer.classList.add('prettyTaskContainer')
    taskContainer.id = projectTitle
@@ -48,20 +46,23 @@ Task.prototype.displayPrettyTask = function (taskTitle, description, dueDate, pr
    }
    
 
-
-
    // Favorite option
    const starDotsWrapper = document.createElement('div')
    starDotsWrapper.classList.add('starDotsWrapper')
    const star = document.createElement('i')
-   star.classList.add("fa-star")
-   star.classList.add("fa-regular")
-   
-   star.onclick = e => testyFunction(e)
-   
-//    star.addEventListener('click', e =>{
-        
-//    })
+   star.classList.add('fa-star')
+   if (favStatus === true){
+    star.classList.remove("fa-regular")
+    star.classList.add("fa-solid")
+}else if (favStatus === false){
+    star.classList.remove("fa-solid")
+    star.classList.add("fa-regular")
+}
+  
+      
+   star.addEventListener('click', e =>{
+        toggleTaskFavoriteStatus(taskTitle, projectTitle, e.target)
+   })
    // Edit task vertical dots option
    const optionIcon = renderIcon(OptionDots, 'Image of a three vertical dots', 'sidebarTabViewIcon')
    optionIcon.addEventListener('click', showEditTaskPanel)
@@ -78,11 +79,4 @@ Task.prototype.displayPrettyTask = function (taskTitle, description, dueDate, pr
 
     return taskContainer
 
-}
-
-function testyFunction(e){
-    console.log(e.target)
-    e.target.classList.add('testClass')
-    console.log(e.target)
-    //toggleTaskFavoriteStatus(taskTitle, projectTitle, e.target)
 }

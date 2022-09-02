@@ -229,6 +229,27 @@ function doesTaskFormHaveName(){
     return false
 }
 
+
+function toggleTaskFavoriteStatus(taskTitle, projectTitle, star){
+    const project = listify.getCurrentProject(projectTitle)
+    
+    const task = project.taskArray.find(task => task.taskTitle === taskTitle)
+
+    console.log(star)
+    if (task.isFavorite === true){
+        task.isFavorite = false
+        star.classList.add("fa-regular")
+        star.classList.remove("fa-solid")
+    }else {
+        task.isFavorite = true
+        star.classList.add("fa-solid")
+        star.classList.remove("fa-regular")
+    }
+
+    updateViewTab(getCurrentActiveViewTab())
+}
+
+
 function isDuplicateTask(){
 
     alert('isDuplicateTask')
@@ -247,28 +268,6 @@ function isDuplicateTask(){
 function displayProjectOptionPanel(){
     alert('display project options panel')
 }
-
-
-function toggleTaskFavoriteStatus(taskTitle, projectTitle, star){
-    const project = listify.getCurrentProject(projectTitle)
-    
-    const task = project.taskArray.find(task => task.taskTitle === taskTitle)
-
-
-    if (task.isFavorite === true){
-        task.isFavorite = false
-        star.classList.add("fa-regular")
-        star.classList.remove("fa-solid")
-    }else {
-        task.isFavorite = true
-        star.classList.add("fa-solid")
-        star.classList.remove("fa-regular")
-    }
-
-    updateViewTab(getCurrentActiveViewTab())
-}
-
-
 function showEditTaskPanel(){
     alert('showEditTaskPanel')
 }
