@@ -1,8 +1,5 @@
 // Methods
-import { renderIcon } from '../utils/helperFunctions'
-import {toggleTaskFavoriteStatus, showEditTaskPanel, toggleTaskIsComplete} from '../eventListeners'
-// Images
-import OptionDots from '../assets/dots-vertical-icon.svg'
+import {toggleTaskFavoriteStatus, toggleTaskIsComplete, deleteCurrentTask, editCurrentTask} from '../eventListeners'
 
 export class Task{
     constructor(taskTitle = '', taskDescription = '', dueDate ='', projectTitle= ''){
@@ -14,7 +11,6 @@ export class Task{
         this.isComplete = false
     }
 }
-
 
 Task.prototype.displayPrettyTask = function (taskTitle, description, dueDate, projectTitle, isFavorite, isComplete){
    const taskContainer = document.createElement('div')
@@ -51,11 +47,12 @@ Task.prototype.displayPrettyTask = function (taskTitle, description, dueDate, pr
    }else{
     dueDateWrapper.innerHTML = "No Date"
    }
-   // Favorite option
-   const starDotsWrapper = document.createElement('div')
-   starDotsWrapper.classList.add('starDotsWrapper')
+   // Favorite and edit and delete wrapper
+   const favEditDeleteWrapper = document.createElement('div')
+   favEditDeleteWrapper.classList.add('favEditDeleteTaskWrapper')
    const star = document.createElement('i')
    star.classList.add('fa-star')
+   star.style.cursor = "pointer"
    if (isFavorite === true){
     star.classList.remove("fa-regular")
     star.classList.add("fa-solid")
@@ -67,13 +64,25 @@ Task.prototype.displayPrettyTask = function (taskTitle, description, dueDate, pr
         toggleTaskFavoriteStatus(taskTitle, projectTitle, e.target)
    })
    // Edit task vertical dots option
-   const optionIcon = renderIcon(OptionDots, 'Image of a three vertical dots', 'sidebarTabViewIcon')
-   optionIcon.addEventListener('click', e=>{
-        showEditTaskPanel(e.target.parentElement.parentElement)
+   const editButton = document.createElement('i')
+   editButton.classList.add('fa-solid', 'fa-pen-to-square')
+   editButton.style.cursor = "pointer"
+   editButton.addEventListener('click', e =>{
+       editCurrentTask(e)
    })
+   const deleteButton = document.createElement('i')
+   deleteButton.classList.add('fa-solid', 'fa-trash')
+   deleteButton.style.cursor = "pointer"
+   deleteButton.addEventListener('click', e=>{
+       deleteCurrentTask(e)
+   })
+
+
    
-   starDotsWrapper.append(star)
-   starDotsWrapper.append(optionIcon)
+   favEditDeleteWrapper.append(star)
+   favEditDeleteWrapper.append(editButton)
+   favEditDeleteWrapper.append(deleteButton)
+   
 
 
 
@@ -81,7 +90,7 @@ Task.prototype.displayPrettyTask = function (taskTitle, description, dueDate, pr
    taskContainer.append(markComplete)
    taskContainer.append(taskInfoWrapper)
    taskContainer.append(dueDateWrapper)
-   taskContainer.append(starDotsWrapper)
+   taskContainer.append(favEditDeleteWrapper)
 
     return taskContainer
 

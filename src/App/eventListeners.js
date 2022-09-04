@@ -6,9 +6,6 @@ import { Task } from "./classes/task"
 import {listify } from '../index.js'
 
 
-import { createPanel } from "./utils/createOptionPanel"
-
-
 function updateViewTab(currentTab){
     // Get all the current tabs on the sidebar
     const allTabItems = document.querySelectorAll('.tabItemContainer')
@@ -262,14 +259,22 @@ function toggleTaskIsComplete(taskTitle, projectTitle, markComplete){
 }
 
 
-function displayProjectOptionPanel(){
-    alert('display project options panel')
-}
-function showEditTaskPanel(e){
-    
-    e.before(createPanel())
-
+function deleteCurrentProject(e){
+    const projectTitle = e.target.parentElement.getAttribute('projectName')
+    const project = listify.getCurrentProject(projectTitle)
+    console.log(project)
 }
 
+function editCurrentProject(e){
+    alert('edit the current project')
+}
 
-export {updateViewTab, displayNewProjectForm, createNewProjectObject, displayProjectOptionPanel, displayNewTaskForm, toggleTaskFavoriteStatus,toggleTaskIsComplete,  showEditTaskPanel}
+function editCurrentTask(e){
+    alert('edit the current task')
+}
+
+function deleteCurrentTask(e){
+    alert('delete the current task')
+}
+
+export {updateViewTab, displayNewProjectForm, createNewProjectObject,displayNewTaskForm, toggleTaskFavoriteStatus,toggleTaskIsComplete, deleteCurrentProject, editCurrentProject,editCurrentTask, deleteCurrentTask }

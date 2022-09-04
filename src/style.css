@@ -99,11 +99,12 @@
 .newProjectCancelButton{
     background-color: red;
 }
-.newProjectOptionsButton{
-    height: 20px;
-    padding-right: 30px;
-    cursor: pointer;
+.editDeleteWrapper{
+    display: flex;
+    width: 20%;
+    justify-content: space-evenly;
 }
+
 .errorMessage::placeholder{
     color: red;
 }
@@ -186,8 +187,10 @@
     width: 100px;
     justify-content: center;
 }
-.starDotsWrapper{
+.favEditDeleteTaskWrapper{
+    width: 20%;
     display: flex;
+    justify-content: space-evenly;
 }
 
 /* CENTRAL VIEW SECTION END */
