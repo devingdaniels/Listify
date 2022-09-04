@@ -3,6 +3,7 @@ import { displayNewProjectForm,displayNewTaskForm, updateViewTab } from '../even
 // Date methods
 import add from 'date-fns/add'
 import format from 'date-fns/format'
+
 function getCurrentDate(){
     let today = new Date();
     let dd = String(today.getDate()).padStart(2, '0');
@@ -14,19 +15,11 @@ function getCurrentDate(){
 }
 
 function addSevenDays(unParsedDate){
-
     const plusSeven = add(new Date(unParsedDate), {
         weeks: 1
       })
     const result = format(new Date(plusSeven), 'MM-dd-yyyy')
-    
     return result
-}
-
-function toggleDarkMode(){
-    
-alert('code darkmode')
-    
 }
 
 function renderIcon(image, alt, styleClass){
@@ -138,6 +131,10 @@ function getCurrentActiveViewTab(){
     })
     return result
 }
-
+function toggleDarkMode(){
+    
+    alert('code darkmode')
+        
+    }
 
 export {renderIcon, toggleDarkMode, createNewProjectButton, createSidebarViewTab, disableNewProjectButton, enableNewProjectButton, removeProjectForm, createNewTaskButton, showErrorMessage, enableNewTaskButton, disableNewTaskButton,formatJSDate, getCurrentActiveViewTab, getCurrentDate, addSevenDays}

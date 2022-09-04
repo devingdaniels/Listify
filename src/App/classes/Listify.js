@@ -20,8 +20,6 @@ export class Listify{
             })
         })        
     }
-
-
     displayToday(){
         // Clear the previous content in the display section
         clearCurrentViewWrapper()
@@ -36,8 +34,6 @@ export class Listify{
             })
         })
     }
-
-
     displayNextSevenDays(){
         // Clear the previous content in the display section
         clearCurrentViewWrapper()
@@ -45,7 +41,6 @@ export class Listify{
         getCurrentViewWrapper().append(createCurrentViewHeading('Next 7 Days'))
         this.projectArray.forEach(project =>{
             project.taskArray.forEach(task=>{
-                console.log(task.dueDate + " " + addSevenDays(getCurrentDate()))
                 if (task.dueDate < addSevenDays(getCurrentDate())){
                     const el = task.displayPrettyTask(task.taskTitle, task.taskDescription, task.dueDate, project.projectTitle, task.isFavorite, task.isComplete)
                     getCurrentViewWrapper().append(el)
@@ -54,7 +49,6 @@ export class Listify{
         })
 
     }
-
     displayFavorites(){
          // Clear the previous content in the display section
          clearCurrentViewWrapper()

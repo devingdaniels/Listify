@@ -4,7 +4,6 @@ import {toggleTaskFavoriteStatus, showEditTaskPanel, toggleTaskIsComplete} from 
 // Images
 import OptionDots from '../assets/dots-vertical-icon.svg'
 
-
 export class Task{
     constructor(taskTitle = '', taskDescription = '', dueDate ='', projectTitle= ''){
         this.taskTitle = taskTitle
@@ -69,7 +68,10 @@ Task.prototype.displayPrettyTask = function (taskTitle, description, dueDate, pr
    })
    // Edit task vertical dots option
    const optionIcon = renderIcon(OptionDots, 'Image of a three vertical dots', 'sidebarTabViewIcon')
-   optionIcon.addEventListener('click', showEditTaskPanel)
+   optionIcon.addEventListener('click', e=>{
+        showEditTaskPanel(e.target.parentElement.parentElement)
+   })
+   
    starDotsWrapper.append(star)
    starDotsWrapper.append(optionIcon)
 

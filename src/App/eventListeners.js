@@ -5,6 +5,10 @@ import { Project } from "./classes/project"
 import { Task } from "./classes/task"
 import {listify } from '../index.js'
 
+
+import { createPanel } from "./utils/createOptionPanel"
+
+
 function updateViewTab(currentTab){
     // Get all the current tabs on the sidebar
     const allTabItems = document.querySelectorAll('.tabItemContainer')
@@ -261,8 +265,10 @@ function toggleTaskIsComplete(taskTitle, projectTitle, markComplete){
 function displayProjectOptionPanel(){
     alert('display project options panel')
 }
-function showEditTaskPanel(){
-    alert('showEditTaskPanel')
+function showEditTaskPanel(e){
+    
+    e.before(createPanel())
+
 }
 
 
