@@ -28,7 +28,6 @@ Task.prototype.displayPrettyTask = function (taskTitle, description, dueDate, pr
     markComplete.classList.remove('fa-solid','fa-circle-check')
    }
    markComplete.addEventListener('click', e =>{
-    console.log(e.target)
     toggleTaskIsComplete(taskTitle, projectTitle, e.target)
    })
    // Title
@@ -37,6 +36,12 @@ Task.prototype.displayPrettyTask = function (taskTitle, description, dueDate, pr
    taskInfoWrapper.classList.add('taskInfoWrapper')
    const titleSection = document.createElement('h3')
    titleSection.innerHTML = taskTitle
+   // Check if task is complete or now 
+   if (isComplete === true){
+    titleSection.classList.add('taskCompleteStrike')
+   }else {
+    titleSection.classList.remove('taskCompleteStrike')
+   }
    const descriptionSection = document.createElement('p')
    descriptionSection.innerHTML = description
    taskInfoWrapper.append(titleSection)

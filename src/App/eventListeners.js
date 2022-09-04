@@ -244,6 +244,7 @@ function toggleTaskFavoriteStatus(taskTitle, projectTitle, star){
 }
 
 function toggleTaskIsComplete(taskTitle, projectTitle, markComplete){
+    console.log(markComplete.nextElementSibling.firstChild)
     const project = listify.getCurrentProject(projectTitle)    
     const task = project.taskArray.find(task => task.taskTitle === taskTitle)
     if (task.isComplete === true){
@@ -254,6 +255,7 @@ function toggleTaskIsComplete(taskTitle, projectTitle, markComplete){
         task.isComplete = true
         markComplete.classList.add('fa-solid','fa-circle-check')
         markComplete.classList.remove('fa-regular','fa-circle')
+        // add strike through to task title
     }
     updateViewTab(getCurrentActiveViewTab())
 }
@@ -268,6 +270,7 @@ function deleteCurrentProject(e){
     // Using project object and index, remove
     listify.projectArray.splice(index, 1)
     listify.displayAllCurrentProjectsSidebar()
+    updateViewTab(getCurrentActiveViewTab())
 }
 
 function editCurrentProject(e){

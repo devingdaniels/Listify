@@ -193,6 +193,10 @@
     justify-content: space-evenly;
 }
 
+.taskCompleteStrike{
+    text-decoration: line-through;
+}
+
 /* CENTRAL VIEW SECTION END */
 
 
