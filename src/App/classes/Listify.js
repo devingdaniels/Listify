@@ -94,6 +94,9 @@ export class Listify{
         // Get the title of the current project in the view 
        return  this.projectArray.find(project => project.projectTitle === projectTitle)
     }
+    getCurrentTask(taskTitle){
+        
+    }
     displayCurrentProjectTasks(project){
         // For each task
         // Get task info, append to task display container

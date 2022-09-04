@@ -258,11 +258,16 @@ function toggleTaskIsComplete(taskTitle, projectTitle, markComplete){
     updateViewTab(getCurrentActiveViewTab())
 }
 
-
 function deleteCurrentProject(e){
+    // Get current title of the project
     const projectTitle = e.target.parentElement.getAttribute('projectName')
+    // Return the current project via its title
     const project = listify.getCurrentProject(projectTitle)
-    console.log(project)
+    // Get the index of the project in the array
+    let index = listify.projectArray.indexOf(project)
+    // Using project object and index, remove
+    listify.projectArray.splice(index, 1)
+    listify.displayAllCurrentProjectsSidebar()
 }
 
 function editCurrentProject(e){
@@ -274,7 +279,21 @@ function editCurrentTask(e){
 }
 
 function deleteCurrentTask(e){
-    alert('delete the current task')
+    // Get current title of the task
+    const taskTitle = e.target.parentElement.parentElement.getAttribute('taskTitle')
+    const projectTitle = e.target.parentElement.parentElement.getAttribute('projectTitle')
+    // Get the current project object
+    const project = listify.getCurrentProject(projectTitle)
+    // Get the current task object
+    const task = project.getCurrentTask(taskTitle)
+    // Get index of current task in the project array
+    let index = project.taskArray.indexOf(task)
+    // Remove the task from the array 
+    project.taskArray.splice(index, 1)
+    // Update the UI display
+    updateViewTab(getCurrentActiveViewTab())
 }
+
+
 
 export {updateViewTab, displayNewProjectForm, createNewProjectObject,displayNewTaskForm, toggleTaskFavoriteStatus,toggleTaskIsComplete, deleteCurrentProject, editCurrentProject,editCurrentTask, deleteCurrentTask }

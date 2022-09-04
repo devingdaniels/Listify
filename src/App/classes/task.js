@@ -14,6 +14,8 @@ export class Task{
 
 Task.prototype.displayPrettyTask = function (taskTitle, description, dueDate, projectTitle, isFavorite, isComplete){
    const taskContainer = document.createElement('div')
+   taskContainer.setAttribute('taskTitle', taskTitle)
+   taskContainer.setAttribute('projectTitle', projectTitle)
    taskContainer.classList.add('prettyTaskContainer')
    taskContainer.id = projectTitle
    // Check box for marking task complete

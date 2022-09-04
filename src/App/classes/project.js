@@ -6,3 +6,7 @@ export class Project{
 }
 
 
+Project.prototype.getCurrentTask = function(taskTitle){
+    return this.taskArray.find(task => task.taskTitle === taskTitle)
+}
+
