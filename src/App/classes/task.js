@@ -2,7 +2,7 @@
 import {toggleTaskFavoriteStatus, toggleTaskIsComplete, deleteCurrentTask, editCurrentTask} from '../eventListeners'
 
 export class Task{
-    constructor(taskTitle = '', taskDescription = '', dueDate ='', projectTitle= ''){
+    constructor(taskTitle = '', taskDescription = '', dueDate ='No Date', projectTitle= ''){
         this.taskTitle = taskTitle
         this.taskDescription = taskDescription
         this.dueDate = dueDate

@@ -1,5 +1,6 @@
 // Helper methods
-import {removeProjectForm, disableNewProjectButton, enableNewProjectButton, showErrorMessage, disableNewTaskButton, enableNewTaskButton, formatJSDate, getCurrentActiveViewTab, getCurrentStar} from "./utils/helperFunctions"
+import {removeProjectForm, disableNewProjectButton, enableNewProjectButton, showErrorMessage, disableNewTaskButton, enableNewTaskButton, formatJSDate, getCurrentActiveViewTab} from "./utils/helperFunctions"
+import { createEditProjectForm } from "./utils/createEditProjectForm"
 // Classes 
 import { Project } from "./classes/project"
 import { Task } from "./classes/task"
@@ -7,6 +8,12 @@ import {listify } from '../index.js'
 
 
 function updateViewTab(currentTab){
+    // Check if update view was triggered from deleting a project
+    if ( typeof currentTab == 'undefined'){
+        const anchor = document.getElementById('current-view-wrapper')
+        anchor.innerHTML = ''
+        return 
+    }
     // Get all the current tabs on the sidebar
     const allTabItems = document.querySelectorAll('.tabItemContainer')
     // Make all tabs except current tab inactive
@@ -33,6 +40,9 @@ function updateViewTab(currentTab){
         case 'Favorites':
             listify.displayFavorites()
           break;
+        case 'Completed':
+            listify.displayCompleted()
+            break;
         default:
           listify.displayCurrentProject(tabName)
       }
@@ -195,7 +205,10 @@ function removeTaskFormFromDom(){
 function parseTaskForm(){
     // Get the data from the form
     const title = document.getElementById('task-title').value
-    const description = document.getElementById('task-description').value
+    let description = document.getElementById('task-description').value
+    if (description === ''){
+        description = 'No Description'
+    }
     const unParsedDate = document.getElementById('task-dueDate').value
     const formattedDate = formatJSDate(unParsedDate)
     // Remove the form from the dom
@@ -263,19 +276,38 @@ function toggleTaskIsComplete(taskTitle, projectTitle, markComplete){
 function deleteCurrentProject(e){
     // Get current title of the project
     const projectTitle = e.target.parentElement.getAttribute('projectName')
-    // Return the current project via its title
+    // Return the current project object
     const project = listify.getCurrentProject(projectTitle)
     // Get the index of the project in the array
     let index = listify.projectArray.indexOf(project)
     // Using project object and index, remove
     listify.projectArray.splice(index, 1)
+    //
     listify.displayAllCurrentProjectsSidebar()
+
+    console.log(getCurrentActiveViewTab())
     updateViewTab(getCurrentActiveViewTab())
 }
 
 function editCurrentProject(e){
-    alert('edit the current project')
+    // Anchor for appending the edit project name form
+    const anchor = document.getElementById('edit-project-anchor')
+    // Get and save current title of the project
+    const projectTitle = e.target.parentElement.getAttribute('projectName')
+    // Return the current project via its title
+    const project = listify.getCurrentProject(projectTitle)
+    // Get the index of the project in the array
+    let index = listify.projectArray.indexOf(project)
+    // Show edit name input
+    const editForm = createEditProjectForm(e)
+
+    anchor.append(editForm)
+   
+
+
 }
+
+
 
 function editCurrentTask(e){
     alert('edit the current task')

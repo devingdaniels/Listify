@@ -10,6 +10,8 @@ function createNewProjectTabSection(projectTitle){
     projectSidebarItemWrapper.classList.add('projectSidebarItemWrapper')
     const projectSidebarItem = createSidebarViewTab(FolderIcon, 'Icon of a folder image', projectTitle, 'sidebarTabViewIcon')
     // Options button for editing project name or deleting project after creation
+    const editProjectAnchor = document.createElement('div')
+    editProjectAnchor.id = 'edit-project-anchor'
 
     const editDeleteWrapper = document.createElement('div')
     editDeleteWrapper.setAttribute('projectName', projectTitle)
@@ -32,6 +34,7 @@ function createNewProjectTabSection(projectTitle){
     
     // Append the project tab and project options icon to the wrapper
     projectSidebarItemWrapper.append(projectSidebarItem)
+    projectSidebarItemWrapper.append(editProjectAnchor)
     projectSidebarItemWrapper.append(editDeleteWrapper)
     return projectSidebarItemWrapper
 }

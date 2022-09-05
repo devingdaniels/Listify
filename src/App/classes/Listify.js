@@ -41,7 +41,7 @@ export class Listify{
         getCurrentViewWrapper().append(createCurrentViewHeading('Next 7 Days'))
         this.projectArray.forEach(project =>{
             project.taskArray.forEach(task=>{
-                if (task.dueDate < addSevenDays(getCurrentDate())){
+                if (task.dueDate < addSevenDays(getCurrentDate()) && task.dueDate !== 'No Date'){
                     const el = task.displayPrettyTask(task.taskTitle, task.taskDescription, task.dueDate, project.projectTitle, task.isFavorite, task.isComplete)
                     getCurrentViewWrapper().append(el)
                 }
@@ -58,6 +58,21 @@ export class Listify{
         this.projectArray.forEach(project =>{
             project.taskArray.forEach(task=>{
                 if (task.isFavorite === true){
+                    const el = task.displayPrettyTask(task.taskTitle, task.taskDescription, task.dueDate, project.projectTitle, task.isFavorite, task.isComplete)
+                    getCurrentViewWrapper().append(el)
+                }
+            })
+        })
+    }
+    displayCompleted(){
+        // Clear the previous content in the display section
+        clearCurrentViewWrapper()
+        // Display name of current view
+        getCurrentViewWrapper().append(createCurrentViewHeading('Completed'))
+        
+        this.projectArray.forEach(project =>{
+            project.taskArray.forEach(task=>{
+                if (task.isComplete === true){
                     const el = task.displayPrettyTask(task.taskTitle, task.taskDescription, task.dueDate, project.projectTitle, task.isFavorite, task.isComplete)
                     getCurrentViewWrapper().append(el)
                 }

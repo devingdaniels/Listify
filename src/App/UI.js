@@ -6,6 +6,7 @@ import TrayFullIcon from './assets/tray-full-icon.svg'
 import TodayIcon from './assets/today-icon.svg'
 import MonthIcon from './assets/month-icon.svg'
 import StarIcon from './assets/star-icon.svg'
+import CheckAll from './assets/check-all-icon.svg'
 // Methods 
 import { renderIcon, toggleDarkMode, createSidebarViewTab, createNewProjectButton } from './utils/helperFunctions'
 
@@ -77,6 +78,9 @@ function createSidePanel(){
     // View section of favorites tab
     const favoritesTab = createSidebarViewTab(StarIcon,"Icon of a start icon", "Favorites", "sidebarTabViewIcon" )    
     sideItemsArray.push(favoritesTab)
+    // Add completed tasks section
+    const completeTab = createSidebarViewTab(CheckAll,"Icon of a check mark icon", "Completed", "sidebarTabViewIcon" )
+    sideItemsArray.push(completeTab)
     // Project section title
     const projectHeading = document.createElement('h3')
     projectHeading.innerHTML = "Projects"
