@@ -9,5 +9,6 @@ import {createListifyUI} from './App/UI'
 createListifyUI()
 //Create instance of listify, which holds all project and task data
 const listify = new Listify()
+listify.displayAllTasks()
 
 export {listify}

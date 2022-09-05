@@ -1,19 +1,19 @@
 import { disableNewProjectButton, enableNewProjectButton } from "./helperFunctions"
 
+import { listify } from '../..'
+import { showErrorMessage } from "./helperFunctions"
+
 
 function createEditProjectForm(e){
     // Disable the new task button until current task is updated or cancelled 
     disableNewProjectButton()
     const projectTabTitleElement = e.target.parentElement.parentElement.firstChild.lastChild
-    // Remove the element from DOM
+    // Add this class in case user cancels edit
     projectTabTitleElement.classList.add('hideProjectTitle')
     // Show an input with 'update' and 'cancel' buttons
     // On cancel, put h4 with original title back
     // On update, put new title, update the project name by updating the view
     // For each task in the project, update the task.projectTitle attribute  
-    console.log(projectTabTitleElement)
-
-
 
     const projectForm = document.createElement('div')
     projectForm.id = 'editProjectContainer'
@@ -29,16 +29,29 @@ function createEditProjectForm(e){
     updateButton.classList.add('newProjectSaveButton')
     updateButton.innerHTML = "Update"
     updateButton.addEventListener('click', ()=>{
-        
-        alert('update pressed')
-
-
-        // const projectTitle = document.getElementById('new-project-title').value
-        //  if(!listify.isDuplicateTitle(projectTitle)){
-        //     createNewProjectObject(projectTitle)  
-        //  }else{
-        //    showErrorMessage('new-project-title', 'Project name taken')
-        //  }
+        const projectTitle = document.getElementById('updated-project-title').value
+         if(!listify.isDuplicateTitle(projectTitle)){
+            // Remove the edit project form
+            document.getElementById('editProjectContainer').remove()
+            // Reshow project title h4 with updated title
+            projectTabTitleElement.classList.remove('hideProjectTitle')
+            // save the old project title
+            const oldProjectTitle = projectTabTitleElement.innerHTML
+            // Update the project title element with new title
+            projectTabTitleElement.innerHTML = projectTitle
+            // Update the project object and it tasks
+            let project = listify.getCurrentProject(oldProjectTitle)
+            // Update the project object title
+            project.projectTitle = projectTitle
+            // Update each task.projectTitle attribute 
+            project.taskArray.forEach(task =>{
+                task.projectTitle = projectTitle
+            })
+            // Update the DOM
+            listify.displayCurrentProject(projectTitle)
+         }else{
+           showErrorMessage('updated-project-title', 'Project name taken')
+         }
     })
     // Button if user wants to cancel creating a new project
     const cancelButton = document.createElement('button')

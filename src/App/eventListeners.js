@@ -257,7 +257,6 @@ function toggleTaskFavoriteStatus(taskTitle, projectTitle, star){
 }
 
 function toggleTaskIsComplete(taskTitle, projectTitle, markComplete){
-    console.log(markComplete.nextElementSibling.firstChild)
     const project = listify.getCurrentProject(projectTitle)    
     const task = project.taskArray.find(task => task.taskTitle === taskTitle)
     if (task.isComplete === true){
@@ -282,10 +281,9 @@ function deleteCurrentProject(e){
     let index = listify.projectArray.indexOf(project)
     // Using project object and index, remove
     listify.projectArray.splice(index, 1)
-    //
+    // Redisplay the sidepanel with removed project gone
     listify.displayAllCurrentProjectsSidebar()
-
-    console.log(getCurrentActiveViewTab())
+    // Update main view with current view content
     updateViewTab(getCurrentActiveViewTab())
 }
 
@@ -300,18 +298,13 @@ function editCurrentProject(e){
     let index = listify.projectArray.indexOf(project)
     // Show edit name input
     const editForm = createEditProjectForm(e)
-
     anchor.append(editForm)
-   
-
-
 }
-
-
 
 function editCurrentTask(e){
     alert('edit the current task')
 }
+
 
 function deleteCurrentTask(e){
     // Get current title of the task
