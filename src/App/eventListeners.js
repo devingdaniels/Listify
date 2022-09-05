@@ -273,6 +273,8 @@ function toggleTaskIsComplete(taskTitle, projectTitle, markComplete){
 }
 
 function deleteCurrentProject(e){
+    // In case delete is triggered while editing a project and is not updated
+    enableNewProjectButton()
     // Get current title of the project
     const projectTitle = e.target.parentElement.getAttribute('projectName')
     // Return the current project object
@@ -288,14 +290,10 @@ function deleteCurrentProject(e){
 }
 
 function editCurrentProject(e){
-    // Anchor for appending the edit project name form
-    const anchor = document.getElementById('edit-project-anchor')
     // Get and save current title of the project
     const projectTitle = e.target.parentElement.getAttribute('projectName')
-    // Return the current project via its title
-    const project = listify.getCurrentProject(projectTitle)
-    // Get the index of the project in the array
-    let index = listify.projectArray.indexOf(project)
+    // Anchor for appending the edit project name form
+    const anchor = document.getElementById(`${projectTitle}-edit-anchor`)
     // Show edit name input
     const editForm = createEditProjectForm(e)
     anchor.append(editForm)

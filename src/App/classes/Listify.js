@@ -69,7 +69,7 @@ export class Listify{
         getCurrentViewWrapper().append(createCurrentViewHeading('Favorites'))
     
         if (!this.isTaskFavorite()){
-            getCurrentViewWrapper().append(viewIsEmptyMessage('No Favs! :)'))   
+            getCurrentViewWrapper().append(viewIsEmptyMessage('No Favs!'))   
         }
         else {
             this.projectArray.forEach(project =>{
@@ -103,17 +103,6 @@ export class Listify{
         }
     }
 
-    displayCurrentProject(projectTitle){
-         // Clear the previous content in the display section
-        clearCurrentViewWrapper()
-        // Display name of current project
-        getCurrentViewWrapper().append(createCurrentViewHeading(projectTitle))
-        // Create and append a 'add new task' button under the heading
-        createNewTaskButton()
-        // Display the current project tasks under the 'add task' button
-        this.displayCurrentProjectTasks(this.getCurrentProject(projectTitle))
-    }
-
     displayAllCurrentProjectsSidebar(){
         // Anchor for appending new project tabs 
         const projectAnchor = document.getElementById('new-project-container-anchor')
@@ -135,20 +124,34 @@ export class Listify{
     getCurrentTask(taskTitle){
         
     }
+    displayCurrentProject(projectTitle){
+        // Clear the previous content in the display section
+       clearCurrentViewWrapper()
+       // Display name of current project
+       getCurrentViewWrapper().append(createCurrentViewHeading(projectTitle))
+       // Create and append a 'add new task' button under the heading
+       createNewTaskButton()
+       // Display the current project tasks under the 'add task' button
+       this.displayCurrentProjectTasks(this.getCurrentProject(projectTitle))
+   }
     displayCurrentProjectTasks(project){
         // For each task
         // Get task info, append to task display container
         // Append each container to the project section 
-        project.taskArray.forEach(task =>{
-            // Get the data from each task
-            const title = task.taskTitle
-            const description = task.taskDescription
-            const dueDate = task.dueDate
-            // Use data to create task display container within the current project
-            const taskContainer  = task.displayPrettyTask(title, description, dueDate, project.projectTitle, task.isFavorite, task.isComplete)
-            // Append the task container to the dom in the project section
-            getCurrentViewWrapper().append(taskContainer)
-        })
+        if (project.taskArray.length === 0){
+            getCurrentViewWrapper().append(viewIsEmptyMessage('No tasks'))   
+        }else{
+            project.taskArray.forEach(task =>{
+                // Get the data from each task
+                const title = task.taskTitle
+                const description = task.taskDescription
+                const dueDate = task.dueDate
+                // Use data to create task display container within the current project
+                const taskContainer  = task.displayPrettyTask(title, description, dueDate, project.projectTitle, task.isFavorite, task.isComplete)
+                // Append the task container to the dom in the project section
+                getCurrentViewWrapper().append(taskContainer)
+            })
+        }  
     }
     isTaskDueTodayInProjectArray(){
         for (let i = 0; i < this.projectArray.length; i++){

@@ -124,7 +124,9 @@
     display: none;
 }
 
-
+.disableProjectManipulation{
+    pointer-events: none;
+}
 
 /* SIDEBAR SECTION END */
 

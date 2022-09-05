@@ -1,7 +1,7 @@
-import { createSidebarViewTab } from './helperFunctions'
+import { createSidebarViewTab, disableEditCurrentProjectButton, disableNewProjectButton } from './helperFunctions'
 import {editCurrentProject, deleteCurrentProject} from '../eventListeners'
 import FolderIcon from '../assets/folder-icon.svg'
-
+import { disableProjectSideBarItemDuringEdit } from './helperFunctions'
 
 
 
@@ -11,7 +11,7 @@ function createNewProjectTabSection(projectTitle){
     const projectSidebarItem = createSidebarViewTab(FolderIcon, 'Icon of a folder image', projectTitle, 'sidebarTabViewIcon')
     // Options button for editing project name or deleting project after creation
     const editProjectAnchor = document.createElement('div')
-    editProjectAnchor.id = 'edit-project-anchor'
+    editProjectAnchor.id = `${projectTitle}-edit-anchor`
 
     const editDeleteWrapper = document.createElement('div')
     editDeleteWrapper.setAttribute('projectName', projectTitle)
@@ -19,7 +19,15 @@ function createNewProjectTabSection(projectTitle){
     const optionsButton = document.createElement('i')
     optionsButton.classList.add('fa-solid', 'fa-pen-to-square')
     optionsButton.style.cursor = "pointer"
+    optionsButton.id = `${projectTitle}-edit-project-title`
     optionsButton.addEventListener('click', e =>{
+         // Disable the new task button until current task is updated or cancelled 
+        disableNewProjectButton()
+        // Disable edit button so user can't create duplicate edit containers
+        disableEditCurrentProjectButton(optionsButton)
+        // Disable other project tabs so user can only edit one at a time
+        const projectItemWrapper = e.target.parentElement.parentElement
+        disableProjectSideBarItemDuringEdit(projectItemWrapper)
         editCurrentProject(e)
     })
     const deleteButton = document.createElement('i')

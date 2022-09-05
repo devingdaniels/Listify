@@ -68,6 +68,13 @@ function enableNewTaskButton(){
     button.style.pointerEvents = 'auto'
 }
 
+function disableEditCurrentProjectButton(button){
+    button.classList.add('disableProjectManipulation')
+}
+function enableEditCurrentProjectButton(button){
+    button.classList.remove('disableProjectManipulation')
+}
+
 function removeProjectForm(){
     const clearForm = document.getElementById('project-form-container-anchor')
     clearForm.innerHTML = ""
@@ -135,6 +142,23 @@ function toggleDarkMode(){
     
     alert('code darkmode')
         
-    }
+}
 
-export {renderIcon, toggleDarkMode, createNewProjectButton, createSidebarViewTab, disableNewProjectButton, enableNewProjectButton, removeProjectForm, createNewTaskButton, showErrorMessage, enableNewTaskButton, disableNewTaskButton,formatJSDate, getCurrentActiveViewTab, getCurrentDate, addSevenDays}
+function disableProjectSideBarItemDuringEdit(currentTab){
+    const items = document.querySelectorAll('.projectSidebarItemWrapper')
+    items.forEach(el =>{
+        if (el !== currentTab){
+            el.classList.add('disableProjectManipulation')
+        }
+    })
+}
+function enableProjectSideBarItemDuringEdit(){
+    const items = document.querySelectorAll('.projectSidebarItemWrapper')
+    items.forEach(el =>{
+            el.classList.remove('disableProjectManipulation')            
+    })
+}
+
+
+
+export {renderIcon, toggleDarkMode, createNewProjectButton, createSidebarViewTab, disableNewProjectButton, enableNewProjectButton, removeProjectForm, createNewTaskButton, showErrorMessage, enableNewTaskButton, disableNewTaskButton,formatJSDate, getCurrentActiveViewTab, getCurrentDate, addSevenDays, disableProjectSideBarItemDuringEdit, enableProjectSideBarItemDuringEdit, enableEditCurrentProjectButton, disableEditCurrentProjectButton}
