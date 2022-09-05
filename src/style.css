@@ -34,7 +34,9 @@
     margin-right: 10px;
 
 }
-
+#current-user-name{
+    font-size: 1.2rem;
+}
 /* HEADER SECTION END */
 
 
@@ -154,15 +156,6 @@
     cursor: pointer;
 }
 
-#new-task-form{
-    border: 2px solid blue;
-    padding: 5px;
-    width: 70%; 
-    margin: 10px auto 0px auto;
-}
-#new-task-form label{
-    font-size: 2rem;
-}
 .formSubSection{
     display: flex;
     flex-direction: column;
@@ -214,6 +207,21 @@
 /* CENTRAL VIEW SECTION END */
 
 
+/* Edit task form CSS */
+
+.editTaskForm, .newTaskForm{
+    display: block;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    height: 250px;
+    width: 300px;
+    border: 1px solid;
+    box-shadow: 2px 5px 12px rgb(80, 105, 228);
+    background-color: aliceblue;
+    padding: 10px;
+}
 
 /* FOOTER SECTION START*/
 #footer-wrapper{

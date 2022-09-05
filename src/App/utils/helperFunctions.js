@@ -3,6 +3,7 @@ import { displayNewProjectForm,displayNewTaskForm, updateViewTab } from '../even
 // Date methods
 import add from 'date-fns/add'
 import format from 'date-fns/format'
+import { listify } from '../..'
 
 function getCurrentDate(){
     let today = new Date();
@@ -159,6 +160,23 @@ function enableProjectSideBarItemDuringEdit(){
     })
 }
 
+function doesTaskFormHaveName(){
+    const title = document.getElementById('task-title').value
+    if (title !== ''){
+        return true
+    }
+    return false
+}
+
+function isDuplicateTask(){
+    // Get the current project
+    // This is safe-ish because user can only add task while in current project
+    const project = listify.getCurrentProject(document.getElementById('current-view-wrapper').firstChild.innerHTML)
+    // Get string of input user is trying to use
+    const title = document.getElementById('task-title').value
+   // return true or false
+    return project.taskArray.some(task => task.taskTitle === title)
+}
 
 
-export {renderIcon, toggleDarkMode, createNewProjectButton, createSidebarViewTab, disableNewProjectButton, enableNewProjectButton, removeProjectForm, createNewTaskButton, showErrorMessage, enableNewTaskButton, disableNewTaskButton,formatJSDate, getCurrentActiveViewTab, getCurrentDate, addSevenDays, disableProjectSideBarItemDuringEdit, enableProjectSideBarItemDuringEdit, enableEditCurrentProjectButton, disableEditCurrentProjectButton}
+export {renderIcon, toggleDarkMode, createNewProjectButton, createSidebarViewTab, disableNewProjectButton, enableNewProjectButton, removeProjectForm, createNewTaskButton, showErrorMessage, enableNewTaskButton, disableNewTaskButton,formatJSDate, getCurrentActiveViewTab, getCurrentDate, addSevenDays, disableProjectSideBarItemDuringEdit, enableProjectSideBarItemDuringEdit, enableEditCurrentProjectButton, disableEditCurrentProjectButton, doesTaskFormHaveName, isDuplicateTask}

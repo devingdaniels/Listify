@@ -83,16 +83,10 @@ Task.prototype.displayPrettyTask = function (taskTitle, description, dueDate, pr
    deleteButton.addEventListener('click', e=>{
        deleteCurrentTask(e)
    })
-
-
    
    favEditDeleteWrapper.append(star)
    favEditDeleteWrapper.append(editButton)
    favEditDeleteWrapper.append(deleteButton)
-   
-
-
-
    
    taskContainer.append(markComplete)
    taskContainer.append(taskInfoWrapper)
@@ -100,5 +94,4 @@ Task.prototype.displayPrettyTask = function (taskTitle, description, dueDate, pr
    taskContainer.append(favEditDeleteWrapper)
 
     return taskContainer
-
 }

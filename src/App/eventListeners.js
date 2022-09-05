@@ -1,6 +1,7 @@
 // Helper methods
-import {removeProjectForm, disableNewProjectButton, enableNewProjectButton, showErrorMessage, disableNewTaskButton, enableNewTaskButton, formatJSDate, getCurrentActiveViewTab} from "./utils/helperFunctions"
+import {removeProjectForm, disableNewProjectButton, enableNewProjectButton, showErrorMessage, disableNewTaskButton, enableNewTaskButton, formatJSDate, getCurrentActiveViewTab, doesTaskFormHaveName, isDuplicateTask} from "./utils/helperFunctions"
 import { createEditProjectForm } from "./utils/createEditProjectForm"
+import { createTaskForm } from "./utils/createEditTask"
 // Classes 
 import { Project } from "./classes/project"
 import { Task } from "./classes/task"
@@ -124,6 +125,7 @@ function displayNewTaskForm(){
     // Form 
     const form = document.createElement('form')
     form.id = 'new-task-form'
+    form.classList.add('newTaskForm')
     // Title section with label and input
     const titleWrapper = document.createElement('div')
     titleWrapper.classList.add('formSubSection')
@@ -223,23 +225,6 @@ function parseTaskForm(){
     listify.displayCurrentProject(project.projectTitle)
 }
 
-function doesTaskFormHaveName(){
-    const title = document.getElementById('task-title').value
-    if (title !== ''){
-        return true
-    }
-    return false
-}
-
-function isDuplicateTask(){
-    // Get the current project
-    // This is safe-ish because user can only add task while in current project
-    const project = listify.getCurrentProject(document.getElementById('current-view-wrapper').firstChild.innerHTML)
-    // Get string of input user is trying to use
-    const title = document.getElementById('task-title').value
-   // return true or false
-    return project.taskArray.some(task => task.taskTitle === title)
-}
 
 function toggleTaskFavoriteStatus(taskTitle, projectTitle, star){
     const project = listify.getCurrentProject(projectTitle)    
@@ -299,11 +284,6 @@ function editCurrentProject(e){
     anchor.append(editForm)
 }
 
-function editCurrentTask(e){
-    alert('edit the current task')
-}
-
-
 function deleteCurrentTask(e){
     // Get current title of the task
     const taskTitle = e.target.parentElement.parentElement.getAttribute('taskTitle')
@@ -320,6 +300,14 @@ function deleteCurrentTask(e){
     updateViewTab(getCurrentActiveViewTab())
 }
 
+function editCurrentTask(e){
+    const currentTask = e.target.parentElement.parentElement
 
+
+    const form = createTaskForm(currentTask)
+    form.classList.add('editTaskForm')
+    document.getElementById('current-view-wrapper').append(form)
+    
+}
 
 export {updateViewTab, displayNewProjectForm, createNewProjectObject,displayNewTaskForm, toggleTaskFavoriteStatus,toggleTaskIsComplete, deleteCurrentProject, editCurrentProject,editCurrentTask, deleteCurrentTask }
