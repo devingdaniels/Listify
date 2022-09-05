@@ -1,5 +1,6 @@
 import { listify } from "../.."
-import { disableNewTaskButton, enableNewProjectButton, disableNewProjectButton, doesTaskFormHaveName, isDuplicateTask, showErrorMessage, enableNewTaskButton } from "./helperFunctions"
+import { updateViewTab } from "../eventListeners"
+import { disableNewTaskButton, enableNewProjectButton, disableNewProjectButton, doesTaskFormHaveName, showErrorMessage, enableNewTaskButton, getCurrentActiveViewTab } from "./helperFunctions"
 import { formatJSDate } from "./helperFunctions"
 
 
@@ -9,8 +10,7 @@ function createTaskForm(currentTask){
     const projectObject = listify.getCurrentProject(currentTask.id)
     const taskObject = projectObject.getCurrentTask(currentTask.getAttribute('taskTitle'))
 
-    // Disable the new task button
-    disableNewTaskButton()
+
     // Disable the new project button
     disableNewProjectButton()
     
@@ -61,10 +61,10 @@ function createTaskForm(currentTask){
     updateTaskButton.value = 'Update'
     updateTaskButton.addEventListener('click', ()=>{
         if (doesTaskFormHaveName()){
-            if (isDuplicateTask()){ 
+            const title = document.getElementById('task-title').value
+            if (projectObject.isDuplicateTask(title)){ 
                 showErrorMessage('task-title', 'Task already exists')
             }else{
-                enableNewTaskButton()
                 updateForm(taskObject)
             }           
         }
@@ -79,7 +79,6 @@ function createTaskForm(currentTask){
     cancelButton.value = 'Cancel'
     cancelButton.addEventListener('click', ()=>{
         // Enable buttons
-        enableNewTaskButton()
         enableNewProjectButton()
         // Remove form from the dom
         const form = document.getElementById('edit-task-form')
@@ -114,7 +113,7 @@ function  updateForm(taskObject){
     taskObject.taskDescription = description
     taskObject.dueDate = formattedDate
 
-    listify.displayCurrentProject(taskObject.projectTitle)
+    updateViewTab(getCurrentActiveViewTab())
 }
 
 

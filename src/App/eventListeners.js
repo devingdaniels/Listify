@@ -1,5 +1,5 @@
 // Helper methods
-import {removeProjectForm, disableNewProjectButton, enableNewProjectButton, showErrorMessage, disableNewTaskButton, enableNewTaskButton, formatJSDate, getCurrentActiveViewTab, doesTaskFormHaveName, isDuplicateTask} from "./utils/helperFunctions"
+import {removeProjectForm, disableNewProjectButton, enableNewProjectButton, showErrorMessage, disableNewTaskButton, enableNewTaskButton, formatJSDate, getCurrentActiveViewTab, doesTaskFormHaveName} from "./utils/helperFunctions"
 import { createEditProjectForm } from "./utils/createEditProjectForm"
 import { createTaskForm } from "./utils/createEditTask"
 // Classes 
@@ -118,6 +118,8 @@ function createNewProjectObject(title){
 }
 
 function displayNewTaskForm(){
+     // Get the current open project
+     const project = listify.getCurrentProject(document.getElementById('current-view-wrapper').firstChild.innerHTML)
     // Disable the new task button until current task is created or cancelled 
     disableNewTaskButton()
     // Get the anchor for appending this new task form
@@ -172,11 +174,12 @@ function displayNewTaskForm(){
     createTaskButton.value = 'Create'
     createTaskButton.addEventListener('click', ()=>{
         if (doesTaskFormHaveName()){
-            if (isDuplicateTask()){ 
+            const title = document.getElementById('task-title').value
+            if (project.isDuplicateTask(title)){ 
                 showErrorMessage('task-title', 'Task already exists')
             }else{
                 enableNewTaskButton()
-                parseTaskForm()
+                parseTaskForm(project)
             }           
         }
         else { 
@@ -204,7 +207,7 @@ function removeTaskFormFromDom(){
     document.getElementById('new-task-form').remove()
 }
 
-function parseTaskForm(){
+function parseTaskForm(project){
     // Get the data from the form
     const title = document.getElementById('task-title').value
     let description = document.getElementById('task-description').value
@@ -215,8 +218,6 @@ function parseTaskForm(){
     const formattedDate = formatJSDate(unParsedDate)
     // Remove the form from the dom
     removeTaskFormFromDom()
-     // Get the current open project
-     const project = listify.getCurrentProject(document.getElementById('current-view-wrapper').firstChild.innerHTML)
     // Create new task object
     const task = new Task(title,description,formattedDate, project.projectTitle) 
     // Add the task object to the current projectArray
@@ -301,12 +302,11 @@ function deleteCurrentTask(e){
 }
 
 function editCurrentTask(e){
+    // 
     const currentTask = e.target.parentElement.parentElement
-
-
     const form = createTaskForm(currentTask)
     form.classList.add('editTaskForm')
-    document.getElementById('current-view-wrapper').append(form)
+    getCurrentActiveViewTab().append(form)
     
 }
 
