@@ -130,6 +130,14 @@
     pointer-events: none;
 }
 
+.disableSideBarItem{
+    pointer-events: none;
+}
+
+.enable{
+    pointer-events: auto;
+}
+
 /* SIDEBAR SECTION END */
 
 
@@ -203,6 +211,9 @@
     text-decoration: line-through;
 }
 
+.disableTaskContainer{
+    pointer-events: none;
+}
 
 /* CENTRAL VIEW SECTION END */
 
@@ -221,6 +232,7 @@
     box-shadow: 2px 5px 12px rgb(80, 105, 228);
     background-color: aliceblue;
     padding: 10px;
+    pointer-events: auto;
 }
 
 /* FOOTER SECTION START*/

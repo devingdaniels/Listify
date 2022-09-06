@@ -1,6 +1,6 @@
 import { listify } from "../.."
 import { updateViewTab } from "../eventListeners"
-import { disableNewTaskButton, enableNewProjectButton, disableNewProjectButton, doesTaskFormHaveName, showErrorMessage, enableNewTaskButton, getCurrentActiveViewTab } from "./helperFunctions"
+import { disableNewTaskButton, enableNewProjectButton, disableNewProjectButton, doesTaskFormHaveName, showErrorMessage, enableNewTaskButton, getCurrentActiveViewTab, enableTasksWhileEditing, enableSideBarDuringTaskEditing } from "./helperFunctions"
 import { formatJSDate } from "./helperFunctions"
 
 
@@ -65,6 +65,7 @@ function createTaskForm(currentTask){
             if (projectObject.isDuplicateTask(title)){ 
                 showErrorMessage('task-title', 'Task already exists')
             }else{
+                enableSideBarDuringTaskEditing()
                 updateForm(taskObject)
             }           
         }
@@ -73,13 +74,16 @@ function createTaskForm(currentTask){
             showErrorMessage('task-title', 'Add task title')
         }        
     })
-    // Cancel the creation of a new task button
+   
     const cancelButton = document.createElement('input')
     cancelButton.type = 'button'
     cancelButton.value = 'Cancel'
     cancelButton.addEventListener('click', ()=>{
         // Enable buttons
         enableNewProjectButton()
+        enableNewTaskButton()
+        enableTasksWhileEditing()
+        enableSideBarDuringTaskEditing()
         // Remove form from the dom
         const form = document.getElementById('edit-task-form')
         form.remove()
@@ -99,20 +103,20 @@ function createTaskForm(currentTask){
 function  updateForm(taskObject){
     // Get data from updated task form
     const title = document.getElementById('task-title').value
-    let description = document.getElementById('task-description').value
-    if (description === ''){
-        description = 'No Description'
-    }
+    const description = document.getElementById('task-description').value
     const unParsedDate = document.getElementById('task-dueDate').value
     const formattedDate = formatJSDate(unParsedDate)
-
     // Remove the update task form from the dom
     document.getElementById('edit-task-form').remove()
     // Update task object with new info
     taskObject.taskTitle = title
-    taskObject.taskDescription = description
-    taskObject.dueDate = formattedDate
-
+    if (description !== ''){
+        taskObject.taskDescription = description
+    }
+    console.log(formattedDate)
+    if (typeof formattedDate !== 'undefined'){
+        taskObject.dueDate = formattedDate
+    }
     updateViewTab(getCurrentActiveViewTab())
 }
 

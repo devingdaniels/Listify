@@ -1,5 +1,5 @@
 // Helper methods
-import {removeProjectForm, disableNewProjectButton, enableNewProjectButton, showErrorMessage, disableNewTaskButton, enableNewTaskButton, formatJSDate, getCurrentActiveViewTab, doesTaskFormHaveName} from "./utils/helperFunctions"
+import {removeProjectForm, disableNewProjectButton, enableNewProjectButton, showErrorMessage, disableNewTaskButton, enableNewTaskButton, formatJSDate, getCurrentActiveViewTab, doesTaskFormHaveName, disableTasksWhileEditing, enableTasksWhileEditing, disableSideBarDuringTaskEditing} from "./utils/helperFunctions"
 import { createEditProjectForm } from "./utils/createEditProjectForm"
 import { createTaskForm } from "./utils/createEditTask"
 // Classes 
@@ -122,6 +122,8 @@ function displayNewTaskForm(){
      const project = listify.getCurrentProject(document.getElementById('current-view-wrapper').firstChild.innerHTML)
     // Disable the new task button until current task is created or cancelled 
     disableNewTaskButton()
+    // Disable tasks already on the screen 
+    disableTasksWhileEditing()
     // Get the anchor for appending this new task form
     const anchor = document.getElementById('current-view-wrapper')
     // Form 
@@ -203,7 +205,10 @@ function displayNewTaskForm(){
     anchor.append(form)
 }
 function removeTaskFormFromDom(){
+    // Enable add a new task button
     enableNewTaskButton()
+    // Enable existing tasks containers so they can be edited 
+    enableTasksWhileEditing()
     document.getElementById('new-task-form').remove()
 }
 
@@ -302,8 +307,13 @@ function deleteCurrentTask(e){
 }
 
 function editCurrentTask(e){
-    // 
+    // Disable the add new task button
+    disableNewTaskButton()
+    // disable edit project buttons
+    disableSideBarDuringTaskEditing()
     const currentTask = e.target.parentElement.parentElement
+    // Disable all tasks containers on screen until editing is complete
+    disableTasksWhileEditing(currentTask)
     const form = createTaskForm(currentTask)
     form.classList.add('editTaskForm')
     getCurrentActiveViewTab().append(form)

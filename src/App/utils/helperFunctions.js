@@ -62,11 +62,17 @@ function enableNewProjectButton(){
 
 function disableNewTaskButton(){
     const button = document.getElementById('new-task-button')
-    button.style.pointerEvents = 'none'
+    if (button != '' && button !== null){
+        button.style.pointerEvents = 'none'
+    }
+    
 }
 function enableNewTaskButton(){
     const button = document.getElementById('new-task-button')
-    button.style.pointerEvents = 'auto'
+    if (button != '' && button !== null){
+        button.style.pointerEvents = 'auto'
+    }
+    
 }
 
 function disableEditCurrentProjectButton(button){
@@ -168,7 +174,44 @@ function doesTaskFormHaveName(){
     return false
 }
 
+function disableTasksWhileEditing(currentTask){
+    const tasks = document.querySelectorAll('.prettyTaskContainer')
+    tasks.forEach(task =>{
+        task.classList.add('disableTaskContainer')
+    })
+}
+function enableTasksWhileEditing(){
+    const tasks = document.querySelectorAll('.prettyTaskContainer')
+    tasks.forEach(task =>{
+        task.classList.remove('disableTaskContainer')
+    })
+}
+
+function disableSideBarDuringTaskEditing(){
+    const sidebarTabs = document.querySelectorAll('.tabItemContainer')
+    const projectTabs = document.querySelectorAll('.projectSidebarItemWrapper')
+
+    sidebarTabs.forEach(item =>{
+        item.classList.add('disableSideBarItem')
+    })
+
+    projectTabs.forEach(item =>{
+        item.classList.add('disableSideBarItem')
+    })
+}
 
 
+function enableSideBarDuringTaskEditing(){
+    const sidebarTabs = document.querySelectorAll('.tabItemContainer')
+    const projectTabs = document.querySelectorAll('.projectSidebarItemWrapper')
 
-export {renderIcon, toggleDarkMode, createNewProjectButton, createSidebarViewTab, disableNewProjectButton, enableNewProjectButton, removeProjectForm, createNewTaskButton, showErrorMessage, enableNewTaskButton, disableNewTaskButton,formatJSDate, getCurrentActiveViewTab, getCurrentDate, addSevenDays, disableProjectSideBarItemDuringEdit, enableProjectSideBarItemDuringEdit, enableEditCurrentProjectButton, disableEditCurrentProjectButton, doesTaskFormHaveName}
+    sidebarTabs.forEach(item =>{
+        item.classList.remove('disableSideBarItem')
+    })
+
+    projectTabs.forEach(item =>{
+        item.classList.remove('disableSideBarItem')
+    })
+}
+
+export {renderIcon, toggleDarkMode, createNewProjectButton, createSidebarViewTab, disableNewProjectButton, enableNewProjectButton, removeProjectForm, createNewTaskButton, showErrorMessage, enableNewTaskButton, disableNewTaskButton,formatJSDate, getCurrentActiveViewTab, getCurrentDate, addSevenDays, disableProjectSideBarItemDuringEdit, enableProjectSideBarItemDuringEdit, enableEditCurrentProjectButton, disableEditCurrentProjectButton, doesTaskFormHaveName, disableTasksWhileEditing, enableTasksWhileEditing, disableSideBarDuringTaskEditing, enableSideBarDuringTaskEditing}
