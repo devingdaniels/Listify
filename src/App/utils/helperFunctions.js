@@ -3,7 +3,6 @@ import { displayNewProjectForm,displayNewTaskForm, updateViewTab } from '../even
 // Date methods
 import add from 'date-fns/add'
 import format from 'date-fns/format'
-import { listify } from '../..'
 
 function getCurrentDate(){
     let today = new Date();
@@ -75,12 +74,7 @@ function enableNewTaskButton(){
     
 }
 
-function disableEditCurrentProjectButton(button){
-    button.classList.add('disableProjectManipulation')
-}
-function enableEditCurrentProjectButton(button){
-    button.classList.remove('disableProjectManipulation')
-}
+
 
 function removeProjectForm(){
     const clearForm = document.getElementById('project-form-container-anchor')
@@ -155,15 +149,22 @@ function disableProjectSideBarItemDuringEdit(currentTab){
     const items = document.querySelectorAll('.projectSidebarItemWrapper')
     items.forEach(el =>{
         if (el !== currentTab){
-            el.classList.add('disableProjectManipulation')
+            el.classList.add('disablePointerEvents')
         }
     })
 }
 function enableProjectSideBarItemDuringEdit(){
     const items = document.querySelectorAll('.projectSidebarItemWrapper')
     items.forEach(el =>{
-            el.classList.remove('disableProjectManipulation')            
+            el.classList.remove('disablePointerEvents')            
     })
+}
+
+function disableEditCurrentProjectButton(button){
+    button.classList.add('disablePointerEvents')
+}
+function enableEditCurrentProjectButton(button){
+    button.classList.remove('disablePointerEvents')
 }
 
 function doesTaskFormHaveName(){
@@ -174,16 +175,16 @@ function doesTaskFormHaveName(){
     return false
 }
 
-function disableTasksWhileEditing(currentTask){
+function disableTasksWhileEditing(){
     const tasks = document.querySelectorAll('.prettyTaskContainer')
     tasks.forEach(task =>{
-        task.classList.add('disableTaskContainer')
+        task.classList.add('disablePointerEvents')
     })
 }
 function enableTasksWhileEditing(){
     const tasks = document.querySelectorAll('.prettyTaskContainer')
     tasks.forEach(task =>{
-        task.classList.remove('disableTaskContainer')
+        task.classList.remove('disablePointerEvents')
     })
 }
 
@@ -192,11 +193,11 @@ function disableSideBarDuringTaskEditing(){
     const projectTabs = document.querySelectorAll('.projectSidebarItemWrapper')
 
     sidebarTabs.forEach(item =>{
-        item.classList.add('disableSideBarItem')
+        item.classList.add('disablePointerEvents')
     })
 
     projectTabs.forEach(item =>{
-        item.classList.add('disableSideBarItem')
+        item.classList.add('disablePointerEvents')
     })
 }
 
@@ -206,11 +207,11 @@ function enableSideBarDuringTaskEditing(){
     const projectTabs = document.querySelectorAll('.projectSidebarItemWrapper')
 
     sidebarTabs.forEach(item =>{
-        item.classList.remove('disableSideBarItem')
+        item.classList.remove('disablePointerEvents')
     })
 
     projectTabs.forEach(item =>{
-        item.classList.remove('disableSideBarItem')
+        item.classList.remove('disablePointerEvents')
     })
 }
 

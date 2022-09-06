@@ -1,6 +1,6 @@
 import { listify } from "../.."
 import { updateViewTab } from "../eventListeners"
-import { disableNewTaskButton, enableNewProjectButton, disableNewProjectButton, doesTaskFormHaveName, showErrorMessage, enableNewTaskButton, getCurrentActiveViewTab, enableTasksWhileEditing, enableSideBarDuringTaskEditing } from "./helperFunctions"
+import { enableNewProjectButton, disableNewProjectButton, doesTaskFormHaveName, showErrorMessage, enableNewTaskButton, getCurrentActiveViewTab, enableTasksWhileEditing, enableSideBarDuringTaskEditing } from "./helperFunctions"
 import { formatJSDate } from "./helperFunctions"
 
 
@@ -57,6 +57,7 @@ function createTaskForm(currentTask){
     const buttonWrapper = document.createElement('div')
     buttonWrapper.classList.add('newTaskButtonWrapper')
     const updateTaskButton = document.createElement('input')
+    updateTaskButton.classList.add('updateTaskButton')
     updateTaskButton.type = 'button'
     updateTaskButton.value = 'Update'
     updateTaskButton.addEventListener('click', ()=>{
@@ -65,6 +66,7 @@ function createTaskForm(currentTask){
             if (projectObject.isDuplicateTask(title)){ 
                 showErrorMessage('task-title', 'Task already exists')
             }else{
+                enableNewProjectButton()
                 enableSideBarDuringTaskEditing()
                 updateForm(taskObject)
             }           
@@ -76,6 +78,7 @@ function createTaskForm(currentTask){
     })
    
     const cancelButton = document.createElement('input')
+    cancelButton.classList.add('cancelUpdateTaskButton')
     cancelButton.type = 'button'
     cancelButton.value = 'Cancel'
     cancelButton.addEventListener('click', ()=>{

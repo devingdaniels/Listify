@@ -2,19 +2,23 @@
     box-sizing: border-box;
     padding: 0;
     margin: 0;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
 }
 
+.disablePointerEvents{
+    pointer-events: none;
+}
 
 #main-grid-layout{
     display: grid;  
     grid-template-columns: repeat(4, 1fr);
-    
 }
-
 
 /* HEADER SECTION START */
 #header-wrapper{
     grid-column: 1/5;
+    background-color: rgb(190, 231, 244);
+    padding: 5px 0 5px 0;
 }
 .headerContainer{
     display: flex;
@@ -26,7 +30,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 2.7rem;
+    font-size: 2.2rem;
 }
 .listifyIcon, .userProfileIcon{
     display: block;
@@ -35,7 +39,7 @@
 
 }
 #current-user-name{
-    font-size: 1.2rem;
+    font-size: 1rem;
 }
 /* HEADER SECTION END */
 
@@ -46,11 +50,11 @@
     padding: 10px;
     height: 87vh;
     overflow-y: auto;
-    border: 1px solid gray;
+    background-color: aliceblue;
 }
 /* width */
 #sidebar-wrapper::-webkit-scrollbar {
-    width: 10px;
+    width: 5px;
   }
   /* Track */
 #sidebar-wrapper::-webkit-scrollbar-track {
@@ -60,12 +64,12 @@
    
   /* Handle */
 #sidebar-wrapper ::-webkit-scrollbar-thumb {
-    background: red; 
-    border-radius: 10px;
+    background: rgb(190, 231, 244);
+    border-radius: 5px;
 }
   /* Handle on hover */
 #sidebar-wrapper::-webkit-scrollbar-thumb:hover {
-    background: #b30000; 
+    background: rgb(190, 231, 244);
 }
 
 .tabItemContainer, .newProjectButton{
@@ -85,6 +89,12 @@
     width: 60%;
     margin: auto;
 }
+.projectFormContainer input {
+    border: 1px solid blue;
+    border-radius: 50px;
+    padding: 5px;
+}
+
 .projectFormButtonContainer{
     margin: 3px auto 0 auto;
     display: flex;
@@ -95,12 +105,7 @@
 .newProjectSaveButton, .newProjectCancelButton{
     border: none;
 }
-.newProjectSaveButton{
-    background-color: rgb(8, 244, 8);
-}
-.newProjectCancelButton{
-    background-color: red;
-}
+
 .editDeleteWrapper{
     display: flex;
     width: 20%;
@@ -118,25 +123,11 @@
     justify-content: space-between;
 }
 
-
-
-
-
 .hideProjectTitle{
     display: none;
 }
 
-.disableProjectManipulation{
-    pointer-events: none;
-}
 
-.disableSideBarItem{
-    pointer-events: none;
-}
-
-.enable{
-    pointer-events: auto;
-}
 
 /* SIDEBAR SECTION END */
 
@@ -146,8 +137,8 @@
 /* CENTRAL VIEW SECTION START */
 #current-view-wrapper{
     grid-column: 2/5;
-    border: 1px solid gray;
     padding: 20px;
+    background-color: azure;
    
 }
 
@@ -186,6 +177,9 @@
     margin: auto;
     justify-content: space-around;
     margin-top: 15px;
+    box-shadow: 2px 5px 12px rgb(80, 105, 228);
+    background-color: aliceblue;
+    padding: 10px;
 }
 #task-checkbox-complete{
     border-radius: 100%;
@@ -211,10 +205,6 @@
     text-decoration: line-through;
 }
 
-.disableTaskContainer{
-    pointer-events: none;
-}
-
 /* CENTRAL VIEW SECTION END */
 
 
@@ -237,12 +227,63 @@
 
 /* FOOTER SECTION START*/
 #footer-wrapper{
+    background-color: rgb(190, 231, 244);
     grid-column: 1/5;
     text-align: center;
-    border: 1px solid gray;
+    padding: 10px 0 10px 0;
 }
 /* FOOTER SECTION END*/
 
 
 
 /* DARK MODE CSS */
+
+
+
+
+
+/* BUTTON CSS */
+.newProjectSaveButton, .newProjectCancelButton, .updateTaskButton, .cancelUpdateTaskButton {
+  align-items: center;
+  appearance: none;
+  background-image: radial-gradient(100% 100% at 100% 0, #5adaff 0, #5468ff 100%);
+  border: 0;
+  border-radius: 6px;
+  box-shadow: rgba(45, 35, 66, .4) 0 2px 4px,rgba(45, 35, 66, .3) 0 7px 13px -3px,rgba(58, 65, 111, .5) 0 -3px 0 inset;
+  box-sizing: border-box;
+  color: #fff;
+  cursor: pointer;
+  display: inline-flex;
+  font-family: "JetBrains Mono",monospace;
+  height: 24px;
+  justify-content: center;
+  line-height: 1;
+  list-style: none;
+  overflow: hidden;
+  padding-left: 16px;
+  padding-right: 16px;
+  position: relative;
+  text-align: left;
+  text-decoration: none;
+  transition: box-shadow .15s,transform .15s;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  white-space: nowrap;
+  will-change: box-shadow,transform;
+  font-size: 18px;
+}
+
+.newProjectSaveButton:focus, .newProjectCancelButton:focus, .updateTaskButton:focus, .cancelUpdateTaskButton:focus {
+  box-shadow: #3c4fe0 0 0 0 1.5px inset, rgba(45, 35, 66, .4) 0 2px 4px, rgba(45, 35, 66, .3) 0 7px 13px -3px, #3c4fe0 0 -3px 0 inset;
+}
+
+.newProjectSaveButton:hover,.newProjectCancelButton:hover, .updateTaskButton:hover, .cancelUpdateTaskButton:hover  {
+  box-shadow: rgba(45, 35, 66, .4) 0 4px 8px, rgba(45, 35, 66, .3) 0 7px 13px -3px, #3c4fe0 0 -3px 0 inset;
+  transform: translateY(-2px);
+}
+
+.newProjectSaveButton:active, .newProjectCancelButton:active, .updateTaskButton:active, .cancelUpdateTaskButton:active {
+  box-shadow: #3c4fe0 0 3px 7px inset;
+  transform: translateY(2px);
+}

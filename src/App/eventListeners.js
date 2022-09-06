@@ -172,6 +172,7 @@ function displayNewTaskForm(){
     const buttonWrapper = document.createElement('div')
     buttonWrapper.classList.add('newTaskButtonWrapper')
     const createTaskButton = document.createElement('input')
+    createTaskButton.classList.add('updateTaskButton')
     createTaskButton.type = 'button'
     createTaskButton.value = 'Create'
     createTaskButton.addEventListener('click', ()=>{
@@ -191,6 +192,7 @@ function displayNewTaskForm(){
     })
     // Cancel the creation of a new task button
     const cancelButton = document.createElement('input')
+    cancelButton.classList.add('cancelUpdateTaskButton')
     cancelButton.type = 'button'
     cancelButton.value = 'Cancel'
     cancelButton.addEventListener('click', removeTaskFormFromDom)
