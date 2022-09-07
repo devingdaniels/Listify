@@ -9,6 +9,7 @@
     pointer-events: none;
 }
 
+
 #main-grid-layout{
     display: grid;  
     grid-template-columns: repeat(5, 1fr);
@@ -50,7 +51,6 @@
     padding: 10px;
     height: 87vh;
     overflow-y: auto;
-    /* background-color: rgb(250, 251, 253); */
 }
 /* width */
 #sidebar-wrapper::-webkit-scrollbar {
@@ -126,20 +126,14 @@
 .hideProjectTitle{
     display: none;
 }
-
-
-
 /* SIDEBAR SECTION END */
-
-
-
 
 /* CENTRAL VIEW SECTION START */
 #current-view-wrapper{
     grid-column: 2/6;
     padding: 20px;
-    /* background-color: azure; */
-   
+    height: 87vh;
+    overflow-y: scroll;
 }
 
 .currentViewHeadingWrapper{
@@ -211,8 +205,7 @@
 /* Edit task form CSS */
 .editTaskForm, .newTaskForm{
     position: sticky;
-    bottom: 175px;
-    left: 600px;
+    margin: auto;
     height: 250px;
     width: 300px;
     border: 1px solid;

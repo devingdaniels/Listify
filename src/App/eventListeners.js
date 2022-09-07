@@ -322,7 +322,7 @@ function editCurrentTask(e){
     
 }
 
-function toggleDarkMode(){    
+function toggleDarkMode(){  
     const header = document.getElementById('header-wrapper')
     const sideBar = document.getElementById('sidebar-wrapper')
     const mainView = document.getElementById('current-view-wrapper')
@@ -333,6 +333,7 @@ function toggleDarkMode(){
     array.push(sideBar)
     array.push(mainView)
     array.push(footer)
+
 
     // Update each main component with color theme
     array.forEach(el =>{
