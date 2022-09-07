@@ -5,6 +5,7 @@ export class Listify{
 
     constructor(){
         this.projectArray = []    
+        this.currentTheme = 'lightMode'
     }
 
     displayAllTasks(){

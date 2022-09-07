@@ -139,11 +139,7 @@ function getCurrentActiveViewTab(){
     })
     return result
 }
-function toggleDarkMode(){
-    
-    alert('code darkmode')
-        
-}
+
 
 function disableProjectSideBarItemDuringEdit(currentTab){
     const items = document.querySelectorAll('.projectSidebarItemWrapper')
@@ -215,4 +211,4 @@ function enableSideBarDuringTaskEditing(){
     })
 }
 
-export {renderIcon, toggleDarkMode, createNewProjectButton, createSidebarViewTab, disableNewProjectButton, enableNewProjectButton, removeProjectForm, createNewTaskButton, showErrorMessage, enableNewTaskButton, disableNewTaskButton,formatJSDate, getCurrentActiveViewTab, getCurrentDate, addSevenDays, disableProjectSideBarItemDuringEdit, enableProjectSideBarItemDuringEdit, enableEditCurrentProjectButton, disableEditCurrentProjectButton, doesTaskFormHaveName, disableTasksWhileEditing, enableTasksWhileEditing, disableSideBarDuringTaskEditing, enableSideBarDuringTaskEditing}
+export {renderIcon, createNewProjectButton, createSidebarViewTab, disableNewProjectButton, enableNewProjectButton, removeProjectForm, createNewTaskButton, showErrorMessage, enableNewTaskButton, disableNewTaskButton,formatJSDate, getCurrentActiveViewTab, getCurrentDate, addSevenDays, disableProjectSideBarItemDuringEdit, enableProjectSideBarItemDuringEdit, enableEditCurrentProjectButton, disableEditCurrentProjectButton, doesTaskFormHaveName, disableTasksWhileEditing, enableTasksWhileEditing, disableSideBarDuringTaskEditing, enableSideBarDuringTaskEditing}

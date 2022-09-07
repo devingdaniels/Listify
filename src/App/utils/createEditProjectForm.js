@@ -1,4 +1,4 @@
-import { disableNewProjectButton, enableNewProjectButton ,enableProjectSideBarItemDuringEdit, enableEditCurrentProjectButton} from "./helperFunctions"
+import { enableNewProjectButton ,enableProjectSideBarItemDuringEdit, enableEditCurrentProjectButton} from "./helperFunctions"
 
 import { listify } from '../..'
 import { showErrorMessage } from "./helperFunctions"

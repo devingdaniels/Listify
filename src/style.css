@@ -11,13 +11,13 @@
 
 #main-grid-layout{
     display: grid;  
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(5, 1fr);
 }
 
 /* HEADER SECTION START */
 #header-wrapper{
-    grid-column: 1/5;
-    background-color: rgb(190, 231, 244);
+    grid-column: 1/6;
+    /* background-color: rgb(190, 231, 244); */
     padding: 5px 0 5px 0;
 }
 .headerContainer{
@@ -34,7 +34,7 @@
 }
 .listifyIcon, .userProfileIcon{
     display: block;
-    height: 40px;
+    height: 30px;
     margin-right: 10px;
 
 }
@@ -50,7 +50,7 @@
     padding: 10px;
     height: 87vh;
     overflow-y: auto;
-    background-color: aliceblue;
+    /* background-color: rgb(250, 251, 253); */
 }
 /* width */
 #sidebar-wrapper::-webkit-scrollbar {
@@ -86,7 +86,7 @@
 .projectFormContainer{
     display: flex;
     flex-direction: column;
-    width: 60%;
+    width: 70%;
     margin: auto;
 }
 .projectFormContainer input {
@@ -136,9 +136,9 @@
 
 /* CENTRAL VIEW SECTION START */
 #current-view-wrapper{
-    grid-column: 2/5;
+    grid-column: 2/6;
     padding: 20px;
-    background-color: azure;
+    /* background-color: azure; */
    
 }
 
@@ -227,8 +227,8 @@
 
 /* FOOTER SECTION START*/
 #footer-wrapper{
-    background-color: rgb(190, 231, 244);
-    grid-column: 1/5;
+    /* background-color: rgb(190, 231, 244); */
+    grid-column: 1/6;
     text-align: center;
     padding: 10px 0 10px 0;
 }
@@ -237,7 +237,16 @@
 
 
 /* DARK MODE CSS */
+.lightMode{
+    background-color: rgb(255, 255, 255);
+    color: black;
+}
 
+.darkMode{
+    background-color: white;
+    color: black;
+    filter: invert(1);
+}
 
 
 
@@ -262,8 +271,6 @@
   overflow: hidden;
   padding-left: 16px;
   padding-right: 16px;
-  position: relative;
-  text-align: left;
   text-decoration: none;
   transition: box-shadow .15s,transform .15s;
   user-select: none;
@@ -271,7 +278,7 @@
   touch-action: manipulation;
   white-space: nowrap;
   will-change: box-shadow,transform;
-  font-size: 18px;
+  font-size: 12px;
 }
 
 .newProjectSaveButton:focus, .newProjectCancelButton:focus, .updateTaskButton:focus, .cancelUpdateTaskButton:focus {
@@ -287,3 +294,4 @@
   box-shadow: #3c4fe0 0 3px 7px inset;
   transform: translateY(2px);
 }
+

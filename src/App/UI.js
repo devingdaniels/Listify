@@ -8,7 +8,9 @@ import MonthIcon from './assets/month-icon.svg'
 import StarIcon from './assets/star-icon.svg'
 import CheckAll from './assets/check-all-icon.svg'
 // Methods 
-import { renderIcon, toggleDarkMode, createSidebarViewTab, createNewProjectButton } from './utils/helperFunctions'
+import { renderIcon, createSidebarViewTab, createNewProjectButton } from './utils/helperFunctions'
+import { toggleDarkMode } from './eventListeners'
+import { listify } from '..'
 
 
 function createHeader(){
@@ -56,6 +58,7 @@ function createHeader(){
 }
 
 function createSidePanel(){
+   
     // Array for easier appending of all the items to the wrapper
     let sideItemsArray = []
     // Create the main side bar section 
@@ -101,7 +104,7 @@ function createSidePanel(){
     // Append all view components to container
     sideItemsArray.forEach(item =>{
         sidebarContainer.append(item)
-    })    
+    }) 
     return sidebarContainer
 }
 
@@ -121,10 +124,11 @@ function createFooter(){
 }
 
 function createListifyUI(){
-    document.getElementById('header-wrapper').append(createHeader())
+    const header=  document.getElementById('header-wrapper')
+    header.append(createHeader())
     document.getElementById('sidebar-wrapper').append(createSidePanel())
     document.getElementById('footer-wrapper').append(createFooter())
-    createNewProjectButton()    
+    createNewProjectButton()
 }
 
 export {createHeader, createSidePanel, createFooter, createListifyUI}

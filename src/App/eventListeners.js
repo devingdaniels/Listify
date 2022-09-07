@@ -318,8 +318,40 @@ function editCurrentTask(e){
     disableTasksWhileEditing(currentTask)
     const form = createTaskForm(currentTask)
     form.classList.add('editTaskForm')
-    getCurrentActiveViewTab().append(form)
+    document.getElementById('current-view-wrapper').append(form)
     
 }
 
-export {updateViewTab, displayNewProjectForm, createNewProjectObject,displayNewTaskForm, toggleTaskFavoriteStatus,toggleTaskIsComplete, deleteCurrentProject, editCurrentProject,editCurrentTask, deleteCurrentTask }
+function toggleDarkMode(){    
+    const header = document.getElementById('header-wrapper')
+    const sideBar = document.getElementById('sidebar-wrapper')
+    const mainView = document.getElementById('current-view-wrapper')
+    const footer = document.getElementById('footer-wrapper')
+
+    let array = []
+    array.push(header)
+    array.push(sideBar)
+    array.push(mainView)
+    array.push(footer)
+
+    // Update each main component with color theme
+    array.forEach(el =>{
+        if (listify.currentTheme === 'darkMode'){
+            el.classList.add('lightMode')
+            el.classList.remove('darkMode')
+        }
+        else{
+            el.classList.remove('lightMode')
+            el.classList.add('darkMode')
+        }
+    })
+    // Update current color
+    if (listify.currentTheme === 'darkMode'){
+        listify.currentTheme = 'lightMode'
+    }
+    else{
+        listify.currentTheme = 'darkMode'
+    }
+ }
+
+export {updateViewTab, displayNewProjectForm, createNewProjectObject,displayNewTaskForm, toggleTaskFavoriteStatus,toggleTaskIsComplete, deleteCurrentProject, editCurrentProject,editCurrentTask, deleteCurrentTask, toggleDarkMode }
