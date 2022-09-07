@@ -8,11 +8,7 @@ function createEditProjectForm(e){
     const projectTabTitleElement = e.target.parentElement.parentElement.firstChild.lastChild
     // Add this class in case user cancels edit
     projectTabTitleElement.classList.add('hideProjectTitle')
-    // Show an input with 'update' and 'cancel' buttons
-    // On cancel, put h4 with original title back
-    // On update, put new title, update the project name by updating the view
-    // For each task in the project, update the task.projectTitle attribute  
-
+    
     const projectForm = document.createElement('div')
     projectForm.id = 'editProjectContainer'
     // Input for getting the project title

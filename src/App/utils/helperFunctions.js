@@ -1,5 +1,6 @@
+// Images
 import PlusIcon from '../assets/plus-icon.svg'
-import { displayNewProjectForm,displayNewTaskForm, updateViewTab } from '../eventListeners'
+import { displayNewProjectForm,displayNewTaskForm, toggleDarkMode, updateViewTab } from '../eventListeners'
 // Date methods
 import add from 'date-fns/add'
 import format from 'date-fns/format'
@@ -211,4 +212,25 @@ function enableSideBarDuringTaskEditing(){
     })
 }
 
-export {renderIcon, createNewProjectButton, createSidebarViewTab, disableNewProjectButton, enableNewProjectButton, removeProjectForm, createNewTaskButton, showErrorMessage, enableNewTaskButton, disableNewTaskButton,formatJSDate, getCurrentActiveViewTab, getCurrentDate, addSevenDays, disableProjectSideBarItemDuringEdit, enableProjectSideBarItemDuringEdit, enableEditCurrentProjectButton, disableEditCurrentProjectButton, doesTaskFormHaveName, disableTasksWhileEditing, enableTasksWhileEditing, disableSideBarDuringTaskEditing, enableSideBarDuringTaskEditing}
+function createDarkModeButton(){
+    
+    const darkModeWrapper = document.createElement('div')
+    darkModeWrapper.classList.add('theme')
+
+    const darkModeInput = document.createElement('input')
+    darkModeInput.type = 'checkbox'
+    darkModeInput.id = 'darkModeToggle'
+    darkModeInput.addEventListener('click', toggleDarkMode)
+
+    const darkModeLabel  = document.createElement('label')
+    darkModeLabel.for = 'darkModeToggle'
+    darkModeLabel.innerHTML = " Theme"
+    darkModeLabel.classList.add('darkModeLabel')
+
+    darkModeWrapper.append(darkModeInput)
+    darkModeWrapper.append(darkModeLabel)
+
+    return darkModeWrapper
+}
+
+export {renderIcon, createNewProjectButton, createSidebarViewTab, disableNewProjectButton, enableNewProjectButton, removeProjectForm, createNewTaskButton, showErrorMessage, enableNewTaskButton, disableNewTaskButton,formatJSDate, getCurrentActiveViewTab, getCurrentDate, addSevenDays, disableProjectSideBarItemDuringEdit, enableProjectSideBarItemDuringEdit, enableEditCurrentProjectButton, disableEditCurrentProjectButton, doesTaskFormHaveName, disableTasksWhileEditing, enableTasksWhileEditing, disableSideBarDuringTaskEditing, enableSideBarDuringTaskEditing, createDarkModeButton}

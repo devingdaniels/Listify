@@ -8,9 +8,7 @@ import MonthIcon from './assets/month-icon.svg'
 import StarIcon from './assets/star-icon.svg'
 import CheckAll from './assets/check-all-icon.svg'
 // Methods 
-import { renderIcon, createSidebarViewTab, createNewProjectButton } from './utils/helperFunctions'
-import { toggleDarkMode } from './eventListeners'
-import { listify } from '..'
+import { renderIcon, createSidebarViewTab, createNewProjectButton, createDarkModeButton } from './utils/helperFunctions'
 
 
 function createHeader(){
@@ -31,26 +29,14 @@ function createHeader(){
     rightSubSection.classList.add('rightSubSection')
     const profileIcon = renderIcon(CustomerIcon, 'Image of a user profile icon', 'userProfileIcon')
     const currentUserName = document.createElement('h6')
-    currentUserName.id = 'current-user-name' //Target later for displaying current user
+    // currentUserName is ID for targeting with login functionality 
+    currentUserName.id = 'current-user-name' 
     currentUserName.innerHTML = "John Doe"
     rightSubSection.append(profileIcon)
     rightSubSection.append(currentUserName)
 
-
-
-    // Dark Mode Button
-    const darkModeWrapper = document.createElement('div')
-    const darkModeInput = document.createElement('input')
-    darkModeInput.type = 'checkbox'
-    darkModeInput.id = 'darkmode-toggle'
-    darkModeInput.addEventListener('click', toggleDarkMode)
-    const darkModeLabel = document.createElement('label')
-    darkModeLabel.for = 'darkmode-toggle'
-    darkModeWrapper.append(darkModeInput)
-    darkModeWrapper.append(darkModeLabel)
-
     // Appends
-    headerContainer.append(darkModeWrapper)
+    headerContainer.append(createDarkModeButton())
     headerContainer.append(leftSubSection)
     headerContainer.append(rightSubSection)
     // Return header container
@@ -58,7 +44,6 @@ function createHeader(){
 }
 
 function createSidePanel(){
-   
     // Array for easier appending of all the items to the wrapper
     let sideItemsArray = []
     // Create the main side bar section 
