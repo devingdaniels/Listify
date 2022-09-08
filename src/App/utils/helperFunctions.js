@@ -5,6 +5,8 @@ import { displayNewProjectForm,displayNewTaskForm, toggleDarkMode, updateViewTab
 import add from 'date-fns/add'
 import format from 'date-fns/format'
 
+
+// Date methods
 function getCurrentDate(){
     let today = new Date();
     let dd = String(today.getDate()).padStart(2, '0');
@@ -12,7 +14,23 @@ function getCurrentDate(){
     let yyyy = today.getFullYear();
     today = mm + '-' + dd + '-' + yyyy;
     return today
+}
 
+function formatJSDate(date){
+    if (date === '' || date === null){
+        return
+    } 
+    const string = String(date)
+    date = ''        
+
+    for (let i = 5; i < 10; i++){
+        date += string[i]
+    }
+    date += '-'
+    for(let i = 0; i < 4; i++){
+        date += string[i]
+    }
+    return date    
 }
 
 function addSevenDays(unParsedDate){
@@ -23,6 +41,7 @@ function addSevenDays(unParsedDate){
     return result
 }
 
+// Icon and button components 
 function renderIcon(image, alt, styleClass){
     if (image === '' || image === null) return 
     const img = new Image()
@@ -33,55 +52,6 @@ function renderIcon(image, alt, styleClass){
     }
     return img
 }
-
-function createNewProjectButton(){
-    const anchor = document.getElementById('project-button-anchor')
-    const button = createSidebarViewTab(PlusIcon,"Icon of a plus icon", "New Project", "sidebarTabViewIcon" )
-    button.id = 'new-project-button'
-    button.classList.add('newProjectButton')
-    button.addEventListener('click', displayNewProjectForm)
-    anchor.append(button)
-}
-function createNewTaskButton(){
-    const anchor = document.getElementById('current-view-wrapper')
-    const button = createSidebarViewTab(PlusIcon,"Icon of a plus icon", "Add Task", "sidebarTabViewIcon" )
-    button.id = 'new-task-button'
-    button.classList.add('newTaskButton')
-    button.addEventListener('click', displayNewTaskForm)
-    anchor.append(button)
-}
-
-function disableNewProjectButton(){
-    const button = document.getElementById('new-project-button')
-    button.style.pointerEvents = 'none'
-}
-function enableNewProjectButton(){
-    const button = document.getElementById('new-project-button')
-    button.style.pointerEvents = 'auto'
-}
-
-function disableNewTaskButton(){
-    const button = document.getElementById('new-task-button')
-    if (button != '' && button !== null){
-        button.style.pointerEvents = 'none'
-    }
-    
-}
-function enableNewTaskButton(){
-    const button = document.getElementById('new-task-button')
-    if (button != '' && button !== null){
-        button.style.pointerEvents = 'auto'
-    }
-    
-}
-
-
-
-function removeProjectForm(){
-    const clearForm = document.getElementById('project-form-container-anchor')
-    clearForm.innerHTML = ""
-}
-
 
 function createSidebarViewTab(image, alt, tabName, styleClass){
     // Create the sidebarItem wrapper
@@ -103,44 +73,53 @@ function createSidebarViewTab(image, alt, tabName, styleClass){
     return tabItemContainer
 }
 
-function showErrorMessage(targetElement, message){
-    const errorMessage = document.getElementById(targetElement)
-    errorMessage.classList.add('errorMessage')
-    errorMessage.value = ""
-    errorMessage.placeholder = message
+function createNewProjectButton(){
+    const anchor = document.getElementById('project-button-anchor')
+    const button = createSidebarViewTab(PlusIcon,"Icon of a plus icon", "New Project", "sidebarTabViewIcon" )
+    button.id = 'new-project-button'
+    button.classList.add('newProjectButton')
+    button.addEventListener('click', displayNewProjectForm)
+    anchor.append(button)
 }
 
-function formatJSDate(date){
-    if (date === '' || date === null){
-        return
-    } 
+function createNewTaskButton(){
+    const button = createSidebarViewTab(PlusIcon,"Icon of a plus icon", "Add Task", "sidebarTabViewIcon" )
+    button.id = 'new-task-button'
+    button.classList.add('newTaskButton')
+    button.addEventListener('click', displayNewTaskForm)
+    return button
+}
 
-    const string = String(date)
-    date = ''        
+function createTaskFormAnchor(){
+    const anchor = document.createElement('div')
+    anchor.id = 'new-task-form-anchor'
+    return anchor
+}
 
-    for (let i = 5; i < 10; i++){
-        date += string[i]
+// Disablers and enablers 
+function disableNewProjectButton(){
+    const button = document.getElementById('new-project-button')
+    button.style.pointerEvents = 'none'
+}
+
+function enableNewProjectButton(){
+    const button = document.getElementById('new-project-button')
+    button.style.pointerEvents = 'auto'
+}
+
+function disableNewTaskButton(){
+    const button = document.getElementById('new-task-button')
+    if (button != '' && button !== null){
+        button.style.pointerEvents = 'none'
     }
-    date += '-'
-    for(let i = 0; i < 4; i++){
-        date += string[i]
+}
+
+function enableNewTaskButton(){
+    const button = document.getElementById('new-task-button')
+    if (button != '' && button !== null){
+        button.style.pointerEvents = 'auto'
     }
-    return date    
 }
-
-function getCurrentActiveViewTab(){
-    // Get all the current tabs on the sidebar
-    const allTabItems = document.querySelectorAll('.tabItemContainer')
-    // Make all tabs except current tab inactive
-    const array = Array.from(allTabItems)
-    const result = array.find(el =>{
-        if (el.classList.contains('active')){
-            return el
-        }
-    })
-    return result
-}
-
 
 function disableProjectSideBarItemDuringEdit(currentTab){
     const items = document.querySelectorAll('.projectSidebarItemWrapper')
@@ -150,6 +129,7 @@ function disableProjectSideBarItemDuringEdit(currentTab){
         }
     })
 }
+
 function enableProjectSideBarItemDuringEdit(){
     const items = document.querySelectorAll('.projectSidebarItemWrapper')
     items.forEach(el =>{
@@ -160,16 +140,9 @@ function enableProjectSideBarItemDuringEdit(){
 function disableEditCurrentProjectButton(button){
     button.classList.add('disablePointerEvents')
 }
+
 function enableEditCurrentProjectButton(button){
     button.classList.remove('disablePointerEvents')
-}
-
-function doesTaskFormHaveName(){
-    const title = document.getElementById('task-title').value
-    if (title !== ''){
-        return true
-    }
-    return false
 }
 
 function disableTasksWhileEditing(){
@@ -178,6 +151,7 @@ function disableTasksWhileEditing(){
         task.classList.add('disablePointerEvents')
     })
 }
+
 function enableTasksWhileEditing(){
     const tasks = document.querySelectorAll('.prettyTaskContainer')
     tasks.forEach(task =>{
@@ -198,7 +172,6 @@ function disableSideBarDuringTaskEditing(){
     })
 }
 
-
 function enableSideBarDuringTaskEditing(){
     const sidebarTabs = document.querySelectorAll('.tabItemContainer')
     const projectTabs = document.querySelectorAll('.projectSidebarItemWrapper')
@@ -212,25 +185,70 @@ function enableSideBarDuringTaskEditing(){
     })
 }
 
+function removeProjectForm(){
+    const clearForm = document.getElementById('project-form-container-anchor')
+    clearForm.innerHTML = ""
+}
+
+function showErrorMessage(targetElement, message){
+    const errorMessage = document.getElementById(targetElement)
+    errorMessage.classList.add('errorMessage')
+    errorMessage.value = ""
+    errorMessage.placeholder = message
+}
+
+function getCurrentActiveViewTab(){
+    // Get all the current tabs on the sidebar
+    const allTabItems = document.querySelectorAll('.tabItemContainer')
+    // Make all tabs except current tab inactive
+    const array = Array.from(allTabItems)
+    const result = array.find(el =>{
+        if (el.classList.contains('active')){
+            return el
+        }
+    })
+    return result
+}
+
+function doesTaskFormHaveName(){
+    const title = document.getElementById('task-title').value
+    if (title !== ''){
+        return true
+    }
+    return false
+}
+
 function createDarkModeButton(){
-    
+    // Button wrapper
     const darkModeWrapper = document.createElement('div')
-    darkModeWrapper.classList.add('theme')
-
-    const darkModeInput = document.createElement('input')
-    darkModeInput.type = 'checkbox'
-    darkModeInput.id = 'darkModeToggle'
-    darkModeInput.addEventListener('click', toggleDarkMode)
-
-    const darkModeLabel  = document.createElement('label')
-    darkModeLabel.for = 'darkModeToggle'
-    darkModeLabel.innerHTML = " Theme"
-    darkModeLabel.classList.add('darkModeLabel')
-
-    darkModeWrapper.append(darkModeInput)
-    darkModeWrapper.append(darkModeLabel)
-
+    darkModeWrapper.classList.add('darkModeWrapper')
+    // Light button
+    const lightRadio = document.createElement('input')
+    lightRadio.type = 'radio'
+    lightRadio.id = 'lightModeButton'
+    lightRadio.name = 'colorTheme'
+    lightRadio.value = 'light'
+    lightRadio.checked = 'true'
+    lightRadio.addEventListener('click', toggleDarkMode)
+    const lightLabel = document.createElement('label')
+    lightLabel.for = 'light'
+    lightLabel.innerHTML = 'Light'
+    // Dark button 
+    const darkRadio = document.createElement('input')
+    darkRadio.type = 'radio'
+    darkRadio.id = 'darkModeButton'
+    darkRadio.name = 'colorTheme'
+    darkRadio.value = 'dark'
+    darkRadio.addEventListener('click', toggleDarkMode)
+    const darkLabel = document.createElement('label')
+    darkLabel.for = 'dark'
+    darkLabel.innerHTML = 'Dark'
+    // Appends
+    darkModeWrapper.append(lightRadio)
+    darkModeWrapper.append(lightLabel)
+    darkModeWrapper.append(darkRadio)
+    darkModeWrapper.append(darkLabel)
     return darkModeWrapper
 }
 
-export {renderIcon, createNewProjectButton, createSidebarViewTab, disableNewProjectButton, enableNewProjectButton, removeProjectForm, createNewTaskButton, showErrorMessage, enableNewTaskButton, disableNewTaskButton,formatJSDate, getCurrentActiveViewTab, getCurrentDate, addSevenDays, disableProjectSideBarItemDuringEdit, enableProjectSideBarItemDuringEdit, enableEditCurrentProjectButton, disableEditCurrentProjectButton, doesTaskFormHaveName, disableTasksWhileEditing, enableTasksWhileEditing, disableSideBarDuringTaskEditing, enableSideBarDuringTaskEditing, createDarkModeButton}
+export {renderIcon, createNewProjectButton, createSidebarViewTab, disableNewProjectButton, enableNewProjectButton, removeProjectForm, createNewTaskButton, showErrorMessage, enableNewTaskButton, disableNewTaskButton,formatJSDate, getCurrentActiveViewTab, getCurrentDate, addSevenDays, disableProjectSideBarItemDuringEdit, enableProjectSideBarItemDuringEdit, enableEditCurrentProjectButton, disableEditCurrentProjectButton, doesTaskFormHaveName, disableTasksWhileEditing, enableTasksWhileEditing, disableSideBarDuringTaskEditing, enableSideBarDuringTaskEditing, createDarkModeButton, createTaskFormAnchor}

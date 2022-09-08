@@ -1,11 +1,10 @@
 import {createNewProjectTabSection} from '../utils/createProjectTab'
-import { createNewTaskButton, getCurrentDate, addSevenDays } from '../utils/helperFunctions'
+import { createNewTaskButton, getCurrentDate, addSevenDays, createTaskFormAnchor } from '../utils/helperFunctions'
 
 export class Listify{
 
     constructor(){
-        this.projectArray = []    
-        this.currentTheme = 'lightMode'
+        this.projectArray = []
     }
 
     displayAllTasks(){
@@ -131,7 +130,9 @@ export class Listify{
        // Display name of current project
        getCurrentViewWrapper().append(createCurrentViewHeading(projectTitle))
        // Create and append a 'add new task' button under the heading
-       createNewTaskButton()
+       getCurrentViewWrapper().append(createNewTaskButton())
+       //Add an anchor for appending a new task form. This way, if there are many tasks, the form is at the top and user does not have to scroll
+       getCurrentViewWrapper().append(createTaskFormAnchor())
        // Display the current project tasks under the 'add task' button
        this.displayCurrentProjectTasks(this.getCurrentProject(projectTitle))
    }

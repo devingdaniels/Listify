@@ -48,7 +48,7 @@
 /* SIDEBAR SECTION START */
 #sidebar-wrapper{
     grid-column: 1/2;
-    padding: 10px;
+    padding: 10px 10px 0 15px;
     height: 87vh;
     overflow-y: auto;
 }
@@ -175,6 +175,10 @@
     background-color: aliceblue;
     padding: 10px;
 }
+.prettyTaskContainer p{
+    word-wrap: break-word;
+}
+
 #task-checkbox-complete{
     border-radius: 100%;
 }
@@ -236,6 +240,12 @@
     background-color: white;
     color: black;
     filter: invert(1);
+}
+
+.darkModeWrapper{
+    display: flex;
+    justify-content: space-evenly;
+    width: 100px;
 }
 
 /* BUTTON CSS */

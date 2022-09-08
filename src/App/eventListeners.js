@@ -45,18 +45,21 @@ function updateViewTab(currentTab){
             listify.displayCompleted()
             break;
         default:
+            // Default is a user-created project
           listify.displayCurrentProject(tabName)
       }
 }
+
 // This gets called when user clicks on 'add new project' button in the side panel
 function displayNewProjectForm(){
     // Hide the new project button temporally 
     disableNewProjectButton()
     // Get a project template form
-    const project = newProjectForm()
+    const projectForm = newProjectForm()
+    // Anchor to append the form to 
     const anchor = document.getElementById('project-form-container-anchor')
     // Append the new project form with input and buttons to the sidebar
-    anchor.append(project)
+    anchor.append(projectForm)
 }
 
 // This gets called from displayNewProjectForm(), returns a div with input and two buttons
@@ -104,13 +107,13 @@ function newProjectForm(){
 // Called when user presses 'save' when creating a new project
 // Creates a new project object with title name, gets added to project array 
 // Appends a new project tab item to the sidebar for user navigation
-function createNewProjectObject(title){
+function createNewProjectObject(projectTitle){
     // Clear the project form from the sidebar
     removeProjectForm()
     // Enable the add new project button on the sidebar
     enableNewProjectButton()
     // Save title in new project object
-    const project = new Project(title)    
+    const project = new Project(projectTitle)    
     // Push the project on the Listify project array
     listify.projectArray.push(project)
     // Display each project on the side panel 
@@ -125,8 +128,7 @@ function displayNewTaskForm(){
     // Disable tasks already on the screen 
     disableTasksWhileEditing()
     // Get the anchor for appending this new task form
-    const anchor = document.getElementById('current-view-wrapper')
-    // Form 
+    const anchor = document.getElementById('new-task-form-anchor') 
     const form = document.createElement('form')
     form.id = 'new-task-form'
     form.classList.add('newTaskForm')
@@ -211,6 +213,7 @@ function removeTaskFormFromDom(){
     enableNewTaskButton()
     // Enable existing tasks containers so they can be edited 
     enableTasksWhileEditing()
+    //Remove the task form from the dom
     document.getElementById('new-task-form').remove()
 }
 
@@ -323,10 +326,14 @@ function editCurrentTask(e){
 }
 
 function toggleDarkMode(){  
+    // Sections to change color of 
     const header = document.getElementById('header-wrapper')
     const sideBar = document.getElementById('sidebar-wrapper')
     const mainView = document.getElementById('current-view-wrapper')
     const footer = document.getElementById('footer-wrapper')
+
+    // Radio buttons
+    const light = document.getElementById('lightModeButton')
 
     let array = []
     array.push(header)
@@ -334,10 +341,9 @@ function toggleDarkMode(){
     array.push(mainView)
     array.push(footer)
 
-
     // Update each main component with color theme
     array.forEach(el =>{
-        if (listify.currentTheme === 'darkMode'){
+        if (light.checked){
             el.classList.add('lightMode')
             el.classList.remove('darkMode')
         }
@@ -346,13 +352,6 @@ function toggleDarkMode(){
             el.classList.add('darkMode')
         }
     })
-    // Update current color
-    if (listify.currentTheme === 'darkMode'){
-        listify.currentTheme = 'lightMode'
-    }
-    else{
-        listify.currentTheme = 'darkMode'
-    }
  }
 
 export {updateViewTab, displayNewProjectForm, createNewProjectObject,displayNewTaskForm, toggleTaskFavoriteStatus,toggleTaskIsComplete, deleteCurrentProject, editCurrentProject,editCurrentTask, deleteCurrentTask, toggleDarkMode }
