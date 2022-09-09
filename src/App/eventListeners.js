@@ -321,7 +321,7 @@ function editCurrentTask(e){
     disableTasksWhileEditing(currentTask)
     const form = createTaskForm(currentTask)
     form.classList.add('editTaskForm')
-    document.getElementById('current-view-wrapper').append(form)
+    currentTask.append(form)
     
 }
 
