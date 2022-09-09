@@ -1,5 +1,7 @@
 {
-    "cSpell.ignoreWords": [
-        "Listify"
-    ]
+  "cSpell.ignoreWords": ["Listify"],
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": true
+  },
+  "eslint.validate": ["javascript"]
 }
