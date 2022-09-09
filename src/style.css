@@ -9,7 +9,6 @@
     pointer-events: none;
 }
 
-
 #main-grid-layout{
     display: grid;  
     grid-template-columns: repeat(5, 1fr);
